@@ -10,81 +10,83 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./photo-upload.component.scss']
 })
 export class PhotoUploadComponent {
-    // Main task
-    //task: AngularFireUploadTask;
+  // Main task
+  task: any;
+
+  // Progress monitoring
+  percentage: Observable<number>;
+
+  snapshot: Observable<any>;
+
+  // Download URL
+  downloadURL: Observable<string>;
+
+  // State for dropzone CSS toggling
+  isHovering: boolean;
+
+  constructor(private http: HttpClient,
+              private galleryService: GalleryService
+    // private storage: AngularFireStorage,
+    // private db: AngularFirestore
+  ) { }
+
+
+  toggleHover(event: boolean) {
+    this.isHovering = event;
+  }
+
+  startUpload(event: FileList) {
+    // The File object
+    const fileEvent = event.item(0);
+
+    // Client-side validation example
+    if (fileEvent.type.split('/')[0] !== 'image') {
+      console.error('unsupported file type... ');
+      return;
+    }
+
+    const file = new FormData();
+    file.append('file', fileEvent);
+
+
+
+    // The storage path
+    //const path = `test/${new Date().getTime()}_${file.name}`;
+
+    // The main task
+
+    //     this.http.post('http://localhost:8080/images/', file,  {
+    //   observe: 'events'
+    // }).subscribe(events => {
+    //   alert('Succesfully uploaded');
+    // });
+    //this.task = this.storage.upload(path, file);
+
+    this.galleryService.uploadImage(file).subscribe(events => {
+      alert('Succesfully uploaded');
+    });
 
     // Progress monitoring
-    percentage: Observable<number>;
+    this.percentage = this.task.percentageChanges();
+    this.snapshot   = this.task.snapshotChanges();
 
-    snapshot: Observable<any>;
+    // The file's download URL
+    //this.downloadURL = this.task.downloadURL();
 
-    // Download URL
-    downloadURL: Observable<string>;
+    this.snapshot = this.task.snapshotChanges().pipe(
+      tap(snap => {
+        if (snap.bytesTransferred === snap.totalBytes) {
+          // Update firestore on completion
+          this.db.collection('photos').add( { path, size: snap.totalBytes });
+        }
+      })
+    );
+  }
 
-    // State for dropzone CSS toggling
-    isHovering: boolean;
-
-    constructor( private http: HttpClient,
-                 private galleryService: GalleryService
-      // private storage: AngularFireStorage,
-      // private db: AngularFirestore
-      ) { }
+  // Determines if the upload task is active
+  isActive(snapshot) {
+    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
+  }
 
 
-    toggleHover(event: boolean) {
-      this.isHovering = event;
-    }
-
-    startUpload(event: FileList) {
-      // The File object
-      const file = event.item(0);
-
-      const file1 = new FormData();
-      file1.append('file', file);
-
-      // Client-side validation example
-      // if (file.type.split('/')[0] !== 'image') {
-      //   console.error('unsupported file type :( ');
-      //   return;
-      // }
-
-      // The storage path
-      //const path = `test/${new Date().getTime()}_${file.name}`;
-
-      // Totally optional metadata
-      // const customMetadata = { app: 'My AngularFire-powered PWA!' };
-
-      // The main task
-
-      this.http.post('http://localhost:8080/images/', file1,  {
-
-    observe: 'events'
-  }).subscribe(events => {
-    alert('Succesfully uploaded');
-    // }
-  });
-
-      //this.task = this.storage.upload(path, file);
-
-      // Progress monitoring
-      //this.percentage = this.task.percentageChanges();
-      //this.snapshot   = this.task.snapshotChanges()
-
-      // The file's download URL
-      //this.downloadURL = this.task.downloadURL();
-    }
-
-    // Determines if the upload task is active
-    isActive(snapshot) {
-      return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
-    }
-
-// this.snapshot = this.task.snapshotChanges().pipe(
-//       tap(snap => {
-//         if (snap.bytesTransferred === snap.totalBytes) {
-//           // Update firestore on completion
-//           this.db.collection('photos').add( { path, size: snap.totalBytes });
-//         }
-//       })
-//     );
 }
