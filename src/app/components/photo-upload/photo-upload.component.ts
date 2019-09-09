@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { GalleryService } from './../../services/gallery.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -9,9 +9,9 @@ import { tap } from 'rxjs/operators';
   templateUrl: './photo-upload.component.html',
   styleUrls: ['./photo-upload.component.scss']
 })
-export class PhotoUploadComponent implements OnInit {
+export class PhotoUploadComponent {
     // Main task
-    // task: AngularFireUploadTask;
+    //task: AngularFireUploadTask;
 
     // Progress monitoring
     percentage: Observable<number>;
@@ -24,7 +24,8 @@ export class PhotoUploadComponent implements OnInit {
     // State for dropzone CSS toggling
     isHovering: boolean;
 
-    constructor(
+    constructor( private http: HttpClient,
+                 private galleryService: GalleryService
       // private storage: AngularFireStorage,
       // private db: AngularFirestore
       ) { }
@@ -38,20 +39,32 @@ export class PhotoUploadComponent implements OnInit {
       // The File object
       const file = event.item(0);
 
+      const file1 = new FormData();
+      file1.append('file', file);
+
       // Client-side validation example
-      if (file.type.split('/')[0] !== 'image') {
-        console.error('unsupported file type :( ');
-        return;
-      }
+      // if (file.type.split('/')[0] !== 'image') {
+      //   console.error('unsupported file type :( ');
+      //   return;
+      // }
 
       // The storage path
-      const path = `test/${new Date().getTime()}_${file.name}`;
+      //const path = `test/${new Date().getTime()}_${file.name}`;
 
       // Totally optional metadata
-      const customMetadata = { app: 'My AngularFire-powered PWA!' };
+      // const customMetadata = { app: 'My AngularFire-powered PWA!' };
 
       // The main task
-      //this.task = this.storage.upload(path, file, { customMetadata })
+
+      this.http.post('http://localhost:8080/images/', file1,  {
+
+    observe: 'events'
+  }).subscribe(events => {
+    alert('Succesfully uploaded');
+    // }
+  });
+
+      //this.task = this.storage.upload(path, file);
 
       // Progress monitoring
       //this.percentage = this.task.percentageChanges();
@@ -66,12 +79,12 @@ export class PhotoUploadComponent implements OnInit {
       return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
     }
 
-this.snapshot = this.task.snapshotChanges().pipe(
-      tap(snap => {
-        if (snap.bytesTransferred === snap.totalBytes) {
-          // Update firestore on completion
-          this.db.collection('photos').add( { path, size: snap.totalBytes });
-        }
-      })
-    );
+// this.snapshot = this.task.snapshotChanges().pipe(
+//       tap(snap => {
+//         if (snap.bytesTransferred === snap.totalBytes) {
+//           // Update firestore on completion
+//           this.db.collection('photos').add( { path, size: snap.totalBytes });
+//         }
+//       })
+//     );
 }
