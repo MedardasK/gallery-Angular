@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Observable';
 export class PhotoUploadComponent implements OnInit {
     // Main task 
     task: AngularFireUploadTask;
+    // test
 
     // Progress monitoring
     percentage: Observable<number>;
