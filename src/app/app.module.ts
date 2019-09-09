@@ -28,6 +28,7 @@ import { PhotoUploadComponent } from './components/photo-upload/photo-upload.com
 import { PhotoEditComponent } from './dialogs/photo-edit/photo-edit.component';
 import { LoginComponent } from './views/login/login.component';
 import { FileUploadDirective } from './directives/file-upload.directive';
+import { FileSizePipe } from './pipes/file-size.pipe';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { FileUploadDirective } from './directives/file-upload.directive';
     PhotoUploadComponent,
     PhotoEditComponent,
     LoginComponent,
-    FileUploadDirective
+    FileUploadDirective,
+    FileSizePipe
   ],
   imports: [
     BrowserModule,

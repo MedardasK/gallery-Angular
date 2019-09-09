@@ -9,13 +9,13 @@ a{
     justify-content: center;
     flex-direction: column; 
     height: 300px;
-    border: 2px dashed #f16624;
+    border: 2px dashed #c2185b;
     border-radius: 5px;
-    background: white;
+    background: #303030;
     margin: 10px 0;
 
     &.hovering {
-        border: 2px solid #f16624;
+        border: 2px solid #c2185b;
         color: #dadada !important;
     }
 }
