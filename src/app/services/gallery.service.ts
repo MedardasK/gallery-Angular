@@ -32,9 +32,15 @@ export class GalleryService {
 
   uploadImage(file: any): Observable<any> {
     return this.http.post('http://localhost:8080/images/', file).pipe(
-      catchError(this.handleError('uploadImage', file))
+      catchError(this.handleError)
     );
 }
+
+// uploadImage(file: any, description: string): Observable<any> {
+//   return this.http.post('http://localhost:8080/images/', file).pipe(
+//     catchError(this.handleError(file, description))
+//   );
+// } // catchError(this.handleError({'uploadImage', file}))
 
   getImagesByCategories(ids: number[]): Promise<IPhoto[]> {
     console.log(ids);
