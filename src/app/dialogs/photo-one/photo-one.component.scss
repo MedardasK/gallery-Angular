@@ -1,0 +1,18 @@
+
+::ng-deep .mat-dialog-container{
+    padding: 0px;
+    background: #424242;
+}
+button{
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    background: none;
+	border: none;
+    cursor: pointer;
+    outline: none;
+}
+// .mat-card-content{
+//     display: flex;
+//     justify-content: center
+// }

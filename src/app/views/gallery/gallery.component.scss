@@ -1,0 +1,72 @@
+@import '../../../assets/styles/search-input.scss';
+
+.photo-container {
+    width: 270px;
+    height: 270px;
+    overflow: hidden;
+    margin: 13px;
+    display: inline-block;
+    border-radius: 7px;
+}
+.chip{
+    position: absolute;
+    top: -15px;
+}
+.loading-container{
+    background-color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+.res-count-container{
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 14px;
+}
+.sufix {
+    position: absolute;
+    right: 5px;
+    top: 23px;
+    background-color: #424242;
+    color: grey;
+}
+.placeholder {
+    color: #424242;
+}
+.sorting-container {
+    margin-bottom: 30px;
+    padding: 20px;
+    width: 100%;
+}
+.gallery-container{
+    margin-top: 10px;
+    .photo-container.ng-star-inserted{
+        margin-bottom: 0px;
+    }
+    .sort-date-container{
+        position: absolute;
+        display: flex;
+        top: 0px;
+        left: 120px;
+        .sort-date-button{
+            min-width: 30px;
+            background: none;
+            padding: 0px;
+        }
+    }
+    .upload-picture-container{
+        position: absolute;
+        top: 0px;
+        left: 300px;
+    }
+    .upload-picture-container{
+        a{
+        color: #ffff;
+        text-decoration: none;
+        }
+    }
+}
+
+

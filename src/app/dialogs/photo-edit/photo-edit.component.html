@@ -1,0 +1,17 @@
+<mat-card class="gallery-container">
+  <div>
+    <h3>Edit selected picture</h3>
+    <div>
+      <input placeholder="Description" type="text" [(ngModel)]="descriptionString" />
+    </div>
+    <div>
+      <input placeholder="File name" type="text" [(ngModel)]="fileNameString" />
+    </div>
+    <div>
+      <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+    </div>
+    <div *ngIf="editSuccessful">
+      Saved successfully!
+    </div>
+  </div>
+</mat-card>

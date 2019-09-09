@@ -1,0 +1,13 @@
+<div class="img-container">
+  <div>
+    <img src="data:image/png;base64,{{photo.data}}" alt="photo.name">
+    <div class="img-overlay">
+      <div (click)="openDialogReview()" class="icon-container">
+        <mat-icon class="icon-search">search</mat-icon>
+      </div>
+      <div (click)="openDialogEdit()" class="icon-container">
+        <mat-icon class="icon-edit">edit</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

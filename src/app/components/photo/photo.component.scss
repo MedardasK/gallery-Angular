@@ -1,0 +1,56 @@
+@import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+.img-container{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    img {
+        max-width: 270px;
+        height: auto;
+    }
+}
+
+.img-overlay{
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    display: none;
+    p{
+        color: white;
+        margin: 20px;
+        text-align: center;
+    }
+    .icon-container{
+        height: 50%;
+        .mat-icon {
+            font-size: 60px;
+            cursor: pointer;
+            margin-left: 115px;
+            margin-top: 35px;
+        }
+    }
+}
+.img-container:hover{
+    .img-overlay{
+        display: block;
+        background: rgb(128, 0, 60, 0.6);
+        transition: .5s ease;
+        animation: moveUp linear 0.3s;
+    }
+}
+@keyframes moveUp{
+    0% {
+        top: 200px;
+        opacity: 0;
+    }
+    50%{
+        top: 100px;
+        opacity: 0.3;
+    }
+        100% {
+        top: 0px;
+        opacity: 1;
+    }
+}

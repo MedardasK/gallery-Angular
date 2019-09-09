@@ -1,0 +1,48 @@
+<form [formGroup]="credentials">
+  <div>
+    <mat-form-field>
+      <input required matInput maxlength="30" formControlName="email" name="email" placeholder="Email">
+      <span matPrefix><i class="material-icons">mail_outline</i></span>
+      <mat-error *ngIf="credentials.controls['email'].hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="credentials.controls['email'].hasError('email')">Email is invalid</mat-error>
+    </mat-form-field>
+  </div>
+  <div>&nbsp;</div>
+  <div>
+    <mat-form-field>
+      <input required matInput maxlength="30" formControlName="phone" type="text" name="phone" placeholder="Phone">
+      <span matPrefix><i class="material-icons">phone</i></span>
+      <mat-error *ngIf="credentials.controls['phone'].hasError('required')">Phone is reuqired</mat-error>
+      <mat-error
+        *ngIf="credentials.controls['phone'].hasError('minLength') || credentials.controls['phone'].hasError('pattern')">
+        Phones too short</mat-error>
+    </mat-form-field>
+  </div>
+  <div>&nbsp;</div>
+  <!-- <div>
+      <mat-form-field>
+        <input
+        matInput
+        maxlength="13"
+        type="password"
+        formControlName="password"
+        name="password"
+        placeholder="Password">
+        <span matPrefix><i class="material-icons">visibility</i></span>
+        <mat-error *ngIf="credentials.controls['password'].hasError('required')">Password is required</mat-error>
+        <mat-error *ngIf="credentials.controls['password'].hasError('minLength')">Password is invalid</mat-error>
+      </mat-form-field>
+    </div>
+    <div>&nbsp;</div> -->
+  <div>
+    <mat-checkbox required formControlName="policy" name="policy">I agree with privacy policy</mat-checkbox>
+  </div>
+  <button mat-raised-button type="button" [disabled]="!credentials.valid" (click)="submitValues()">Submit</button>
+</form>
+
+<div>
+  <h3>Results: </h3>
+  <p>{{ credentials.value.email }}</p>
+  <p></p>
+  <p></p>
+</div>

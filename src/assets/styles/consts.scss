@@ -1,0 +1,8 @@
+$primary: 'black';
+$secondary: #5645623;
+
+.some-class{
+    color: $primary;
+}
+
+// veliau @import ../../../assets/styles/consts.scss
