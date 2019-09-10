@@ -1,28 +1,49 @@
 @import '../../../assets/styles/consts.scss';
 
-a {
-    color: #ffff;
+.link-container {
+  a {
+    color: $grey;
     text-decoration: none;
     cursor: pointer;
+  }
 }
 
 .dropzone {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 200px;
-    border: 2px dashed $secondary;
-    border-radius: 5px;
-    background: $background;
-    margin: 10px 0;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 150px;
+  border: 2px dashed $secondary;
+  border-radius: 5px;
+  background: $background;
+  margin: 10px 0;
 
-    &.hovering {
-        border: 2px solid $secondary;
-        color: #dadada !important;
-    }
+  &.hovering {
+    border: 2px solid $secondary;
+    color: $grey !important;
+  }
+
+  .file-input {
+    display: none;
+  }
+  .file-label, h3{
+    color: $grey;
+  }
 }
 
 progress::-webkit-progress-value {
-    transition: width 0.1s ease;
+  transition: width 0.1s ease;
+}
+.submit-button{
+    color: $grey;
+}
+.image-preview-container{
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
+    img{
+        max-height: 600px;
+    }
 }

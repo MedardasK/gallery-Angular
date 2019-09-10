@@ -8,7 +8,6 @@
   margin: 13px;
   display: inline-block;
   border-radius: 7px;
-  overflow: hidden;
 }
 
 .chip {
@@ -72,7 +71,7 @@
   }
 
 .upload-container,
-  .create-new-container {
+  .tags-categories-container {
     a {
       color: $secondary;
       text-decoration: none;

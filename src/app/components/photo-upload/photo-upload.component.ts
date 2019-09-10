@@ -14,22 +14,15 @@ import { ICategory } from './../../models/category.model';
 })
 export class PhotoUploadComponent implements OnInit {
   @Input() photo: any;
-  // Main task
-  task: any;
-
   categoryControl = new FormControl();
   tagControl = new FormControl();
   upload: FormGroup;
+  fileControl = new FormControl();
   categories: ICategory[] = [];
   tags: ITag[] = [];
+  fileData = new FormData();
 
-  // Progress monitoring
-  percentage: Observable<number>;
-
-  snapshot: Observable<any>;
-
-  // Download URL
-  downloadURL: Observable<string>;
+  previewUrl: any = null;
 
   // State for dropzone CSS toggling
   isHovering: boolean;
@@ -40,8 +33,7 @@ export class PhotoUploadComponent implements OnInit {
     this.createForm();
   }
 
-  constructor(private http: HttpClient,
-              private galleryService: GalleryService,
+  constructor(private galleryService: GalleryService,
               private fb: FormBuilder
   ) { }
 
@@ -65,75 +57,41 @@ export class PhotoUploadComponent implements OnInit {
   }
 
   startUpload(event: FileList) {
-    // The File object
     const fileData = event.item(0);
 
-    // Client-side validation example
     if (fileData.type.split('/')[0] !== 'image') {
       console.error('unsupported file type... ');
       return;
     }
+    if (this.fileData.has('file')) {
+      this.fileData.delete('file');
+    }
+    this.fileData.append('file', fileData);
 
-    const file = new FormData();
-    file.append('file', fileData);
-    file.append('description', this.upload.value);
-    this.photo = fileData;
-
-
-    // The storage path
-    //const path = `test/${new Date().getTime()}_${file.name}`;
-
-    // The main task
-
-    //     this.http.post('http://localhost:8080/images/', file,  {
-    //   observe: 'events'
-    // }).subscribe(events => {
-    //   alert('Succesfully uploaded');
-    // });
-    // this.task = this.storage.upload(path, file);
-
-
-
-    // Progress monitoring
-    this.percentage = this.task.percentageChanges();
-    this.snapshot = this.task.snapshotChanges();
-
-    // The file's download URL
-    this.downloadURL = this.task.downloadURL();
-    console.log(this.downloadURL);
-
-    this.snapshot = this.task.snapshotChanges().pipe(
-      tap(snap => {
-        console.log('upload complete');
-        return undefined;
-
-        // if (snap.bytesTransferred === snap.totalBytes) {
-        //   // Update firestore on completion
-        //   this.db.collection('photos').add( { path, size: snap.totalBytes });
-      })
-    );
-
-  }
-  // Determines if the upload task is active
-  isActive(snapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
+    const reader = new FileReader();
+    reader.readAsDataURL(fileData);
+    reader.onload = (event) => {
+      this.previewUrl = reader.result;
+    };
+    // this.upload.patchValue({file: this.fileData});
   }
 
   private createForm(): void {
     this.upload = this.fb.group({
-      // file: ['', [Validators.required]],
-      file: [],
+      file: ['', [Validators.required]],
       description: [],
       categories: [],
       tags: [],
     });
   }
-  submitValues() {
 
-    // this.task = this.galleryService.uploadImage(file).subscribe(events => {
-    //   alert('Successfully uploaded');
-    // });
+  submitValues() {
+    console.log(this.fileData);
     console.log(this.upload.value);
+    this.fileData.append('description', this.upload.value);
+    this.galleryService.uploadImage(this.fileData).subscribe(events => {
+      alert('Successfully uploaded');
+    });
   }
 
 }

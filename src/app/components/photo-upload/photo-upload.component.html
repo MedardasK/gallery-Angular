@@ -1,30 +1,35 @@
 <mat-card class="gallery-container">
-  <a [routerLink]="'/'"> Back to gallery </a>
+  <div class="link-container">
+    <a [routerLink]="'/'"> Back to gallery </a>
+  </div>
   <form [formGroup]="upload">
-    <mat-form-field>
-      <input matInput maxlength="30" formControlName="description" name="description" placeholder="Description">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Select categories</mat-label>
-      <mat-select [formControl]="categoryControl" multiple>
-        <mat-option *ngFor="let category of categories" [value]="category.id">
-          {{category.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Select tags</mat-label>
-      <mat-select [formControl]="tagControl" multiple>
-        <mat-option *ngFor="let tag of tags" [value]="tag.id">
-          {{tag.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around end" fxLayoutAlign.xs="space-around stretch">
+      <div fxLayout="column">
+        <mat-form-field>
+          <input matInput maxlength="30" formControlName="description" name="description" placeholder="Description">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Select categories</mat-label>
+          <mat-select [formControl]="categoryControl" multiple>
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{category.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Select tags</mat-label>
+          <mat-select [formControl]="tagControl" multiple>
+            <mat-option *ngFor="let tag of tags" [value]="tag.id">
+              {{tag.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <div class="dropzone" dropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)"
         [class.hovering]="isHovering">
         <h3>Drop your image here</h3>
         <div class="file">
           <label class="file-label">
-            <input required class="file-input" type="file" (change)="startUpload($event.target.files)" name="file">
+            <input required class="file-input" formControlName="file" type="file"
+              (change)="startUpload($event.target.files)" name="file">
             <span class="file-cta">
               <span class="file-icon">
                 <i class="fa fa-upload"></i>
@@ -33,21 +38,17 @@
             </span>
           </label>
         </div>
-        <!-- <mat-error *ngIf="upload.controls['file'].hasError('required')">File is required</mat-error> -->
+        <mat-error *ngIf="upload.controls['file'].hasError('required')">File is required</mat-error>
       </div>
     </div>
-    <!-- <div *ngIf="percentage | async as pct">
-      <progress class="progress is-info" [value]="pct" max="100">
-      </progress>
-      {{ pct | number }}%
-    </div> -->
-    <!-- <div *ngIf="snapshot | async as snap">
-      {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} -->
-      <!-- <div *ngIf="downloadURL | async as url"> -->
-      <div>
-        <!-- <img [src]="data:image/png;base64,{{photo.data}}"> -->
+    <div>
+      <div class="image-preview-container" fxFlex="30" fxFlex.lg="20" fxFlex.sm="45" fxFlex.xs="100" *ngIf="previewUrl">
+        <img [src]="previewUrl">
       </div>
-    <!-- </div> -->
-    <button mat-raised-button type="button" [disabled]="!upload.valid" (click)="submitValues()">Submit</button>
+    </div>
+    <div>
+      <button mat-raised-button class="submit-button" type="button" [disabled]="!upload.valid"
+        (click)="submitValues()">Submit</button>
+    </div>
   </form>
 </mat-card>

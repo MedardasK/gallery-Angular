@@ -13,7 +13,13 @@ button{
     cursor: pointer;
     outline: none;
 }
-.image{
-    max-width: 80vw;
-    max-height: 80vh;
+.image-container{
+    position: relative;
+    overflow: hidden;
+    width: 70vw;
+    height: 60vh;
+    img{
+        position: absolute;
+        background-position: center;
+    }
 }

@@ -3,10 +3,12 @@
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-subtitle>Description: {{photo.description}}</mat-card-subtitle>
-      <mat-card-subtitle>Categories: {{photo.description}}</mat-card-subtitle>
-      <mat-card-subtitle>Tags: {{photo.description}}</mat-card-subtitle>
+      <mat-card-subtitle>Categories: {{photo.category}}</mat-card-subtitle>
+      <mat-card-subtitle>Tags: {{photo.tag}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <img class="image" src="data:image/png;base64,{{photo.imageFull.data}}" alt="{{photo.description}}">
-  </mat-card-content>
+      <div class="image-container">
+      <img src="data:image/png;base64,{{photo.imageFull.data}}" alt="{{photo.description}}">
+    </div>
+    </mat-card-content>
 </mat-card>
