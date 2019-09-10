@@ -4,16 +4,18 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GalleryComponent,
-         LoginComponent } from './views/';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PhotoOneComponent,
-         PhotoEditComponent } from './dialogs';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ItemsCountPipe } from './pipes/items-count.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-
+import { GalleryComponent,
+         LoginComponent } from './views/';
+import { PhotoOneComponent,
+         PhotoEditComponent } from './dialogs';
+import { PhotoUploadComponent,
+         PhotoComponent } from './components';
+import { FileUploadDirective } from './directives/file-upload.directive';
+import { FileSizePipe } from './pipes/file-size.pipe';
 import { MatCardModule,
         MatFormFieldModule,
         MatSelectModule,
@@ -22,11 +24,8 @@ import { MatCardModule,
         MatButtonModule,
         MatIconModule,
         MatDialogModule,
-        MatCheckboxModule } from '@angular/material';
-import { PhotoUploadComponent,
-         PhotoComponent } from './components';
-import { FileUploadDirective } from './directives/file-upload.directive';
-import { FileSizePipe } from './pipes/file-size.pipe';
+        MatCheckboxModule,
+        MatInputModule } from '@angular/material';
 
 
 @NgModule({
@@ -58,6 +57,7 @@ import { FileSizePipe } from './pipes/file-size.pipe';
     MatProgressSpinnerModule,
     MatChipsModule,
     MatButtonModule,
+    MatInputModule,
     FlexLayoutModule
   ],
   providers: [GalleryService],

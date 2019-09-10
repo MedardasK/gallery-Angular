@@ -1,17 +1,48 @@
 <mat-card class="gallery-container">
-  <div>
-    <h3>Edit selected picture</h3>
+  <h3>Edit selected picture</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around end"
+  fxLayoutAlign.xs="space-around stretch">
     <div>
-      <input placeholder="Description" type="text" [(ngModel)]="descriptionString" />
+      <form [formGroup]="editForm">
+        <div>
+          <mat-form-field>
+            <input matInput maxlength="30" formControlName="description" name="description" placeholder="Description"
+              value="{{photo.description}}">
+            <span matPrefix><i class="material-icons">create</i></span>
+            <!-- <mat-error *ngIf="editForm.controls['description'].hasError('description')">Description is invalid</mat-error> -->
+          </mat-form-field>
+        </div>
+        <div>&nbsp;</div>
+        <div>
+          <mat-form-field>
+            <input matInput maxlength="30" formControlName="fileName" name="fileName" placeholder="File name"
+              value="{{photo.name}}">
+            <span matPrefix><i class="material-icons">file_copy</i></span>
+            <mat-error *ngIf="editForm.controls['fileName'].hasError('fileName')">FileName is too short</mat-error>
+          </mat-form-field>
+        </div>
+        <div>&nbsp;</div>
+        <mat-form-field>
+          <mat-label>Select categories</mat-label>
+          <mat-select [formControl]="categoryControl" multiple>
+            <mat-option *ngFor="let category of categories" [value]="category.id">
+              {{category.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>&nbsp;</div>
+        <mat-form-field>
+          <mat-label>Select tags</mat-label>
+          <mat-select [formControl]="tagControl" multiple>
+            <mat-option *ngFor="let tag of tags" [value]="tag.id">
+              {{tag.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>&nbsp;</div>
+        <button mat-raised-button type="button" [disabled]="!editForm.valid" (click)="submitValues()">Submit</button>
+      </form>
     </div>
     <div>
-      <input placeholder="File name" type="text" [(ngModel)]="fileNameString" />
-    </div>
-    <div>
-      <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
-    </div>
-    <div *ngIf="editSuccessful">
-      Saved successfully!
+      <img src="data:image/png;base64,{{photo.data}}" alt="photo.name">
     </div>
   </div>
 </mat-card>

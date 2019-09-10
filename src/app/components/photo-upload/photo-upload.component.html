@@ -2,8 +2,7 @@
   <a [routerLink]="'/'"> Back to gallery </a>
   <form [formGroup]="upload">
     <mat-form-field>
-      <input required matInput maxlength="30" formControlName="description" name="description" placeholder="Description">
-      <span matPrefix><i class="material-icons">mail_outline</i></span>
+      <input matInput maxlength="30" formControlName="description" name="description" placeholder="Description">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Select categories</mat-label>
@@ -12,45 +11,43 @@
           {{category.name}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field>
+      <mat-label>Select tags</mat-label>
+      <mat-select [formControl]="tagControl" multiple>
+        <mat-option *ngFor="let tag of tags" [value]="tag.id">
+          {{tag.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <div>
       <div class="dropzone" dropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)"
         [class.hovering]="isHovering">
-
         <h3>Drop your image here</h3>
-
         <div class="file">
           <label class="file-label">
-
-            <input class="file-input" type="file" (change)="startUpload($event.target.files)" name="file">
+            <input required class="file-input" type="file" (change)="startUpload($event.target.files)" name="file">
             <span class="file-cta">
               <span class="file-icon">
                 <i class="fa fa-upload"></i>
               </span>
-              <span class="file-label">
-                or choose a file…
-              </span>
+              <span class="file-label"> or choose a file… </span>
             </span>
           </label>
         </div>
-        <mat-error *ngIf="upload.controls['file'].hasError('required')">File is required</mat-error>
+        <!-- <mat-error *ngIf="upload.controls['file'].hasError('required')">File is required</mat-error> -->
       </div>
     </div>
-    <div *ngIf="percentage | async as pct">
-
+    <!-- <div *ngIf="percentage | async as pct">
       <progress class="progress is-info" [value]="pct" max="100">
       </progress>
       {{ pct | number }}%
-    </div>
-
-    <div *ngIf="snapshot | async as snap">
-      {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
-
-      <div *ngIf="downloadURL | async as url">
-        <!-- <img [src]="data:image/png;base64,{{file.file}}"> -->
+    </div> -->
+    <!-- <div *ngIf="snapshot | async as snap">
+      {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }} -->
+      <!-- <div *ngIf="downloadURL | async as url"> -->
+      <div>
+        <!-- <img [src]="data:image/png;base64,{{photo.data}}"> -->
       </div>
-
-    </div>
+    <!-- </div> -->
     <button mat-raised-button type="button" [disabled]="!upload.valid" (click)="submitValues()">Submit</button>
-
   </form>
 </mat-card>

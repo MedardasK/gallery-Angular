@@ -21,6 +21,8 @@ export class PhotoComponent {
       return this.galleryService.getPhotoById(this.photo.id)
         .then(res => {
           this.dialog.open(PhotoOneComponent, {
+            width: '80vw',
+            height: '80vh',
             data: {photo: res}
           });
         });
@@ -31,7 +33,7 @@ export class PhotoComponent {
         .then(res => {
           this.dialog.open(PhotoEditComponent, {
             width: '80vw',
-            height: '50vw',
+            height: '80vh',
             data: {photo: res}
           });
         });
