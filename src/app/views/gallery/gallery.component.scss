@@ -1,3 +1,5 @@
+@import '../../../assets/styles/consts.scss';
+
 @import '../../../assets/styles/search-input.scss';
 
 .photo-container {
@@ -29,11 +31,11 @@
     position: absolute;
     right: 5px;
     top: 23px;
-    background-color: #424242;
-    color: grey;
+    background-color: $background;
+    color: $secondary;
 }
 .placeholder {
-    color: #424242;
+    color: $grey;
 }
 .sorting-container {
     margin-bottom: 30px;
@@ -63,7 +65,7 @@
     }
     .upload-picture-container{
         a{
-        color: #ffff;
+        color: $grey;
         text-decoration: none;
         }
     }

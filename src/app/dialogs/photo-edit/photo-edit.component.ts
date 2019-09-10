@@ -20,6 +20,8 @@ export class PhotoEditComponent {
     this.photo = data.photo;
   }
 
+
+
   onClick(): void {
     this.dialogRef.close();
   }
@@ -39,4 +41,6 @@ export class PhotoEditComponent {
       }
     });
   }
+
+
 }

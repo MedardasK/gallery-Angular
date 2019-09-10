@@ -46,12 +46,8 @@
       {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
 
       <div *ngIf="downloadURL | async as url">
-        <img [src]="url">
+        <!-- <img [src]="data:image/png;base64,{{file.file}}"> -->
       </div>
-
-      <button (click)="task.pause()" class="button is-warning" [disabled]="!isActive(snap)">Pause</button>
-      <button (click)="task.cancel()" class="button is-danger" [disabled]="!isActive(snap)">Cancel</button>
-      <button (click)="task.resume()" class="button is-info" [disabled]="!(snap?.state === 'paused')">Resume</button>
 
     </div>
     <button mat-raised-button type="button" [disabled]="!upload.valid" (click)="submitValues()">Submit</button>

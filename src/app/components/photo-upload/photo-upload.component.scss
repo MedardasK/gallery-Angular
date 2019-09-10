@@ -1,21 +1,24 @@
-a{
+@import '../../../assets/styles/consts.scss';
+
+a {
     color: #ffff;
     text-decoration: none;
+    cursor: pointer;
 }
 
-.dropzone { 
+.dropzone {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column; 
+    flex-direction: column;
     height: 200px;
-    border: 2px dashed #c2185b;
+    border: 2px dashed $secondary;
     border-radius: 5px;
-    background: #303030;
+    background: $background;
     margin: 10px 0;
 
     &.hovering {
-        border: 2px solid #c2185b;
+        border: 2px solid $secondary;
         color: #dadada !important;
     }
 }

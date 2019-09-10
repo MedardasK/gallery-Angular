@@ -3,7 +3,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { GalleryService } from './../../services/gallery.service';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import {FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ITag } from './../../models/tag.model';
 import { ICategory } from './../../models/category.model';
 
@@ -17,7 +17,6 @@ export class PhotoUploadComponent implements OnInit {
   task: any;
 
   categoryControl = new FormControl();
-  descriptionString = '';
   upload: FormGroup;
   categories: ICategory[] = [];
   tags: ITag[] = [];
@@ -46,16 +45,16 @@ export class PhotoUploadComponent implements OnInit {
 
   loadCategories(): void {
     this.galleryService.getCategories()
-    .then(data => {
-      this.categories = data;
-    });
+      .then(data => {
+        this.categories = data;
+      });
   }
 
   loadTags(): void {
     this.galleryService.getTags()
-    .then(data => {
-      this.tags = data;
-    });
+      .then(data => {
+        this.tags = data;
+      });
   }
 
 
@@ -75,7 +74,7 @@ export class PhotoUploadComponent implements OnInit {
 
     const file = new FormData();
     file.append('file', fileData);
-    file.append('description', this.descriptionString);
+    file.append('description', this.upload.value);
 
 
 
@@ -92,7 +91,7 @@ export class PhotoUploadComponent implements OnInit {
     // this.task = this.storage.upload(path, file);
 
     this.task = this.galleryService.uploadImage(file).subscribe(events => {
-      alert('Succesfully uploaded');
+      alert('Successfully uploaded');
     });
 
     // Progress monitoring
@@ -122,7 +121,7 @@ export class PhotoUploadComponent implements OnInit {
 
   private createForm(): void {
     this.upload = this.fb.group({
-       file: ['', Validators.required]
+      file: ['', Validators.required]
     });
   }
   submitValues() {

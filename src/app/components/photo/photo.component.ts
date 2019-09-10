@@ -12,27 +12,24 @@ import { PhotoEditComponent } from 'src/app/dialogs/photo-edit/photo-edit.compon
 })
 export class PhotoComponent {
   @Input() photo: IPhoto;
-  // let data = this.gallery.getPhotoById(this.photo.id);
 
   constructor(
     private galleryService: GalleryService,
     public dialog: MatDialog) {}
 
-    openDialogReview(): void {
-      this.galleryService.getPhotoById(this.photo.id)
+    openDialogReview(): Promise<void> {
+      return this.galleryService.getPhotoById(this.photo.id)
         .then(res => {
-          const dialogRef = this.dialog.open(PhotoOneComponent, {
-            // width: '80vw',
-            // height: '80vw',
+          this.dialog.open(PhotoOneComponent, {
             data: {photo: res}
           });
         });
     }
 
-    openDialogEdit(): void {
-      this.galleryService.getPhotoById(this.photo.id)
+    openDialogEdit(): Promise<void> {
+      return this.galleryService.getPhotoById(this.photo.id)
         .then(res => {
-          const dialogRef = this.dialog.open(PhotoEditComponent, {
+          this.dialog.open(PhotoEditComponent, {
             width: '80vw',
             height: '50vw',
             data: {photo: res}
