@@ -51,6 +51,7 @@
 
 .gallery-container {
   margin-top: 10px;
+
   .photo-container.ng-star-inserted {
     margin-bottom: 0px;
   }
@@ -59,25 +60,30 @@
     p {
       color: $grey;
     }
+
     mat-icon {
       color: $grey;
     }
+
     .sort-date-button {
       min-width: 30px;
       background: none;
     }
   }
 
-  .upload-container, .create-new-container {
+.upload-container,
+  .create-new-container {
     a {
       color: $secondary;
       text-decoration: none;
     }
   }
 }
-.sort-date-container{
-    margin-top: 10px;
-    button{
-        color: $grey;
-    }
+
+.sort-date-container {
+  margin-top: 10px;
+
+  button {
+    color: $grey;
+  }
 }
