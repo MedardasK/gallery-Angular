@@ -25,7 +25,8 @@ import { MatCardModule,
         MatIconModule,
         MatDialogModule,
         MatCheckboxModule,
-        MatInputModule } from '@angular/material';
+        MatInputModule,
+        MatToolbarModule } from '@angular/material';
 
 
 @NgModule({
@@ -58,6 +59,7 @@ import { MatCardModule,
     MatChipsModule,
     MatButtonModule,
     MatInputModule,
+    MatToolbarModule,
     FlexLayoutModule
   ],
   providers: [GalleryService],

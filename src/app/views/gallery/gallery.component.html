@@ -1,4 +1,24 @@
-<section>
+<mat-toolbar class="top-toolbar">
+  <mat-toolbar-row fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around end" fxLayoutAlign.xs="space-around stretch">
+    <div fxFlex="30" fxFlex.xs="100" class="toolbar-button-container">
+      <button mat-flat-button>
+        <a [routerLink]="'/upload'"> Upload picture </a>
+      </button>
+    </div>
+    <div fxFlex="5"></div>
+    <div fxFlex="30" fxFlex.xs="100" class="toolbar-button-container">
+      <button mat-flat-button>
+        <a [routerLink]="'/categories-tags'"> Create new categories or tags </a>
+      </button>
+    </div>
+    <div fxFlex="30" fxFlex.xs="100" class="toolbar-button-container">
+        <button mat-flat-button>
+          <a [routerLink]="'/categories-tags'"> LOGIN </a>
+        </button>
+      </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+<section class="top-container">
   <mat-card fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around end" fxLayoutAlign.xs="space-around stretch"
     class="sorting-container">
     <div fxFlex="25" fxFlex.xs="100">
@@ -39,24 +59,13 @@
   <mat-chip-list class="chip">
     <mat-chip color="primary" selected>PICTURES</mat-chip>
   </mat-chip-list>
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around end" fxLayoutAlign.xs="space-around stretch">
-    <div  fxFlex="30" fxFlex.xs="100" class="sort-date-container">
+  <div>
+    <div fxFlex="30" fxFlex.xs="100" class="sort-date-container">
       <button mat-flat-button class="sort-date-button" (click)="sortByDate()">
-            Sort by date<mat-icon>{{sortObj.buttonString}}</mat-icon>
+        Sort by date<mat-icon>{{sortObj.buttonString}}</mat-icon>
       </button>
     </div>
     <div fxFlex="5"></div>
-    <div fxFlex="30" fxFlex.xs="100" class="upload-container">
-      <button mat-flat-button>
-        <a [routerLink]="'/upload'"> Upload picture </a>
-      </button>
-    </div>
-    <div fxFlex="5"></div>
-    <div fxFlex="30" fxFlex.xs="100" class="tags-categories-container">
-      <button mat-flat-button>
-        <a [routerLink]="'/categories-tags'"> Create new categories or tags </a>
-      </button>
-    </div>
   </div>
   <div class="res-count-container">Showing: {{resCount | itemsCount}} pictures</div>
   <div fxLayout="row wrap" fxLayoutAlign="space-around center" class="gallery-container">

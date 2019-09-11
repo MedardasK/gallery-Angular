@@ -22,14 +22,14 @@ export class PhotoUploadComponent implements OnInit {
   tags: ITag[] = [];
   fileData = new FormData();
 
-  previewUrl: any = null;
+  previewUrl: any;
 
   // State for dropzone CSS toggling
   isHovering: boolean;
 
   ngOnInit() {
-    this.loadCategories();
-    this.loadTags();
+    this._loadCategories();
+    this._loadTags();
     this.createForm();
   }
 
@@ -37,14 +37,14 @@ export class PhotoUploadComponent implements OnInit {
               private fb: FormBuilder
   ) { }
 
-  loadCategories(): void {
+  _loadCategories(): void {
     this.galleryService.getCategories()
       .then(data => {
         this.categories = data;
       });
   }
 
-  loadTags(): void {
+  _loadTags(): void {
     this.galleryService.getTags()
       .then(data => {
         this.tags = data;
@@ -56,7 +56,7 @@ export class PhotoUploadComponent implements OnInit {
     this.isHovering = event;
   }
 
-  startUpload(event: FileList) {
+  startUpload(event: FileList) { //blob
     const fileData = event.item(0);
 
     if (fileData.type.split('/')[0] !== 'image') {
@@ -70,15 +70,13 @@ export class PhotoUploadComponent implements OnInit {
 
     const reader = new FileReader();
     reader.readAsDataURL(fileData);
-    reader.onload = (event) => {
+    reader.onload = (_event) => {
       this.previewUrl = reader.result;
     };
-    // this.upload.patchValue({file: this.fileData});
   }
 
   private createForm(): void {
     this.upload = this.fb.group({
-      file: ['', [Validators.required]],
       description: [],
       categories: [],
       tags: [],
@@ -86,8 +84,7 @@ export class PhotoUploadComponent implements OnInit {
   }
 
   submitValues() {
-    console.log(this.fileData);
-    console.log(this.upload.value);
+    // jei nera  file, neleist submitint
     this.fileData.append('description', this.upload.value);
     this.galleryService.uploadImage(this.fileData).subscribe(events => {
       alert('Successfully uploaded');

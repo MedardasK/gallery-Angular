@@ -38,7 +38,6 @@
             </span>
           </label>
         </div>
-        <mat-error *ngIf="upload.controls['file'].hasError('required')">File is required</mat-error>
       </div>
     </div>
     <div>
@@ -47,7 +46,7 @@
       </div>
     </div>
     <div>
-      <button mat-raised-button class="submit-button" type="button" [disabled]="!upload.valid"
+      <button mat-raised-button class="submit-button" type="button" [disabled]="!previewUrl"
         (click)="submitValues()">Submit</button>
     </div>
   </form>
