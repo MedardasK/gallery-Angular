@@ -10,10 +10,10 @@
       <form [formGroup]="credentials">
         <div>
           <mat-form-field>
-            <input required matInput maxlength="30" formControlName="email" name="email" placeholder="Email">
+            <input required matInput maxlength="30" formControlName="username" name="username" placeholder="Email">
             <span matPrefix><i class="material-icons">mail_outline</i></span>
-            <mat-error *ngIf="credentials.controls['email'].hasError('required')">Email is required</mat-error>
-            <mat-error *ngIf="credentials.controls['email'].hasError('email')">Email is invalid</mat-error>
+            <mat-error *ngIf="credentials.controls['username'].hasError('required')">Email is required</mat-error>
+            <mat-error *ngIf="credentials.controls['username'].hasError('username')">Email is invalid</mat-error>
           </mat-form-field>
         </div>
         <div>&nbsp;</div>

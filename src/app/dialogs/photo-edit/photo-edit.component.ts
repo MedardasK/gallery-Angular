@@ -30,11 +30,10 @@ export class PhotoEditComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  private createForm(): void {
+  createForm(): void {
     this.editForm = this.fb.group({
       description: [],
       fileName: ['', Validators.minLength(1)]
-      // password: ['', Validators.required, Validators.minLength(9)],
     });
   }
   submitValues() {

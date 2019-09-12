@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 })
 export class PhotoComponent {
   @Input() photo: IPhoto;
-  isLogged: boolean;
 
   constructor(private galleryService: GalleryService,
               private auth: AuthService,
@@ -31,7 +30,7 @@ export class PhotoComponent {
     }
 
     openDialogEdit(): Promise<void> {
-      if (this.auth.isLoggedIn()) {
+      if (this.auth.loggedIn) {
         this.router.navigate(['login']);
         return;
       }

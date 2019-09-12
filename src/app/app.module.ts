@@ -6,63 +6,65 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemsCountPipe } from './pipes/items-count.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { GalleryComponent,
          LoginComponent } from './views/';
 import { PhotoOneComponent,
-         PhotoEditComponent } from './dialogs';
+         PhotoEditComponent,
+         RegisterComponent } from './dialogs';
 import { PhotoUploadComponent,
          PhotoComponent } from './components';
 import { FileUploadDirective } from './directives/file-upload.directive';
 import { MatCardModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatProgressSpinnerModule,
-        MatChipsModule,
-        MatButtonModule,
-        MatIconModule,
-        MatDialogModule,
-        MatCheckboxModule,
-        MatInputModule,
-        MatToolbarModule } from '@angular/material';
+         MatFormFieldModule,
+         MatSelectModule,
+         MatProgressSpinnerModule,
+         MatChipsModule,
+         MatButtonModule,
+         MatIconModule,
+         MatDialogModule,
+         MatCheckboxModule,
+         MatInputModule,
+         MatToolbarModule } from '@angular/material';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    GalleryComponent,
-    PhotoComponent,
-    PhotoOneComponent,
-    ItemsCountPipe,
-    PhotoUploadComponent,
-    PhotoEditComponent,
-    LoginComponent,
-    FileUploadDirective
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    MatDialogModule,
-    MatCheckboxModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatProgressSpinnerModule,
-    MatChipsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatToolbarModule,
-    FlexLayoutModule
-  ],
-  providers: [GalleryService, AuthService],
-  bootstrap: [AppComponent],
-  entryComponents: [PhotoOneComponent, PhotoComponent, PhotoEditComponent]
+    declarations: [
+        AppComponent,
+        GalleryComponent,
+        PhotoComponent,
+        PhotoOneComponent,
+        ItemsCountPipe,
+        PhotoUploadComponent,
+        PhotoEditComponent,
+        LoginComponent,
+        FileUploadDirective,
+        RegisterComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatProgressSpinnerModule,
+        MatChipsModule,
+        MatButtonModule,
+        MatInputModule,
+        MatToolbarModule,
+        FlexLayoutModule
+    ],
+    providers: [GalleryService, AuthService],
+    bootstrap: [AppComponent],
+    entryComponents: [PhotoOneComponent, PhotoComponent, PhotoEditComponent, RegisterComponent]
 })
 export class AppModule { }

@@ -27,7 +27,7 @@ export class PhotoUploadComponent implements OnInit {
   ngOnInit() {
     this._loadCategories();
     this._loadTags();
-    this.createForm();
+    this._createForm();
   }
 
   constructor(private galleryService: GalleryService,
@@ -72,7 +72,7 @@ export class PhotoUploadComponent implements OnInit {
     };
   }
 
-  private createForm(): void {
+  _createForm(): void {
     this.upload = this.fb.group({
       description: [],
       categories: [],
