@@ -1,19 +1,13 @@
 <mat-toolbar class="top-toolbar">
-  <mat-toolbar-row fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around end" fxLayoutAlign.xs="space-around stretch">
-    <div fxFlex="30" fxFlex.xs="100" class="toolbar-button-container">
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center" fxLayoutAlign.xs="space-around stretch">
+    <div fxFlex="50" fxLayoutAlign="start" class="toolbar-button-container">
       <button mat-flat-button>
         <a [routerLink]="'/upload'"> Upload picture </a>
       </button>
     </div>
-    <div fxFlex="5"></div>
-    <div fxFlex="30" fxFlex.xs="100" class="toolbar-button-container">
-      <button mat-flat-button>
-        <a [routerLink]="'/categories-tags'"> Create new categories or tags </a>
-      </button>
-    </div>
-    <div fxFlex="30" fxFlex.xs="100" class="toolbar-button-container">
+    <div fxFlex="50" fxLayoutAlign="end" class="toolbar-button-container">
         <button mat-flat-button>
-          <a [routerLink]="'/categories-tags'"> LOGIN </a>
+          <a [routerLink]="'/login'"> LOGIN </a>
         </button>
       </div>
   </mat-toolbar-row>

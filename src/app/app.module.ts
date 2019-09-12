@@ -1,4 +1,5 @@
-import { GalleryService } from './services/gallery.service';
+import { GalleryService,
+         AuthService } from './services/';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,7 +16,6 @@ import { PhotoOneComponent,
 import { PhotoUploadComponent,
          PhotoComponent } from './components';
 import { FileUploadDirective } from './directives/file-upload.directive';
-import { FileSizePipe } from './pipes/file-size.pipe';
 import { MatCardModule,
         MatFormFieldModule,
         MatSelectModule,
@@ -39,8 +39,7 @@ import { MatCardModule,
     PhotoUploadComponent,
     PhotoEditComponent,
     LoginComponent,
-    FileUploadDirective,
-    FileSizePipe
+    FileUploadDirective
   ],
   imports: [
     BrowserModule,
@@ -62,7 +61,7 @@ import { MatCardModule,
     MatToolbarModule,
     FlexLayoutModule
   ],
-  providers: [GalleryService],
+  providers: [GalleryService, AuthService],
   bootstrap: [AppComponent],
   entryComponents: [PhotoOneComponent, PhotoComponent, PhotoEditComponent]
 })

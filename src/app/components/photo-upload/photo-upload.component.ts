@@ -1,8 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HttpClient, HttpEventType } from '@angular/common/http';
 import { GalleryService } from './../../services/gallery.service';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ITag } from './../../models/tag.model';
 import { ICategory } from './../../models/category.model';
@@ -84,7 +81,6 @@ export class PhotoUploadComponent implements OnInit {
   }
 
   submitValues() {
-    // jei nera  file, neleist submitint
     this.fileData.append('description', this.upload.value);
     this.galleryService.uploadImage(this.fileData).subscribe(events => {
       alert('Successfully uploaded');

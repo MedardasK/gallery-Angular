@@ -1,5 +1,7 @@
+import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,9 @@ export class LoginComponent implements OnInit {
 
   credentials: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private auth: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
     this.createForm();
@@ -19,14 +23,18 @@ export class LoginComponent implements OnInit {
   private createForm(): void {
     this.credentials = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(12), Validators.pattern('^[0-9 ()+-]+$')]],
-      // password: ['', Validators.required, Validators.minLength(9)],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       policy: [false, Validators.requiredTrue]
     });
   }
 
   submitValues() {
     console.log(this.credentials.value);
+    this.auth.login();
+    // jei praeina login
+    // redirect i front
+    console.log(this.auth.isLoggedIn);
+    this.router.navigate(['']);
   }
 
 }

@@ -42,8 +42,10 @@ progress::-webkit-progress-value {
 .image-preview-container{
     height: 300px;
     width: 300px;
+    border-radius: 5px;
     overflow: hidden;
     img{
-        max-height: 600px;
+      height: 300px;
+      width: 300px;
     }
 }

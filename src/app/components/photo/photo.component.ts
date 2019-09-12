@@ -4,6 +4,8 @@ import { IPhoto } from './../../models/photo.model';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PhotoEditComponent } from 'src/app/dialogs/photo-edit/photo-edit.component';
+import { AuthService } from './../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-photo',
@@ -12,28 +14,32 @@ import { PhotoEditComponent } from 'src/app/dialogs/photo-edit/photo-edit.compon
 })
 export class PhotoComponent {
   @Input() photo: IPhoto;
+  isLogged: boolean;
 
-  constructor(
-    private galleryService: GalleryService,
-    public dialog: MatDialog) {}
+  constructor(private galleryService: GalleryService,
+              private auth: AuthService,
+              private router: Router,
+              private dialog: MatDialog) {}
 
     openDialogReview(): Promise<void> {
       return this.galleryService.getPhotoById(this.photo.id)
         .then(res => {
           this.dialog.open(PhotoOneComponent, {
-            width: '80vw',
-            height: '80vh',
             data: {photo: res}
           });
         });
     }
 
     openDialogEdit(): Promise<void> {
+      if (this.auth.isLoggedIn()) {
+        this.router.navigate(['login']);
+        return;
+      }
       return this.galleryService.getPhotoById(this.photo.id)
         .then(res => {
           this.dialog.open(PhotoEditComponent, {
             width: '80vw',
-            height: '80vh',
+            height: '60vh',
             data: {photo: res}
           });
         });

@@ -6,10 +6,15 @@
   top: 0px;
   left: 0px;
   z-index: 999;
+  background: $background;
+  border-bottom: 1px solid $secondary;
   .toolbar-button-container {
     a {
-      color: $secondary;
+      color: #ffffff;
       text-decoration: none;
+    }
+    button{
+      background-color: $secondary;
     }
   }
 }
@@ -40,7 +45,7 @@
 .res-count-container {
   position: absolute;
   color: $grey;
-  top: 20px;
+  top: 15px;
   right: 25px;
   font-size: 14px;
 }
@@ -64,8 +69,6 @@
 }
 
 .gallery-container {
-  margin-top: 10px;
-
   .photo-container.ng-star-inserted {
     margin-bottom: 0px;
   }
@@ -74,22 +77,12 @@
     p {
       color: $grey;
     }
-
-    mat-icon {
+    button {
       color: $grey;
     }
-
     .sort-date-button {
       min-width: 30px;
       background: none;
     }
-  }
-}
-
-.sort-date-container {
-  margin-top: 10px;
-
-  button {
-    color: $grey;
   }
 }
