@@ -15,7 +15,7 @@ export class GalleryService {
   constructor(private http: HttpClient) { }
 
   getPhotos(): Promise<IPhoto[]> {
-    return this.http.get<IPhoto[]>('http://localhost:8080/images/').toPromise();
+    return this.http.get<IPhoto[]>('http://localhost:8080/images').toPromise();
   }
 
   getPhotoById(id: number): Promise<IPhoto> {
@@ -27,11 +27,11 @@ export class GalleryService {
   }
 
   getTags(): Promise<ITag[]> {
-    return this.http.get<ITag[]>('http://localhost:8080/tags/').toPromise();
+    return this.http.get<ITag[]>('http://localhost:8080/tags').toPromise();
   }
 
   uploadImage(file: any): Observable<any> {
-    return this.http.post('http://localhost:8080/images/', file).pipe(
+    return this.http.post('http://localhost:8080/images/upload', file).pipe(
       catchError(this.handleError)
     );
 }

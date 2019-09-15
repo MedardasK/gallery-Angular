@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { Router } from '@angular/router';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-gallery',
@@ -17,9 +19,10 @@ export class GalleryComponent implements OnInit {
   categoryControl = new FormControl();
   photos: IPhoto[] = [];
   isLoaded = false;
+
   resCount = 0;
   sortObj = { sortBoolean: true,
-    buttonString: 'keyboard_arrow_up' };
+              buttonString: 'keyboard_arrow_up' };
   categories: ICategory[] = [];
   search = '';
   tags: ITag[] = [];
@@ -28,7 +31,9 @@ export class GalleryComponent implements OnInit {
   categoriesIds: number[] = [];
 
 
-  constructor(private gallery: GalleryService) { }
+  constructor(private gallery: GalleryService,
+              private router: Router,
+              private auth: AuthService) { }
 
   ngOnInit() {
     this.loadPhotos();
@@ -146,6 +151,13 @@ export class GalleryComponent implements OnInit {
     if (e.length > 2) {
       console.log('sending request...');
     }
+  }
+  loginOrOut() {
+    if (this.auth.loggedIn) {
+      this.auth.logout();
+      return;
+    }
+    this.router.navigate(['login']);
   }
 
 }

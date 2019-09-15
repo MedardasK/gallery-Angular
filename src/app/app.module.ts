@@ -10,12 +10,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemsCountPipe } from './pipes/items-count.pipe';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { GalleryComponent,
-         LoginComponent } from './views/';
+         LoginComponent,
+         PhotoUploadComponent } from './views/';
 import { PhotoOneComponent,
          PhotoEditComponent,
          RegisterComponent } from './dialogs';
-import { PhotoUploadComponent,
-         PhotoComponent } from './components';
+import { PhotoComponent } from './components';
 import { FileUploadDirective } from './directives/file-upload.directive';
 import { MatCardModule,
          MatFormFieldModule,
@@ -28,6 +28,8 @@ import { MatCardModule,
          MatCheckboxModule,
          MatInputModule,
          MatToolbarModule } from '@angular/material';
+import { CookieService } from 'ngx-cookie-service';
+import { JwtModule } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -61,9 +63,33 @@ import { MatCardModule,
         MatButtonModule,
         MatInputModule,
         MatToolbarModule,
-        FlexLayoutModule
+        FlexLayoutModule,
+        JwtModule.forRoot({
+            config: {
+              tokenGetter: function  tokenGetter() {
+                function getCookie(cname) {
+                  const name = cname + '=';
+                  const decodedCookie = decodeURIComponent(document.cookie);
+                  const ca = decodedCookie.split(';');
+                  for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) === ' ') {
+                      c = c.substring(1);
+                    }
+                    if (c.indexOf(name) === 0) {
+                      return c.substring(name.length, c.length);
+                    }
+                  }
+                  return '';
+                }
+                return getCookie('access_token');
+                  },
+              whitelistedDomains: ['localhost:8080'],
+              blacklistedRoutes: ['http://localhost:8080/login']
+            }
+          })
     ],
-    providers: [GalleryService, AuthService],
+    providers: [GalleryService, AuthService, CookieService],
     bootstrap: [AppComponent],
     entryComponents: [PhotoOneComponent, PhotoComponent, PhotoEditComponent, RegisterComponent]
 })

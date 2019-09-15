@@ -1,8 +1,10 @@
+import { RegisterComponent } from './../../dialogs/register/register.component';
 import { IUser } from './../../models/user.model';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private auth: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.createForm();
@@ -25,18 +28,20 @@ export class LoginComponent implements OnInit {
   private createForm(): void {
     this.credentials = this.fb.group({
       username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      policy: [false, Validators.requiredTrue]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  submitValues() {
+  submitValues(): void {
     this.userCredentials = this.credentials.value;
-    console.log(this.userCredentials);
     this.auth.login(this.userCredentials.username, this.userCredentials.password);
     // jei praeina login
-    // redirect i front
+    // redirect i front ?
     this.router.navigate(['']);
+  }
+
+  openDialogRegister(): void {
+    this.dialog.open(RegisterComponent);
   }
 
 }

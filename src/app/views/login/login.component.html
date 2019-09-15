@@ -26,14 +26,10 @@
             <mat-error *ngIf="credentials.controls['password'].hasError('minLength')">Password is invalid</mat-error>
           </mat-form-field>
         </div>
-        <div>&nbsp;</div>
-        <div>
-          <mat-checkbox required formControlName="policy" name="policy">I agree with privacy policy</mat-checkbox>
-        </div>
-        <div>&nbsp;</div>
-        <button mat-raised-button type="button" [disabled]="!credentials.valid" (click)="submitValues()">Sign In</button>
+        <button mat-raised-button type="button" [disabled]="!credentials.valid" (click)="submitValues()">
+          Sign In</button>
       </form>
-      <p>... or <a [routerLink]="'/'">Sign up</a> if you don't have an account</p>
+      <p>... or <a (click)="openDialogRegister()">Sign up</a> if you don't have an account</p>
       <p>or</p>
       <p><a [routerLink]="'/'">check our currently listed pictures</a></p>
     </mat-card>

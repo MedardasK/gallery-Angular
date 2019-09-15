@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GalleryService } from './../../services/gallery.service';
+import { GalleryService } from '../../services/gallery.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { ITag } from './../../models/tag.model';
-import { ICategory } from './../../models/category.model';
+import { ITag } from '../../models/tag.model';
+import { ICategory } from '../../models/category.model';
 
 @Component({
   selector: 'app-photo-upload',
@@ -25,23 +25,23 @@ export class PhotoUploadComponent implements OnInit {
   isHovering: boolean;
 
   ngOnInit() {
-    this._loadCategories();
-    this._loadTags();
-    this._createForm();
+    this.loadCategories();
+    this.loadTags();
+    this.createForm();
   }
 
   constructor(private galleryService: GalleryService,
               private fb: FormBuilder
   ) { }
 
-  _loadCategories(): void {
+  private loadCategories(): void {
     this.galleryService.getCategories()
       .then(data => {
         this.categories = data;
       });
   }
 
-  _loadTags(): void {
+  private loadTags(): void {
     this.galleryService.getTags()
       .then(data => {
         this.tags = data;
@@ -72,7 +72,7 @@ export class PhotoUploadComponent implements OnInit {
     };
   }
 
-  _createForm(): void {
+  private createForm(): void {
     this.upload = this.fb.group({
       description: [],
       categories: [],
