@@ -1,3 +1,4 @@
+import { IPhotoUpload } from './../models/photo-upload.model';
 import { ITag } from './../models/tag.model';
 import { ICategory } from './../models/category.model';
 import { IPhoto } from './../models/photo.model';
@@ -30,7 +31,8 @@ export class GalleryService {
     return this.http.get<ITag[]>('http://localhost:8080/tags').toPromise();
   }
 
-  uploadImage(file: any): Observable<any> {
+  uploadImage(file: IPhotoUpload): Observable<any> {
+    console.log('test ' + file);
     return this.http.post('http://localhost:8080/images/upload', file).pipe(
       catchError(this.handleError)
     );

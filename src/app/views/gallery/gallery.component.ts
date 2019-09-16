@@ -19,7 +19,7 @@ export class GalleryComponent implements OnInit {
   categoryControl = new FormControl();
   photos: IPhoto[] = [];
   isLoaded = false;
-
+  isLoggedIn = false;
   resCount = 0;
   sortObj = { sortBoolean: true,
               buttonString: 'keyboard_arrow_up' };
@@ -39,6 +39,7 @@ export class GalleryComponent implements OnInit {
     this.loadPhotos();
     this.loadCategories();
     this.loadTags();
+    this.checkCookie();
   }
 
   loadPhotos(): void {
@@ -152,8 +153,14 @@ export class GalleryComponent implements OnInit {
       console.log('sending request...');
     }
   }
-  loginOrOut() {
+
+  checkCookie() {
     if (this.auth.loggedIn) {
+      this.isLoggedIn = true;
+    }
+  }
+  loginOrOut() {
+    if (this.isLoggedIn) {
       this.auth.logout();
       return;
     }

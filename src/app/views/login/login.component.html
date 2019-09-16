@@ -1,5 +1,5 @@
-<div fxLayout="row">
-  <div class="image-container" fxFlex="60" fxFlex.xs="0">
+<div class="d-flex bd-highlight">
+  <div class="image-container">
     <div class="text-container">
       <p>Your imagination journey starts here...</p>
     </div>
@@ -10,7 +10,7 @@
       <form [formGroup]="credentials">
         <div>
           <mat-form-field>
-            <input required matInput maxlength="30" formControlName="username" name="username" placeholder="Email">
+            <input required matInput maxlength="30" formControlName="username" name="username" placeholder="Email" class="d-flex flex-wrap">
             <span matPrefix><i class="material-icons">mail_outline</i></span>
             <mat-error *ngIf="credentials.controls['username'].hasError('required')">Email is required</mat-error>
             <mat-error *ngIf="credentials.controls['username'].hasError('username')">Email is invalid</mat-error>

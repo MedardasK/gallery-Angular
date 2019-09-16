@@ -3,8 +3,8 @@
     <button mat-raised-button><a [routerLink]="'/'">Back to gallery</a></button>
   </div>
   <form [formGroup]="upload">
-    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-around end" fxLayoutAlign.xs="space-around stretch">
-      <div fxLayout="column">
+    <div class="d-flex bd-highlight">
+      <div class="d-flex flex-column bd-highlight mb-3 p-2 flex-fill bd-highlight">
         <mat-form-field>
           <input matInput maxlength="30" formControlName="description" name="description" placeholder="Description">
         </mat-form-field>
@@ -23,7 +23,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="dropzone" dropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)"
+      <div class="dropzone p-2 flex-fill bd-highlight" dropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)"
         [class.hovering]="isHovering">
         <h3>Drop your image here</h3>
         <div class="file">
@@ -40,11 +40,12 @@
         </div>
       </div>
     </div>
-    <div>
-      <div class="image-preview-container" fxFlex="30" fxFlex.lg="20" fxFlex.sm="45" fxFlex.xs="100" *ngIf="previewUrl">
+    <div class="d-flex">
+      <div class="image-preview-container flex-wrap d-flex" *ngIf="previewUrl">
         <img [src]="previewUrl">
       </div>
     </div>
+    <div>&nbsp;</div>
     <div>
       <button mat-raised-button class="submit-button" type="button" [disabled]="!previewUrl"
         (click)="submitValues()">Submit</button>

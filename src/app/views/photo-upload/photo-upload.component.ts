@@ -1,8 +1,10 @@
+import { IPhotoUpload } from './../../models/photo-upload.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { GalleryService } from '../../services/gallery.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ITag } from '../../models/tag.model';
 import { ICategory } from '../../models/category.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-photo-upload',
@@ -18,6 +20,9 @@ export class PhotoUploadComponent implements OnInit {
   categories: ICategory[] = [];
   tags: ITag[] = [];
   fileData = new FormData();
+  duration = 5000;
+  image: IPhotoUpload = {} as IPhotoUpload;
+  imageFile: File;
 
   previewUrl: any;
 
@@ -31,8 +36,8 @@ export class PhotoUploadComponent implements OnInit {
   }
 
   constructor(private galleryService: GalleryService,
-              private fb: FormBuilder
-  ) { }
+              private fb: FormBuilder,
+              private snackBar: MatSnackBar) { }
 
   private loadCategories(): void {
     this.galleryService.getCategories()
@@ -55,7 +60,7 @@ export class PhotoUploadComponent implements OnInit {
 
   startUpload(event: FileList) { //blob
     const fileData = event.item(0);
-
+    this.imageFile = event.item(0);
     if (fileData.type.split('/')[0] !== 'image') {
       console.error('unsupported file type... ');
       return;
@@ -81,10 +86,24 @@ export class PhotoUploadComponent implements OnInit {
   }
 
   submitValues() {
-    this.fileData.append('description', this.upload.value);
-    this.galleryService.uploadImage(this.fileData).subscribe(events => {
-      alert('Successfully uploaded');
+    this.image.file = this.imageFile;
+    this.image.description = this.upload.value;
+    this.image.tag = null;
+    this.image.category = null;
+    console.log(this.image);
+
+
+    this.galleryService.uploadImage(this.image).subscribe(events => {
+      this.snackBar.openFromComponent(PhotoUploadComponent, {
+        duration: 5000,
+      });
     });
+
+    // this.galleryService.uploadImage(this.fileData).subscribe(events => {
+    //   this.snackBar.openFromComponent(PhotoUploadComponent, {
+    //     duration: 5000,
+    //   });
+    // });
   }
 
 }

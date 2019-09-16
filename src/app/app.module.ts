@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemsCountPipe } from './pipes/items-count.pipe';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { GalleryComponent,
          LoginComponent,
          PhotoUploadComponent } from './views/';
@@ -27,7 +26,8 @@ import { MatCardModule,
          MatDialogModule,
          MatCheckboxModule,
          MatInputModule,
-         MatToolbarModule } from '@angular/material';
+         MatToolbarModule,
+         MatSnackBarModule } from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -63,7 +63,7 @@ import { JwtModule } from '@auth0/angular-jwt';
         MatButtonModule,
         MatInputModule,
         MatToolbarModule,
-        FlexLayoutModule,
+        MatSnackBarModule,
         JwtModule.forRoot({
             config: {
               tokenGetter: function  tokenGetter() {
