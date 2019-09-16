@@ -31,8 +31,8 @@ export class GalleryService {
     return this.http.get<ITag[]>('http://localhost:8080/tags').toPromise();
   }
 
-  uploadImage(file: IPhotoUpload): Observable<any> {
-    console.log('test ' + file);
+  uploadImage(file: any): Observable<any> {
+    console.log(file);
     return this.http.post('http://localhost:8080/images/upload', file).pipe(
       catchError(this.handleError)
     );

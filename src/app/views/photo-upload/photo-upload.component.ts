@@ -58,7 +58,7 @@ export class PhotoUploadComponent implements OnInit {
     this.isHovering = event;
   }
 
-  startUpload(event: FileList) { //blob
+  startUpload(event: FileList) { // blob
     const fileData = event.item(0);
     this.imageFile = event.item(0);
     if (fileData.type.split('/')[0] !== 'image') {
@@ -86,24 +86,16 @@ export class PhotoUploadComponent implements OnInit {
   }
 
   submitValues() {
-    this.image.file = this.imageFile;
-    this.image.description = this.upload.value;
-    this.image.tag = null;
-    this.image.category = null;
-    console.log(this.image);
+    this.image = this.upload.value;
+    this.fileData.append('description', this.image.description);
+    this.fileData.append('tags', this.image.tags !== null ? this.image.tags.toString() : '');
+    this.fileData.append('categories', this.image.categories !== null ? this.image.categories.toString() : '');
 
-
-    this.galleryService.uploadImage(this.image).subscribe(events => {
+    this.galleryService.uploadImage(this.fileData).subscribe(events => {
       this.snackBar.openFromComponent(PhotoUploadComponent, {
-        duration: 5000,
+        duration: 10000,
       });
     });
-
-    // this.galleryService.uploadImage(this.fileData).subscribe(events => {
-    //   this.snackBar.openFromComponent(PhotoUploadComponent, {
-    //     duration: 5000,
-    //   });
-    // });
   }
 
 }

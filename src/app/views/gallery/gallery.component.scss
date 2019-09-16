@@ -8,6 +8,10 @@
   z-index: 999;
   background: $background;
   border-bottom: 1px solid $secondary;
+  min-height: 50px;
+  mat-toolbar-row{
+    height: 50px;
+  }
   .toolbar-button-container {
     a {
       color: #ffffff;
