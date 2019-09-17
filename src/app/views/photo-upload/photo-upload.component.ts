@@ -93,7 +93,7 @@ export class PhotoUploadComponent implements OnInit {
 
     this.galleryService.uploadImage(this.fileData).subscribe(events => {
       this.snackBar.openFromComponent(PhotoUploadComponent, {
-        duration: 10000,
+        duration: 5000,
       });
     });
   }
