@@ -1,7 +1,7 @@
 <mat-card class="gallery-container">
   <h3>Edit selected picture</h3>
   <div class="d-flex bd-highlight form-container">
-    <div class="p-2 bd-highlight">
+    <div class="p-2 flex-grow-1 bd-highlight">
       <form [formGroup]="editForm">
         <div>
           <mat-form-field>
@@ -41,9 +41,12 @@
         </div>
       </form>
     </div>
-    <div class=" d-flex">
-      <div class="preview-container flex-wrap d-flex">
-        <img src="data:image/png;base64,{{photo.data}}" alt="photo.name">
+    <div>
+      <div class="preview-container d-flex bd-highlight">
+        <mat-icon (click)="deletePicture()">cancel</mat-icon>
+        <div class="p-2 flex-shrink-1 bd-highlight">
+          <img src="data:image/png;base64,{{photo.data}}" alt={{photo.name}}>
+        </div>
       </div>
     </div>
   </div>

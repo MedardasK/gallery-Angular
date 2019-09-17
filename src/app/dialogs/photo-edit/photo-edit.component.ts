@@ -2,7 +2,6 @@ import { GalleryService } from './../../services/gallery.service';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { IPhoto } from '../../models/photo.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { HttpClient, HttpEventType } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -22,7 +21,6 @@ export class PhotoEditComponent implements OnInit {
   constructor(private fb: FormBuilder,
               public dialogRef: MatDialogRef<PhotoEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private http: HttpClient,
               private snackBar: MatSnackBar,
               private galleryService: GalleryService ) {
               this.photo = data.photo;
@@ -56,6 +54,14 @@ export class PhotoEditComponent implements OnInit {
 
     this.galleryService.updateImage(this.photo).subscribe(events => {
       this.snackBar.open('Successfully updated!', '', {
+        duration: 3000
+      });
+    });
+  }
+
+  deletePicture() {
+    this.galleryService.deleteImage(this.photo.id).subscribe(events => {
+      this.snackBar.open('Successfully deleted!', '', {
         duration: 3000
       });
     });
