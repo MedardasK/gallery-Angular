@@ -36,28 +36,41 @@ export class GalleryService {
     );
   }
 
-  updateImage(photo: IPhoto): Observable<any> {
+  updateImage(photo: any): Observable<any> {
     return this.http.post('http://localhost:8080/images/update', photo).pipe(
       catchError(this.handleError)
     );
   }
 
-  saveTag(tag: any): Observable<any> {
-    console.log(tag);
-    return this.http.post('http://localhost:8080/tags/create', tag).pipe(
+  saveTag(name: string): Observable<any> {
+    console.log(name);
+    return this.http.post('http://localhost:8080/tags/create', name).pipe(
       catchError(this.handleError)
     );
   }
 
-  saveCategory(category: any): Observable<any> {
-    console.log(category);
-    return this.http.post('http://localhost:8080/categories/create', category).pipe(
+  saveCategory(name: string): Observable<any> {
+    console.log(name);
+    return this.http.post('http://localhost:8080/categories/create/', name).pipe(
       catchError(this.handleError)
     );
   }
 
-  getImagesByCategories(ids: number[]): Promise<IPhoto[]> {
-    return this.http.get<IPhoto[]>('http://localhost:8080/imagesByCategories/' + ids).toPromise();
+  // saveCategory(category: any): Observable<any> {
+  //   console.log(category);
+  //   return this.http.post('http://localhost:8080/categories/create/', category).pipe(
+  //     catchError(this.handleError)
+  //   );
+  // }
+
+  deleteImage(id: number): Observable<any> {
+    return this.http.post('http://localhost:8080/images/delete/', id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getImagesBySearch(searchString: string, tagsIds: number[], categoriesIds: number[]): Promise<IPhoto[]> {
+    return this.http.get<IPhoto[]>('http://localhost:8080/search/' + tagsIds + categoriesIds).toPromise();
   }
 
   private handleError(error: HttpErrorResponse) {

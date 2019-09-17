@@ -100,7 +100,8 @@ export class PhotoUploadComponent implements OnInit {
 
     this.galleryService.uploadImage(this.fileData).subscribe(events => {
       this.snackBar.open('Successfully uploaded!', '', {
-        duration: 3000
+        duration: 3000,
+        panelClass: 'snackbar-container'
       });
     });
   }

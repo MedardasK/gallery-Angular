@@ -1,4 +1,5 @@
 @import '../../../assets/styles/consts.scss';
+@import '../../../assets/styles/snackbar.scss';
 
 .link-container {
   a {
@@ -38,9 +39,14 @@
 progress::-webkit-progress-value {
   transition: width 0.1s ease;
 }
-.submit-button{
+
+.submit-container{
+  text-align: right;
+  .submit-button{
     color: $grey;
+  }
 }
+
 .image-preview-container{
     height: 300px;
     width: 300px;
@@ -50,4 +56,13 @@ progress::-webkit-progress-value {
       height: 300px;
       width: 300px;
     }
+}
+
+@media only screen and (max-width: 420px) {
+  .form-container{
+    flex-direction: column;
+    .dropzone{
+      width: 100%;
+    }
+  }
 }

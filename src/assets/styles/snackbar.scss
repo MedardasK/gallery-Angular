@@ -1,0 +1,6 @@
+@import 'consts.scss';
+
+::ng-deep .mat-snack-bar-container {
+    background: $background !important;
+    color: $secondary !important;
+}

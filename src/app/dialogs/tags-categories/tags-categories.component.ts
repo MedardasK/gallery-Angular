@@ -2,6 +2,7 @@ import { ITag } from './../../models/tag.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GalleryService } from '../../services/gallery.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tags-categories',
@@ -11,12 +12,14 @@ import { GalleryService } from '../../services/gallery.service';
 export class TagsCategoriesComponent implements OnInit {
   tags: FormGroup;
   categories: FormGroup;
+  tagString: string;
   tag: ITag;
   tagData = new FormData();
   categoryData = new FormData();
 
   constructor(private fb: FormBuilder,
-              private galleryService: GalleryService) { }
+              private galleryService: GalleryService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.createForm();
@@ -33,15 +36,23 @@ export class TagsCategoriesComponent implements OnInit {
 
   createTag(): void {
     this.tagData.append('name', this.tags.value);
+    this.tagString = this.tags.value;
     this.tag = this.tags.value;
-    console.log(this.tag);
-    this.galleryService.saveTag(this.tagData);
+    console.log(this.tags.value);
+    this.galleryService.saveTag(this.tagString).subscribe(events => {
+      this.snackBar.open('New tag was successfully created!', '', {
+        duration: 3000
+      });
+    });
   }
+
   createCategory(): void {
     this.categoryData.append('name', this.categories.value);
-    // this.tag = this.tags.value;
-    // console.log(this.tag);
-    this.galleryService.saveCategory(this.categoryData);
+    this.galleryService.saveCategory(this.categories.value).subscribe(events => {
+      this.snackBar.open('New category was successfully created!', '', {
+        duration: 3000
+      });
+    });;
   }
 
 }

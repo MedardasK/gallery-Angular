@@ -3,7 +3,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { IPhoto } from '../../models/photo.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -16,6 +16,8 @@ export class PhotoEditComponent implements OnInit {
   photoDetails: IPhoto;
   editSuccessful = false;
   editForm: FormGroup;
+  categoryControl = new FormControl();
+  tagControl = new FormControl();
 
   constructor(private fb: FormBuilder,
               public dialogRef: MatDialogRef<PhotoEditComponent>,
@@ -56,16 +58,6 @@ export class PhotoEditComponent implements OnInit {
       this.snackBar.open('Successfully updated!', '', {
         duration: 3000
       });
-    });
-
-    this.http.post('http://localhost:8080/images/update/', this.photo,  {
-      reportProgress: true,
-      observe: 'events'
-    })
-    .subscribe(events => {
-      if (events.type === HttpEventType.Response) {
-        this.editSuccessful = true;
-      }
     });
   }
 

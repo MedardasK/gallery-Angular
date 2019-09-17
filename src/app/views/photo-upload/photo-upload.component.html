@@ -3,7 +3,7 @@
     <button mat-raised-button><a [routerLink]="'/'">Back to gallery</a></button>
   </div>
   <form [formGroup]="upload">
-    <div class="d-flex bd-highlight">
+    <div class="d-flex bd-highlight form-container">
       <div class="d-flex flex-column bd-highlight mb-3 p-2 flex-fill bd-highlight">
         <mat-form-field>
           <input matInput maxlength="30" formControlName="description" name="description" placeholder="Description">
@@ -48,7 +48,7 @@
       </div>
     </div>
     <div>&nbsp;</div>
-    <div>
+    <div class="submit-container">
       <button mat-raised-button class="submit-button" type="button" [disabled]="!previewUrl"
         (click)="submitValues()">Submit</button>
     </div>
