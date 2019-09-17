@@ -20,6 +20,8 @@ export class GalleryComponent implements OnInit {
   photos: IPhoto[] = [];
   isLoaded = false;
   isLoggedIn = false;
+  loginString = 'LOGIN';
+  loginIcon = 'account_box';
   resCount = 0;
   sortObj = { sortBoolean: true,
               buttonString: 'keyboard_arrow_up' };
@@ -81,35 +83,6 @@ export class GalleryComponent implements OnInit {
   // pats paskutinis checkas ar nera tuscias array
   // po idejimu ir jei tuscias - metam visus pav
   filterByCategories(category: ICategory): void {
-    console.log('categories paimta ' + category.id + category.name);
-    console.log('kai nieko ner indexas' + this.categoriesArray.indexOf(category));
-
-    this.categoriesIds.push(category.id);
-    console.log(this.categoriesIds);
-
-    if (this.categoriesArray.indexOf(category) < 0) {
-      console.log('antras if ' + this.categoriesArray.indexOf(category));
-      this.categoriesArray.push(category);
-      this.gallery.getImagesByCategories(this.categoriesIds)
-      .then(data => {
-        this.photos = data;
-        this.isLoaded = true;
-      });
-    }
-
-    if (this.categoriesArray.indexOf(category) > 0) {
-      let categoryIndex = this.categoriesArray.indexOf(category);
-      console.log('indexas' + categoryIndex);
-      console.log('pirmas if pries atemima ' + this.categoriesArray.indexOf(category));
-      this.categoriesArray.splice(categoryIndex, categoryIndex + 1 );
-      console.log('po atemimo ' + this.categoriesArray.indexOf(category));
-    }
-
-    console.log('gale length ' + this.categoriesArray.length);
-    if (this.categoriesArray.length === 0) {
-      console.log('patenka i paskutini if ' + this.categoriesArray.length);
-      this.loadPhotos();
-    }
   }
 
   // chip-tags
@@ -130,7 +103,7 @@ export class GalleryComponent implements OnInit {
     //add tag
     if ((value || '').trim()) {
       // pakeist id is tags?
-      this.tags.push({id: 5, name: value.trim(), date: 'asd'});
+      this.tags.push({id: 5, name: value.trim()});
     }
 
     // Reset the input value
@@ -156,14 +129,30 @@ export class GalleryComponent implements OnInit {
 
   checkCookie() {
     if (this.auth.loggedIn) {
+      console.log(this.auth.loggedIn);
+      console.log('prisijunges');
       this.isLoggedIn = true;
+      this.loginString = 'LOGOUT';
+      this.loginIcon = 'directions_run';
+    } else {
+      console.log(this.auth.loggedIn);
+      console.log('ne');
+      this.isLoggedIn = false;
+      this.loginString = 'LOGIN';
+      this.loginIcon = 'account_box';
     }
   }
+
   loginOrOut() {
     if (this.isLoggedIn) {
       this.auth.logout();
+      this.isLoggedIn = false;
+      this.loginString = 'LOGIN';
+      this.loginIcon = 'account_box';
       return;
     }
+    this.loginString = 'LOGOUT';
+    this.loginIcon = 'directions_run';
     this.router.navigate(['login']);
   }
 

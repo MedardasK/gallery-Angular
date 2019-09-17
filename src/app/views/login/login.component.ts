@@ -34,9 +34,8 @@ export class LoginComponent implements OnInit {
 
   submitValues(): void {
     this.userCredentials = this.credentials.value;
-    this.auth.login(this.userCredentials.username, this.userCredentials.password);
-    // jei praeina login
-    // redirect i front ?
+    this.auth.login(this.userCredentials.username, this.userCredentials.password)
+    .catch(() => {this.router.navigate(['/login']); } );
     this.router.navigate(['']);
   }
 

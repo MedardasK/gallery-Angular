@@ -22,6 +22,8 @@
               {{tag.name}}</mat-option>
           </mat-select>
         </mat-form-field>
+        <button mat-raised-button class="tags-categories-button" type="button"
+        (click)="openDialogCreate()">Create tags or categories</button>
       </div>
       <div class="dropzone p-2 flex-fill bd-highlight" dropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)"
         [class.hovering]="isHovering">

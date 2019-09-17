@@ -13,7 +13,8 @@ import { GalleryComponent,
          PhotoUploadComponent } from './views/';
 import { PhotoOneComponent,
          PhotoEditComponent,
-         RegisterComponent } from './dialogs';
+         RegisterComponent,
+         TagsCategoriesComponent } from './dialogs';
 import { PhotoComponent } from './components';
 import { FileUploadDirective } from './directives/file-upload.directive';
 import { MatCardModule,
@@ -43,7 +44,8 @@ import { JwtModule } from '@auth0/angular-jwt';
         PhotoEditComponent,
         LoginComponent,
         FileUploadDirective,
-        RegisterComponent
+        RegisterComponent,
+        TagsCategoriesComponent
     ],
     imports: [
         BrowserModule,
@@ -91,6 +93,6 @@ import { JwtModule } from '@auth0/angular-jwt';
     ],
     providers: [GalleryService, AuthService, CookieService],
     bootstrap: [AppComponent],
-    entryComponents: [PhotoOneComponent, PhotoComponent, PhotoEditComponent, RegisterComponent]
+    entryComponents: [PhotoOneComponent, PhotoComponent, PhotoEditComponent, RegisterComponent, TagsCategoriesComponent]
 })
 export class AppModule { }

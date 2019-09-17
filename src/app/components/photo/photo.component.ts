@@ -30,7 +30,7 @@ export class PhotoComponent {
     }
 
     openDialogEdit(): Promise<void> {
-      if (this.auth.loggedIn) {
+      if (!this.auth.loggedIn) {
         this.router.navigate(['login']);
         return;
       }

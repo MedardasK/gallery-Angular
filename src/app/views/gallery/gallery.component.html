@@ -2,17 +2,14 @@
   <mat-toolbar-row class="d-flex justify-content-between">
     <div fxFlex="50" fxLayoutAlign="start" class="toolbar-button-container">
       <button mat-flat-button>
-        <a [routerLink]="'/upload'">
-          <mat-icon>folder_open</mat-icon> Upload picture
-        </a>
+          <mat-icon>folder_open</mat-icon>
+        <a [routerLink]="'/upload'">Upload picture</a>
       </button>
     </div>
     <div fxFlex="50" fxLayoutAlign="end" class="toolbar-button-container">
       <button mat-flat-button>
-        <a (click)="loginOrOut()">
-          <mat-icon>account_box</mat-icon>
-          <mat-icon>directions_run</mat-icon> LOGIN
-        </a>
+          <mat-icon>{{loginIcon}}</mat-icon>
+        <a (click)="loginOrOut()">{{loginString}}</a>
       </button>
     </div>
   </mat-toolbar-row>

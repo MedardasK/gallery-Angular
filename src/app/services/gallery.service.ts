@@ -1,4 +1,3 @@
-import { IPhotoUpload } from './../models/photo-upload.model';
 import { ITag } from './../models/tag.model';
 import { ICategory } from './../models/category.model';
 import { IPhoto } from './../models/photo.model';
@@ -35,7 +34,27 @@ export class GalleryService {
     return this.http.post('http://localhost:8080/images/upload', file).pipe(
       catchError(this.handleError)
     );
-}
+  }
+
+  updateImage(photo: IPhoto): Observable<any> {
+    return this.http.post('http://localhost:8080/images/update', photo).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  saveTag(tag: any): Observable<any> {
+    console.log(tag);
+    return this.http.post('http://localhost:8080/tags/create', tag).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  saveCategory(category: any): Observable<any> {
+    console.log(category);
+    return this.http.post('http://localhost:8080/categories/create', category).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   getImagesByCategories(ids: number[]): Promise<IPhoto[]> {
     return this.http.get<IPhoto[]>('http://localhost:8080/imagesByCategories/' + ids).toPromise();

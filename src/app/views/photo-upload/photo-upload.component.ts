@@ -4,7 +4,11 @@ import { GalleryService } from '../../services/gallery.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ITag } from '../../models/tag.model';
 import { ICategory } from '../../models/category.model';
+import { AuthService } from './../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { TagsCategoriesComponent } from 'src/app/dialogs';
 
 @Component({
   selector: 'app-photo-upload',
@@ -37,7 +41,10 @@ export class PhotoUploadComponent implements OnInit {
 
   constructor(private galleryService: GalleryService,
               private fb: FormBuilder,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private router: Router,
+              private auth: AuthService,
+              private dialog: MatDialog) { }
 
   private loadCategories(): void {
     this.galleryService.getCategories()
@@ -92,10 +99,19 @@ export class PhotoUploadComponent implements OnInit {
     this.fileData.append('categories', this.image.categories !== null ? this.image.categories.toString() : '');
 
     this.galleryService.uploadImage(this.fileData).subscribe(events => {
-      this.snackBar.openFromComponent(PhotoUploadComponent, {
-        duration: 5000,
+      this.snackBar.open('Successfully uploaded!', '', {
+        duration: 3000
       });
     });
+  }
+
+  openDialogCreate(): void {
+    if (!this.auth.loggedIn) {
+      console.log(this.auth.loggedIn);
+      this.router.navigate(['login']);
+      return;
+    }
+    this.dialog.open(TagsCategoriesComponent);
   }
 
 }
