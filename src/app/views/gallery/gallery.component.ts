@@ -44,7 +44,7 @@ export class GalleryComponent implements OnInit {
     this.checkCookie();
   }
 
-  loadPhotos(): void {
+  private loadPhotos(): void {
     this.gallery.getPhotos()
       .then(data => {
         this.photos = data;
@@ -53,14 +53,14 @@ export class GalleryComponent implements OnInit {
       });
   }
 
-  loadCategories(): void {
+  private loadCategories(): void {
     this.gallery.getCategories()
     .then(data => {
       this.categories = data;
     });
   }
 
-  loadTags(): void {
+  private loadTags(): void {
     this.gallery.getTags()
     .then(data => {
       this.tags = data;
@@ -71,9 +71,20 @@ export class GalleryComponent implements OnInit {
     if (this.sortObj.sortBoolean) {
       this.sortObj.buttonString = 'keyboard_arrow_down';
       this.sortObj.sortBoolean = false;
+      this.photos.sort(
+        (a, b) => {
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        }
+      );
+      console.log(this.photos);
     } else {
       this.sortObj.buttonString = 'keyboard_arrow_up';
       this.sortObj.sortBoolean = true;
+      this.photos.sort(
+        (a, b) => {
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        }
+      );
     }
   }
 

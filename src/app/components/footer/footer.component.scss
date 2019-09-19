@@ -1,6 +1,8 @@
-@import '../../../assets/styles/snackbar.scss';
+@import '../../../assets/styles/consts.scss';
 
 .footer-container{
+    text-align: center;
+    margin-top: 10px;
     p{
         color: $grey;
     }

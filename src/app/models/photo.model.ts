@@ -9,4 +9,5 @@ export interface IPhoto {
     data: string;
     imageFull: {id: number;
                 data: string[]};
+    date: string;
 }

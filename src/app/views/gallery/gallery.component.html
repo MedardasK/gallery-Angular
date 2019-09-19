@@ -1,26 +1,24 @@
 <mat-toolbar class="top-toolbar">
   <mat-toolbar-row class="d-flex justify-content-between">
-    <div fxFlex="50" fxLayoutAlign="start" class="toolbar-button-container">
-      <button mat-flat-button>
-          <mat-icon>folder_open</mat-icon>
-        <a [routerLink]="'/upload'">Upload picture</a>
+    <div>
+      <button mat-flat-button [routerLink]="'/upload'">
+        <mat-icon>folder_open</mat-icon>Upload picture
       </button>
     </div>
-    <div fxFlex="50" fxLayoutAlign="end" class="toolbar-button-container">
-      <button mat-flat-button>
-          <mat-icon>{{loginIcon}}</mat-icon>
-        <a (click)="loginOrOut()">{{loginString}}</a>
+    <div>
+      <button mat-flat-button (click)="loginOrOut()">
+        <mat-icon>{{loginIcon}}</mat-icon>{{loginString}}
       </button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
 <section class="top-container">
   <mat-card class="sorting-container d-flex justify-content-between">
-    <div fxFlex="25" fxFlex.xs="100">
+    <div>
       <mat-chip-list class="chip">
         <mat-chip color="primary" selected>CATEGORIES</mat-chip>
       </mat-chip-list>
-      <mat-form-field fxFlex="100">
+      <mat-form-field>
         <mat-label>Choose</mat-label>
         <mat-select [formControl]="categoryControl" multiple>
           <mat-option *ngFor="let category of categories" [value]="category.id" (click)="filterByCategories(category)">
@@ -28,8 +26,8 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div fxFlex="5"></div>
-    <mat-form-field fxFlex="25" fxFlex.xs="100" class="example-chip-list">
+    <div></div>
+    <mat-form-field class="example-chip-list">
       <mat-chip-list #chipList aria-label="Tag selection">
         <mat-chip *ngFor="let tag of tags" selectable="true" removable="true" (removed)="remove(tag)">
           {{tag.name}}
@@ -40,8 +38,8 @@
           (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
     </mat-form-field>
-    <div fxFlex="5"></div>
-    <label fxFlex="40" fxFlex.xs="100" class="pure-material-textfield-outlined relative">
+    <div></div>
+    <label class="pure-material-textfield-outlined relative">
       <input [(ngModel)]="search" (ngModelChange)="initSearch($event)" class="input-padding" placeholder=" ">
       <span class="placeholder">Search</span>
       <span class="sufix">
@@ -55,24 +53,26 @@
     <mat-chip color="primary" selected>PICTURES</mat-chip>
   </mat-chip-list>
   <div>
-    <div fxFlex="30" fxFlex.xs="100" class="sort-date-container">
+    <div class="sort-date-container">
       <button mat-flat-button class="sort-date-button" (click)="sortByDate()">
         Sort by date<mat-icon>{{sortObj.buttonString}}</mat-icon>
       </button>
     </div>
-    <div fxFlex="5"></div>
+    <div></div>
   </div>
   <div class="res-count-container">Showing: {{resCount | itemsCount}} pictures</div>
-  <div fxLayout="row wrap" fxLayoutAlign="space-around center" class="gallery-container">
-    <div fxFlex="30" fxFlex.lg="20" fxFlex.sm="45" fxFlex.xs="100" class="photo-container" *ngFor="let item of photos">
+  <div class="gallery-container">
+    <div class="photo-container" *ngFor="let item of photos">
       <app-photo [photo]="item"></app-photo>
     </div>
   </div>
   <ng-container *ngIf="isLoaded else loading"></ng-container>
 </mat-card>
+
 <ng-template #loading>
   <div class="loading-container">
     <mat-progress-spinner color="warn" mode="indeterminate">
     </mat-progress-spinner>
   </div>
 </ng-template>
+

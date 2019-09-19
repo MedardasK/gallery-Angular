@@ -30,28 +30,28 @@ export class GalleryService {
     return this.http.get<ITag[]>('http://localhost:8080/tags').toPromise();
   }
 
-  uploadImage(file: any): Observable<any> {
+  uploadImage(file: FormData): Observable<any> {
     return this.http.post('http://localhost:8080/images/upload', file).pipe(
       catchError(this.handleError)
     );
   }
 
-  updateImage(photo: any): Observable<any> {
-    return this.http.post('http://localhost:8080/images/update', photo).pipe(
+  updateImage(photo: FormData): Observable<any> {
+    return this.http.put('http://localhost:8080/images/update', photo).pipe(
       catchError(this.handleError)
     );
   }
 
-  saveTag(name: string): Observable<any> {
+  saveTag(name: FormData): Observable<any> {
     console.log(name);
     return this.http.post('http://localhost:8080/tags/create', name).pipe(
       catchError(this.handleError)
     );
   }
 
-  saveCategory(name: string): Observable<any> {
+  saveCategory(name: FormData): Observable<any> {
     console.log(name);
-    return this.http.post('http://localhost:8080/categories/create/', name).pipe(
+    return this.http.post('http://localhost:8080/categories/create', name).pipe(
       catchError(this.handleError)
     );
   }

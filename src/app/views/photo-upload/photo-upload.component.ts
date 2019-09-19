@@ -24,7 +24,6 @@ export class PhotoUploadComponent implements OnInit {
   categories: ICategory[] = [];
   tags: ITag[] = [];
   fileData = new FormData();
-  duration = 5000;
   image: IPhotoUpload = {} as IPhotoUpload;
   imageFile: File;
 
@@ -86,19 +85,25 @@ export class PhotoUploadComponent implements OnInit {
 
   private createForm(): void {
     this.upload = this.fb.group({
-      description: [],
-      categories: [],
-      tags: [],
-    });
+      description: ['', [Validators.required, Validators.minLength(3)]],
+      categoriesForm: new FormControl (['', Validators.required]),
+      tagsForm: ['', Validators.required],
+      fileForm: ['', Validators.required],
+      // categoriesForm: ['', Validators.required],
+      // tagsForm: ['', Validators.required]
+    // }, {
+    //   validator: this.fileData
+  });
   }
 
   submitValues() {
     this.image = this.upload.value;
+    console.log(this.image);
     this.fileData.append('description', this.image.description);
-    this.fileData.append('tags', this.image.tags !== null ? this.image.tags.toString() : '');
-    this.fileData.append('categories', this.image.categories !== null ? this.image.categories.toString() : '');
-
+    this.fileData.append('category', JSON.stringify(this.image.categories));
+    this.fileData.append('tag', JSON.stringify(this.image.tags));
     this.galleryService.uploadImage(this.fileData).subscribe(events => {
+      this.upload.reset();
       this.snackBar.open('Successfully uploaded!', '', {
         duration: 3000,
         panelClass: 'snackbar-container'

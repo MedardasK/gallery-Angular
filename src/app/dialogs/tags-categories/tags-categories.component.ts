@@ -35,11 +35,7 @@ export class TagsCategoriesComponent implements OnInit {
   }
 
   createTag(): void {
-    this.tagData.append('name', this.tags.value);
-    this.tagString = this.tags.value;
-    this.tag = this.tags.value;
-    console.log(this.tags.value);
-    this.galleryService.saveTag(this.tagString).subscribe(events => {
+    this.galleryService.saveTag(this.tags.value).subscribe(events => {
       this.snackBar.open('New tag was successfully created!', '', {
         duration: 3000
       });
@@ -47,12 +43,11 @@ export class TagsCategoriesComponent implements OnInit {
   }
 
   createCategory(): void {
-    this.categoryData.append('name', this.categories.value);
     this.galleryService.saveCategory(this.categories.value).subscribe(events => {
       this.snackBar.open('New category was successfully created!', '', {
         duration: 3000
       });
-    });;
+    });
   }
 
 }

@@ -1,22 +1,24 @@
 <mat-card>
-    <form [formGroup]="tags">
-        <mat-form-field>
-          <input required matInput maxlength="20" formControlName="tag" name="tag" placeholder="Tag" class="d-flex flex-wrap">
-          <span matPrefix><i class="material-icons">mail_outline</i></span>
-          <mat-error *ngIf="tags.controls['tag'].hasError('required')">Tag is required</mat-error>
-          <mat-error *ngIf="tags.controls['tag'].hasError('minLength')">Tag is invalid</mat-error>
-        </mat-form-field>
-      <button mat-raised-button type="button" [disabled]="!tags.valid" (click)="createTag()">
-        Create tag</button>
-    </form>
-    <form [formGroup]="categories">
-      <mat-form-field>
-        <input required matInput maxlength="20" formControlName="category" name="category" placeholder="Category" class="d-flex flex-wrap">
-        <span matPrefix><i class="material-icons">mail_outline</i></span>
-        <mat-error *ngIf="categories.controls['category'].hasError('required')">Category is required</mat-error>
-        <mat-error *ngIf="categories.controls['category'].hasError('minLength')">Category is invalid</mat-error>
-      </mat-form-field>
+  <form [formGroup]="categories">
+    <mat-form-field>
+      <input required matInput maxlength="20" formControlName="category" name="category" placeholder="Category"
+        class="d-flex flex-wrap">
+      <span matPrefix><i class="material-icons">mail_outline</i></span>
+      <mat-error *ngIf="categories.controls['category'].hasError('required')">Category is required</mat-error>
+      <mat-error *ngIf="categories.controls['category'].hasError('minLength')">Category is invalid</mat-error>
+    </mat-form-field>
     <button mat-raised-button type="button" [disabled]="!categories.valid" (click)="createCategory()">
       Create tag</button>
   </form>
-  </mat-card>
+  <form [formGroup]="tags">
+    <mat-form-field>
+      <input required matInput maxlength="20" formControlName="tag" name="tag" placeholder="Tag"
+        class="d-flex flex-wrap">
+      <span matPrefix><i class="material-icons">mail_outline</i></span>
+      <mat-error *ngIf="tags.controls['tag'].hasError('required')">Tag is required</mat-error>
+      <mat-error *ngIf="tags.controls['tag'].hasError('minLength')">Tag is invalid</mat-error>
+    </mat-form-field>
+    <button mat-raised-button type="button" [disabled]="!tags.valid" (click)="createTag()">
+      Create tag</button>
+  </form>
+</mat-card>

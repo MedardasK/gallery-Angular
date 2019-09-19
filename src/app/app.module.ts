@@ -32,6 +32,7 @@ import { MatCardModule,
 import { CookieService } from 'ngx-cookie-service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FooterComponent } from './components/footer/footer.component';
+import { DeleteConfirmComponent } from './dialogs/delete-confirm/delete-confirm.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { FooterComponent } from './components/footer/footer.component';
         FileUploadDirective,
         RegisterComponent,
         TagsCategoriesComponent,
-        FooterComponent
+        FooterComponent,
+        DeleteConfirmComponent
     ],
     imports: [
         BrowserModule,
@@ -95,6 +97,7 @@ import { FooterComponent } from './components/footer/footer.component';
     ],
     providers: [GalleryService, AuthService, CookieService],
     bootstrap: [AppComponent],
-    entryComponents: [PhotoOneComponent, PhotoComponent, PhotoEditComponent, RegisterComponent, TagsCategoriesComponent]
+    entryComponents: [PhotoOneComponent, PhotoComponent, PhotoEditComponent, RegisterComponent,
+                      TagsCategoriesComponent, DeleteConfirmComponent]
 })
 export class AppModule { }
