@@ -31,6 +31,7 @@ import { MatCardModule,
          MatSnackBarModule } from '@angular/material';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { JwtModule } from '@auth0/angular-jwt';
         LoginComponent,
         FileUploadDirective,
         RegisterComponent,
-        TagsCategoriesComponent
+        TagsCategoriesComponent,
+        FooterComponent
     ],
     imports: [
         BrowserModule,

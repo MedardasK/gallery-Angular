@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private auth: AuthService,
               private router: Router,
+              private snackBar: MatSnackBar,
               private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -35,7 +37,11 @@ export class LoginComponent implements OnInit {
   submitValues(): void {
     this.userCredentials = this.credentials.value;
     this.auth.login(this.userCredentials.username, this.userCredentials.password)
-    .catch(() => {this.router.navigate(['/login']); } );
+    .catch(() => {
+      this.snackBar.open('Email or password incorrect!', '', {
+        duration: 3000
+      });
+     });
     this.router.navigate(['']);
   }
 
