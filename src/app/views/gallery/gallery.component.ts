@@ -29,6 +29,9 @@ export class GalleryComponent implements OnInit {
   tags: string[];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   search: string;
+  searchString = '';
+  tagsArray = [];
+  categoriesIds = [];
 
 
   constructor(private gallery: GalleryService,
@@ -93,6 +96,7 @@ export class GalleryComponent implements OnInit {
     if (input) {
       input.value = '';
     }
+    this.searchCombination('tags', this.tags);
   }
 
   remove(tag: string): void {
@@ -101,16 +105,37 @@ export class GalleryComponent implements OnInit {
     if (index >= 0) {
       this.tags.splice(index, 1);
     }
+    this.searchCombination('tags', this.tags);
   }
   // chip-end
 
   initSearch(e: string): void {
     if (e.length > 2) {
-      console.log('sending request...');
+      this.searchCombination('search', e);
     }
   }
-  filterByCategories(categories: number[]) {
 
+  filterByCategories(categories: number[]) {
+    this.searchCombination('categories', categories);
+  }
+
+  searchCombination(param: string, value: any) {
+    if (param === 'search') {
+      this.searchString = value;
+    }
+    if (param === 'categories') {
+      this.tagsArray = value;
+    }
+    if (param === 'categories') {
+      this.categoriesIds = value;
+    }
+
+    this.gallery.getImagesBySearch(this.searchString, this.tagsArray, this.categoriesIds)
+    .then(data => {
+      this.photos = data;
+      this.isLoaded = true;
+      this.resCount = data.length;
+    });
   }
 
   checkCookie(): void {

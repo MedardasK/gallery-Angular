@@ -62,8 +62,8 @@ export class GalleryService {
     );
   }
 
-  getImagesBySearch(searchString: string, tagsIds: number[], categoriesIds: number[]): Promise<IPhoto[]> {
-    return this.http.get<IPhoto[]>('http://localhost:8080/search/' + tagsIds + categoriesIds).toPromise();
+  getImagesBySearch(searchString: string, tagsArray: string[], categoriesIds: number[]): Promise<IPhoto[]> {
+    return this.http.get<IPhoto[]>('http://localhost:8080/search/' + searchString + tagsArray + categoriesIds).toPromise();
   }
 
   private handleError(error: HttpErrorResponse) {

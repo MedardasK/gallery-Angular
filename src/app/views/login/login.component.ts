@@ -37,13 +37,19 @@ export class LoginComponent implements OnInit {
   submitValues(): void {
     this.userCredentials = this.credentials.value;
     this.auth.login(this.userCredentials.username, this.userCredentials.password)
+    .then(
+      () => {
+      this.router.navigate(['']);
+      this.snackBar.open('You have successfully logged in!', '', {
+        duration: 3000
+      });
+    })
     .catch(error => {
       console.log(error);
       this.snackBar.open('Email or password incorrect!', '', {
         duration: 3000
       });
-    }).then();
-    this.router.navigate(['']);
+    });
   }
 
   openDialogRegister(): void {

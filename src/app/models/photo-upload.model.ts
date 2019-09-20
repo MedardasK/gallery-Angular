@@ -1,11 +1,5 @@
 export interface IPhotoUpload {
     description: string;
-    tags: Array<{
-        id: number,
-        name: string
-    }>;
-    categories: [{
-        id: number,
-        name: string
-    }];
+    tag: [{ id: number, name: string }];
+    category: [{ id: number, name: string }];
 }

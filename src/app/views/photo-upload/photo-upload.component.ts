@@ -21,8 +21,9 @@ export class PhotoUploadComponent implements OnInit {
   tagControl = new FormControl();
   upload: FormGroup;
   fileControl = new FormControl();
-  categories: ICategory[] = [];
-  tags: ITag[] = [];
+  categoriesLoad: ICategory[] = [];
+  categoriesArray: ICategory[] = [];
+  tagsLoad: ITag[] = [];
   fileData = new FormData();
   image: IPhotoUpload = {} as IPhotoUpload;
   imageFile: File;
@@ -48,14 +49,14 @@ export class PhotoUploadComponent implements OnInit {
   private loadCategories(): void {
     this.galleryService.getCategories()
       .then(data => {
-        this.categories = data;
+        this.categoriesLoad = data;
       });
   }
 
   private loadTags(): void {
     this.galleryService.getTags()
       .then(data => {
-        this.tags = data;
+        this.tagsLoad = data;
       });
   }
 
@@ -86,19 +87,18 @@ export class PhotoUploadComponent implements OnInit {
   private createForm(): void {
     this.upload = this.fb.group({
       description: ['', [Validators.required, Validators.minLength(3)]],
-      categoriesForm: new FormControl (['', Validators.required]),
-      tagsForm: ['', Validators.required],
+      category: new FormControl (['', Validators.required]),
+      tag: new FormControl (['', Validators.required]),
       fileForm: ['', Validators.required]
   });
   }
 
   submitValues(): void {
     this.image = this.upload.value;
-    console.log(this.image);
     this.fileData.append('description', this.image.description);
-    this.fileData.append('category', JSON.stringify(this.image.categories));
-    this.fileData.append('tag', JSON.stringify(this.image.tags));
-    this.galleryService.uploadImage(this.fileData).subscribe(events => {
+    this.fileData.append('category', JSON.stringify(new Array(this.image.category)));
+    this.fileData.append('tag', JSON.stringify(new Array(this.image.tag)));
+    this.galleryService.uploadImage(this.fileData).subscribe(() => {
       this.upload.reset();
       this.snackBar.open('Successfully uploaded!', '', {
         duration: 3000,

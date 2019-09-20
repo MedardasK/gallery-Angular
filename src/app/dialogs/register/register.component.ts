@@ -46,8 +46,10 @@ export class RegisterComponent implements OnInit {
       this.snackBar.open('Successfully registered! You can login now', '', {
         duration: 3000
       });
-    }).catch(error =>  {
-      console.log(error);
+    }).catch(() =>  {
+      this.snackBar.open('This username is already taken', '', {
+        duration: 3000
+      });
     }
     );
     return this.dialogRef.close();

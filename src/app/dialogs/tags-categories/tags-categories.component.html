@@ -8,7 +8,7 @@
       <mat-error *ngIf="categories.controls['category'].hasError('minLength')">Category is invalid</mat-error>
     </mat-form-field>
     <button mat-raised-button type="button" [disabled]="!categories.valid" (click)="createCategory()">
-      Create tag</button>
+      Create category</button>
   </form>
   <form [formGroup]="tags">
     <mat-form-field>
