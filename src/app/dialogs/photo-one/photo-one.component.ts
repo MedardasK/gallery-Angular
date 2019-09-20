@@ -22,8 +22,8 @@ export class PhotoOneComponent {
                 this.categories = data.photo.category;
               }
 
-  onClick(): void {
-    this.dialogRef.close();
+  closeDialog(): void {
+    return this.dialogRef.close();
   }
 
 }

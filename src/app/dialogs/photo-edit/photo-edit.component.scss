@@ -1,25 +1,25 @@
 @import '../../../assets/styles/snackbar.scss';
 
-.preview-container{
+.preview-container {
     max-width: 400px;
     max-height: 400px;
     position: relative;
-    img{
+    img {
         border-radius: 5px;
         max-width: 400px;
         max-height: 400px;
     }
-    mat-icon{
+    mat-icon {
         top: 23px;
         right: 10px;
         position: absolute;
         cursor: pointer;
     }
 }
-.submit-container{
+.submit-container {
     text-align: right;
 }
-mat-form-field{
+mat-form-field {
     width: 100%;
 }
 

@@ -57,36 +57,50 @@ export class PhotoEditComponent implements OnInit {
     });
   }
 
-  onClick(): void {
-    this.dialogRef.close();
-  }
-
   createForm(): void {
     this.editForm = this.fb.group({
       description: ['', Validators.minLength(3)],
-      fileName: ['', Validators.minLength(1)]
+      name: ['', Validators.minLength(1)]
     });
   }
 
-  submitValues() {
+  private submitValues(): void {
     const updateData = new FormData();
     this.photoDetails = this.editForm.value;
-    updateData.append('description', this.photo.description);
-    updateData.append('id', this.photo.id);
-    updateData.append('tag', JSON.stringify(this.photoDetails.tag));
+    updateData.append('description', this.photoDetails.description);
+    updateData.append('name', this.photoDetails.name);
+    console.log(this.photoDetails.description);
+    console.log(this.photoDetails.name);
+    updateData.append('tag', JSON.stringify(
+      this.photoDetails.tag !== null ? this.photoDetails.tag : this.photo.tag));
+    updateData.append('category', JSON.stringify(
+      this.photoDetails.category !== null ? this.photoDetails.category : this.photo.category));
     updateData.append('category', JSON.stringify(this.photoDetails.category));
 
-    this.galleryService.updateImage(updateData).subscribe(events => {
+    this.galleryService.updateImage(this.photo.id, updateData).subscribe(() => {
       this.snackBar.open('Successfully updated!', '', {
         duration: 3000
       });
     });
   }
 
-  confirmDeleteDialog(): Promise<void>  {
-    return this.dialog.open(DeleteConfirmComponent), {
-      data: { dataDelete: this.data.id }
-    };
+  confirmDeleteDialog(): void {
+    const confirm = this.dialog.open(DeleteConfirmComponent, {
+      data : { data: false }
+    });
+
+    confirm.afterClosed()
+      .subscribe(data => {
+      if (data === true) {
+        this.galleryService.deleteImage(this.photo.id)
+        .subscribe(() => {
+          this.snackBar.open('Successfully deleted!', '', {
+            duration: 3000
+          });
+          this.dialogRef.close();
+        });
+      }
+    });
   }
 
 }

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { IUser } from './../../models/user.model';
 import { MustMatch } from '../../helpers/must-match.validator';
 import { AuthService } from './../../services/auth.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<RegisterComponent>,
               private fb: FormBuilder,
               private auth: AuthService,
-              private router: Router) { }
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.createForm();
@@ -36,18 +36,26 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  submitValues() {
+  submitValues(): void {
     this.userCredentials = this.credentials.value;
     if (this.credentials.invalid) {
       return;
     }
-    this.auth.register(this.userCredentials.username, this.userCredentials.password);
-    this.dialogRef.close();
+    this.auth.register(this.userCredentials.username, this.userCredentials.password)
+    .then(() => {
+      this.snackBar.open('Successfully registered! You can login now', '', {
+        duration: 3000
+      });
+    }).catch(error =>  {
+      console.log(error);
+    }
+    );
+    return this.dialogRef.close();
   }
 
-  cancel() {
+  cancel(): void {
     this.credentials.reset();
-    this.dialogRef.close();
+    return this.dialogRef.close();
   }
 
 }

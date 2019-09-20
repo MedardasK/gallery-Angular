@@ -35,7 +35,7 @@ export class TagsCategoriesComponent implements OnInit {
   }
 
   createTag(): void {
-    this.galleryService.saveTag(this.tags.value).subscribe(events => {
+    this.galleryService.saveTag(this.tags.value).subscribe(() => {
       this.snackBar.open('New tag was successfully created!', '', {
         duration: 3000
       });
@@ -43,7 +43,7 @@ export class TagsCategoriesComponent implements OnInit {
   }
 
   createCategory(): void {
-    this.galleryService.saveCategory(this.categories.value).subscribe(events => {
+    this.galleryService.saveCategory(this.categories.value).subscribe(() => {
       this.snackBar.open('New category was successfully created!', '', {
         duration: 3000
       });

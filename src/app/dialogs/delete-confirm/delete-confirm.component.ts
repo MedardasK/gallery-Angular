@@ -1,7 +1,5 @@
 import { Component, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { GalleryService } from './../../services/gallery.service';
 
 @Component({
   selector: 'app-delete-confirm',
@@ -11,26 +9,13 @@ import { GalleryService } from './../../services/gallery.service';
 export class DeleteConfirmComponent {
 
   constructor(public dialogRef: MatDialogRef<DeleteConfirmComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private snackBar: MatSnackBar,
-              private galleryService: GalleryService) { }
+              @Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  decline() {
-    this.dialogRef.close();
+  cancel(): void {
+    return this.dialogRef.close(false);
   }
 
-  accept() {
-    console.log(this.data);
-    this.galleryService.deleteImage(this.data).subscribe(events => {
-      this.snackBar.open('Successfully deleted!', '', {
-        duration: 3000
-      });
-      this.dialogRef.close();
-    });
+  delete(): void {
+    return this.dialogRef.close(true);
   }
-
-  dismiss() {
-    this.dialogRef.close();
-  }
-
 }

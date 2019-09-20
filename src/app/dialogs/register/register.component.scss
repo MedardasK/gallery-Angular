@@ -1,1 +1,11 @@
 @import '../../../assets/styles/consts.scss';
+
+.text-container {
+    text-align: center;
+    h1{
+        max-width: 300px;
+    }
+}
+.form-container {
+    text-align: center;
+}

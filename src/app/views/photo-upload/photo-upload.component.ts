@@ -7,7 +7,7 @@ import { ICategory } from '../../models/category.model';
 import { AuthService } from './../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TagsCategoriesComponent } from 'src/app/dialogs';
 
 @Component({
@@ -60,11 +60,11 @@ export class PhotoUploadComponent implements OnInit {
   }
 
 
-  toggleHover(event: boolean) {
+  toggleHover(event: boolean): void {
     this.isHovering = event;
   }
 
-  startUpload(event: FileList) {
+  startUpload(event: FileList): void {
     const fileData = event.item(0);
     this.imageFile = event.item(0);
     if (fileData.type.split('/')[0] !== 'image') {
@@ -78,7 +78,7 @@ export class PhotoUploadComponent implements OnInit {
 
     const reader = new FileReader();
     reader.readAsDataURL(fileData);
-    reader.onload = (_event) => {
+    reader.onload = () => {
       this.previewUrl = reader.result;
     };
   }
@@ -92,7 +92,7 @@ export class PhotoUploadComponent implements OnInit {
   });
   }
 
-  submitValues() {
+  submitValues(): void {
     this.image = this.upload.value;
     console.log(this.image);
     this.fileData.append('description', this.image.description);
@@ -113,7 +113,12 @@ export class PhotoUploadComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
-    this.dialog.open(TagsCategoriesComponent);
+    const dialogRef = this.dialog.open(TagsCategoriesComponent);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadCategories();
+      this.loadTags();
+    });
   }
 
 }

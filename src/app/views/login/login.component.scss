@@ -1,27 +1,27 @@
 @import '../../../assets/styles/consts.scss';
 @import '../../../assets/styles/snackbar.scss';
 
-p, i, mat-checkbox{
+p, i, mat-checkbox {
     color: $grey;
 }
-.image-container{
+.image-container {
     max-height: 100vh;
     overflow: hidden;
     position: relative;
     border-radius: 5px;
-    img{
+    img {
         max-width: 60vw;
     }
-    .text-container{
+    .text-container {
         position: absolute;
         width: 200px;
         left: 20px;
-        p{
+        p {
             font-size: 60px;
         }
     }
 }
-.form-container{
+.form-container {
     border-radius: 5px;
     display: flex;
     align-items: center;
@@ -30,13 +30,13 @@ p, i, mat-checkbox{
         text-align: center;
         width: 80%;
     }
-    a{
+    a {
         color: $secondary;
         text-decoration: none;
         font-style: italic;
         cursor: pointer;
     }
-    span{
+    span {
         margin-right: 6px;
     }
 }

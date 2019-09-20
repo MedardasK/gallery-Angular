@@ -1,13 +1,10 @@
 <div class="modal-header">
   <h4 class="modal-title">Pease confirm</h4>
-  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
-    <span aria-hidden="true">&times;</span>
-  </button>
 </div>
 <div class="modal-body">
   that you are sure you wish to delete this picture
 </div>
 <div class="modal-footer">
-  <button mat-raised-button type="button" (click)="decline()">Cancel</button>
-  <button mat-raised-button type="button" (click)="accept()">Delete</button>
+  <button mat-raised-button type="button" (click)="cancel()">Cancel</button>
+  <button mat-raised-button type="button" (click)="delete()">Delete</button>
 </div>

@@ -36,8 +36,8 @@ export class GalleryService {
     );
   }
 
-  updateImage(photo: FormData): Observable<any> {
-    return this.http.put('http://localhost:8080/images/update', photo).pipe(
+  updateImage(id: number, photo: FormData): Observable<any> {
+    return this.http.put('http://localhost:8080/images/update/' + id, photo).pipe(
       catchError(this.handleError)
     );
   }
@@ -56,15 +56,8 @@ export class GalleryService {
     );
   }
 
-  // saveCategory(category: any): Observable<any> {
-  //   console.log(category);
-  //   return this.http.post('http://localhost:8080/categories/create/', category).pipe(
-  //     catchError(this.handleError)
-  //   );
-  // }
-
   deleteImage(id: number): Observable<any> {
-    return this.http.post('http://localhost:8080/images/delete/', id).pipe(
+    return this.http.delete('http://localhost:8080/images/delete/' + id).pipe(
       catchError(this.handleError)
     );
   }

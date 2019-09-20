@@ -11,7 +11,7 @@ export class AuthService {
   constructor( private cookieService: CookieService,
                private httpClient: HttpClient ) { }
 
-  login(username: string, password: string): Promise<void> {
+  async login(username: string, password: string): Promise<void> {
     return this.httpClient.post<{token: string}>('http://localhost:8080/login', {username, password})
     .toPromise()
     .then( res => {

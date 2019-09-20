@@ -2,10 +2,8 @@
 @import '../../../assets/styles/snackbar.scss';
 
 .link-container {
-  a {
+  button {
     color: $grey;
-    text-decoration: none;
-    cursor: pointer;
   }
 }
 .tags-categories-button{
@@ -40,14 +38,14 @@ progress::-webkit-progress-value {
   transition: width 0.1s ease;
 }
 
-.submit-container{
+.submit-container {
   text-align: right;
   .submit-button{
     color: $grey;
   }
 }
 
-.image-preview-container{
+.image-preview-container {
     height: 300px;
     width: 300px;
     border-radius: 5px;

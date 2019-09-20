@@ -1,13 +1,13 @@
-import { ITag } from './../../models/tag.model';
 import { ICategory } from './../../models/category.model';
 import { GalleryService } from './../../services/gallery.service';
 import { IPhoto } from './../../models/photo.model';
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { FormControl } from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-gallery',
@@ -26,15 +26,15 @@ export class GalleryComponent implements OnInit {
   sortObj = { sortBoolean: true,
               buttonString: 'keyboard_arrow_up' };
   categories: ICategory[] = [];
-  tags: ITag[] = [];
+  tags: string[];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  categoriesArray: ICategory[] = [];
-  categoriesIds: number[] = [];
+  search: string;
 
 
   constructor(private gallery: GalleryService,
               private router: Router,
-              private auth: AuthService) { }
+              private auth: AuthService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.loadPhotos();
@@ -84,10 +84,9 @@ export class GalleryComponent implements OnInit {
     const input = event.input;
     const value = event.value;
 
-    //add tag
+    // add tag
     if ((value || '').trim()) {
-      // pakeist id is tags?
-      this.tags.push({id: 0, name: value.trim()});
+      this.tags.push(value.trim());
     }
 
     // Reset the input value
@@ -96,7 +95,7 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-  remove(tag: ITag): void {
+  remove(tag: string): void {
     const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
@@ -105,7 +104,7 @@ export class GalleryComponent implements OnInit {
   }
   // chip-end
 
-  initSearch(e: string) {
+  initSearch(e: string): void {
     if (e.length > 2) {
       console.log('sending request...');
     }
@@ -114,7 +113,7 @@ export class GalleryComponent implements OnInit {
 
   }
 
-  checkCookie() {
+  checkCookie(): void {
     if (this.auth.loggedIn) {
       this.isLoggedIn = true;
       this.loginString = 'LOGOUT';
@@ -126,17 +125,20 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-  loginOrOut() {
+  loginOrOut(): void {
     if (this.isLoggedIn) {
       this.auth.logout();
       this.isLoggedIn = false;
       this.loginString = 'LOGIN';
       this.loginIcon = 'account_box';
-      return;
-    }
+      this.snackBar.open('Successfully logged out!', '', {
+        duration: 3000
+      });
+    } else {
     this.loginString = 'LOGOUT';
     this.loginIcon = 'directions_run';
     this.router.navigate(['login']);
+    }
   }
 
 }

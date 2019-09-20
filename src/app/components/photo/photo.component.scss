@@ -1,6 +1,6 @@
 @import '../../../assets/styles/snackbar.scss';
 
-.img-container{
+.img-container {
     position: relative;
     height: 270px;
     width: 270px;
@@ -12,14 +12,14 @@
     }
 }
 
-.img-overlay{
+.img-overlay {
     height: 270px;
     width: 270px;
     top: 0px;
     left: 0px;
     position: absolute;
     display: none;
-    p{
+    p {
         color: white;
         margin: 20px;
         text-align: center;
@@ -34,8 +34,8 @@
         }
     }
 }
-.img-container:hover{
-    .img-overlay{
+.img-container:hover {
+    .img-overlay {
         display: block;
         background: rgb(128, 0, 60, 0.6);
         transition: .5s ease;
@@ -47,11 +47,11 @@
         top: 200px;
         opacity: 0;
     }
-    50%{
+    50% {
         top: 100px;
         opacity: 0.3;
     }
-        100% {
+    100% {
         top: 0px;
         opacity: 1;
     }

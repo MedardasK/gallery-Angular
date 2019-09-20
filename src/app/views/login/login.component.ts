@@ -37,11 +37,12 @@ export class LoginComponent implements OnInit {
   submitValues(): void {
     this.userCredentials = this.credentials.value;
     this.auth.login(this.userCredentials.username, this.userCredentials.password)
-    .catch(() => {
+    .catch(error => {
+      console.log(error);
       this.snackBar.open('Email or password incorrect!', '', {
         duration: 3000
       });
-     });
+    }).then();
     this.router.navigate(['']);
   }
 

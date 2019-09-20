@@ -8,15 +8,21 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemsCountPipe } from './pipes/items-count.pipe';
+import { PhotoComponent } from './components';
+import { FileUploadDirective } from './directives/file-upload.directive';
+import { CookieService } from 'ngx-cookie-service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { FooterComponent } from './components/footer/footer.component';
+import { DeleteConfirmComponent } from './dialogs/delete-confirm/delete-confirm.component';
 import { GalleryComponent,
          LoginComponent,
          PhotoUploadComponent } from './views/';
+
 import { PhotoOneComponent,
          PhotoEditComponent,
          RegisterComponent,
          TagsCategoriesComponent } from './dialogs';
-import { PhotoComponent } from './components';
-import { FileUploadDirective } from './directives/file-upload.directive';
+
 import { MatCardModule,
          MatFormFieldModule,
          MatSelectModule,
@@ -29,10 +35,6 @@ import { MatCardModule,
          MatInputModule,
          MatToolbarModule,
          MatSnackBarModule } from '@angular/material';
-import { CookieService } from 'ngx-cookie-service';
-import { JwtModule } from '@auth0/angular-jwt';
-import { FooterComponent } from './components/footer/footer.component';
-import { DeleteConfirmComponent } from './dialogs/delete-confirm/delete-confirm.component';
 
 
 @NgModule({
@@ -77,6 +79,7 @@ import { DeleteConfirmComponent } from './dialogs/delete-confirm/delete-confirm.
                   const name = cname + '=';
                   const decodedCookie = decodeURIComponent(document.cookie);
                   const ca = decodedCookie.split(';');
+                  // tslint:disable-next-line:prefer-for-of
                   for (let i = 0; i < ca.length; i++) {
                     let c = ca[i];
                     while (c.charAt(0) === ' ') {

@@ -30,7 +30,7 @@
     <mat-form-field class="flex-fill">
       <mat-chip-list #chipList aria-label="Tag selection">
         <mat-chip *ngFor="let tag of tags" selectable="true" removable="true" (removed)="remove(tag)">
-          {{tag.name}}
+          {{tag}}
           <mat-icon matChipRemove *ngIf="true">cancel</mat-icon>
         </mat-chip>
         <input placeholder="Write a tag..." [matChipInputFor]="chipList"
@@ -61,7 +61,7 @@
     <div></div>
   </div>
   <div class="res-count-container">Showing: {{resCount | itemsCount}} pictures</div>
-  <div class="gallery-container">
+  <div>
     <div class="photo-container" *ngFor="let item of photos">
       <app-photo [photo]="item"></app-photo>
     </div>

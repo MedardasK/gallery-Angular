@@ -20,7 +20,7 @@ export class PhotoComponent {
               private router: Router,
               private dialog: MatDialog) {}
 
-  openDialogReview(): Promise<void> {
+  async openDialogReview(): Promise<void> {
     return this.galleryService.getPhotoById(this.photo.id)
       .then(res => {
         this.dialog.open(PhotoOneComponent, {
@@ -29,7 +29,7 @@ export class PhotoComponent {
       });
   }
 
-  openDialogEdit(): Promise<void> {
+  async openDialogEdit(): Promise<void> {
     if (!this.auth.loggedIn) {
       this.router.navigate(['login']);
       return;

@@ -1,7 +1,7 @@
 @import '../../../assets/styles/consts.scss';
 @import '../../../assets/styles/search-input.scss';
 
-.top-toolbar{
+.top-toolbar {
   position: fixed;
   top: 0px;
   left: 0px;
@@ -9,10 +9,10 @@
   background: $background;
   border-bottom: 1px solid $secondary;
   min-height: 50px;
-  mat-toolbar-row{
+  mat-toolbar-row {
     height: 50px;
   }
-  mat-icon{
+  mat-icon {
     margin-right: 3px;
   }
   .toolbar-button-container {
@@ -20,43 +20,29 @@
       color: #ffffff;
       text-decoration: none;
     }
-    button{
+    button {
       background-color: $secondary;
     }
   }
 }
-.top-container{
-  margin-top: 70px;
+.top-container {
+  margin-top: 90px;
+  .chip {
+    position: absolute;
+    top: -15px;
+  }
+  .sorting-container {
+    margin-bottom: 30px;
+    padding: 20px;
+    width: 100%;
+  }
 }
-.photo-container {
-  width: 270px;
-  height: 270px;
-  overflow: hidden;
-  margin: 13px;
-  display: inline-block;
-  border-radius: 7px;
-}
-
-.chip {
-  position: absolute;
-  top: -15px;
-}
-
 .loading-container {
   margin-top: 30px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
-
-.res-count-container {
-  position: absolute;
-  color: $grey;
-  top: 15px;
-  right: 25px;
-  font-size: 14px;
-}
-
 .sufix {
   position: absolute;
   right: 5px;
@@ -64,22 +50,28 @@
   background-color: $background;
   color: $secondary;
 }
-
 .placeholder {
   color: $grey;
 }
-
-.sorting-container {
-  margin-bottom: 30px;
-  padding: 20px;
-  width: 100%;
-}
-
 .gallery-container {
+  .res-count-container {
+    position: absolute;
+    color: $grey;
+    top: 15px;
+    right: 25px;
+    font-size: 14px;
+  }
   .photo-container.ng-star-inserted {
     margin-bottom: 0px;
   }
-
+  .photo-container {
+    width: 270px;
+    height: 270px;
+    overflow: hidden;
+    margin: 13px;
+    display: inline-block;
+    border-radius: 7px;
+  }
   .sort-date-container {
     p {
       color: $grey;
