@@ -42,9 +42,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
     this.auth.register(this.userCredentials.username, this.userCredentials.password);
-
     this.dialogRef.close();
-    this.router.navigate(['']);
   }
 
   cancel() {

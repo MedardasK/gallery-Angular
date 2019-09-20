@@ -20,27 +20,27 @@ export class PhotoComponent {
               private router: Router,
               private dialog: MatDialog) {}
 
-    openDialogReview(): Promise<void> {
-      return this.galleryService.getPhotoById(this.photo.id)
-        .then(res => {
-          this.dialog.open(PhotoOneComponent, {
-            data: {photo: res}
-          });
+  openDialogReview(): Promise<void> {
+    return this.galleryService.getPhotoById(this.photo.id)
+      .then(res => {
+        this.dialog.open(PhotoOneComponent, {
+          data: {photo: res}
         });
-    }
+      });
+  }
 
-    openDialogEdit(): Promise<void> {
-      if (!this.auth.loggedIn) {
-        this.router.navigate(['login']);
-        return;
-      }
-      return this.galleryService.getPhotoById(this.photo.id)
-        .then(res => {
-          this.dialog.open(PhotoEditComponent, {
-            width: '80vw',
-            height: '60vh',
-            data: {photo: res}
-          });
-        });
+  openDialogEdit(): Promise<void> {
+    if (!this.auth.loggedIn) {
+      this.router.navigate(['login']);
+      return;
     }
+    return this.galleryService.getPhotoById(this.photo.id)
+      .then(res => {
+        this.dialog.open(PhotoEditComponent, {
+          width: '80vw',
+          height: '62vh',
+          data: {photo: res}
+        });
+    });
+  }
 }

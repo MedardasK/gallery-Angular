@@ -64,7 +64,7 @@ export class PhotoUploadComponent implements OnInit {
     this.isHovering = event;
   }
 
-  startUpload(event: FileList) { // blob
+  startUpload(event: FileList) {
     const fileData = event.item(0);
     this.imageFile = event.item(0);
     if (fileData.type.split('/')[0] !== 'image') {
@@ -88,11 +88,7 @@ export class PhotoUploadComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(3)]],
       categoriesForm: new FormControl (['', Validators.required]),
       tagsForm: ['', Validators.required],
-      fileForm: ['', Validators.required],
-      // categoriesForm: ['', Validators.required],
-      // tagsForm: ['', Validators.required]
-    // }, {
-    //   validator: this.fileData
+      fileForm: ['', Validators.required]
   });
   }
 

@@ -26,7 +26,6 @@ export class GalleryComponent implements OnInit {
   sortObj = { sortBoolean: true,
               buttonString: 'keyboard_arrow_up' };
   categories: ICategory[] = [];
-  search = '';
   tags: ITag[] = [];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   categoriesArray: ICategory[] = [];
@@ -40,7 +39,6 @@ export class GalleryComponent implements OnInit {
   ngOnInit() {
     this.loadPhotos();
     this.loadCategories();
-    this.loadTags();
     this.checkCookie();
   }
 
@@ -57,13 +55,6 @@ export class GalleryComponent implements OnInit {
     this.gallery.getCategories()
     .then(data => {
       this.categories = data;
-    });
-  }
-
-  private loadTags(): void {
-    this.gallery.getTags()
-    .then(data => {
-      this.tags = data;
     });
   }
 
@@ -88,24 +79,6 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-  // paduodam category id
-  // patikrinam ar tuscias array ir ar toks id yra, jei ne, pridedam
-  // ismetam reikiamsus paveiksliukus
-  // pats paskutinis checkas ar nera tuscias array
-  // po idejimu ir jei tuscias - metam visus pav
-  filterByCategories(category: ICategory): void {
-  }
-
-  // chip-tags
-  // visible = true;
-  // selectable = true;
-  // removable = true;
-  // addOnBlur = true;
-  // fruits: Fruit[] = [
-  //   {name: 'Lemon'},
-  //   {name: 'Lime'},
-  //   {name: 'Apple'},
-  // ];
 // chip-tags
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -114,7 +87,7 @@ export class GalleryComponent implements OnInit {
     //add tag
     if ((value || '').trim()) {
       // pakeist id is tags?
-      this.tags.push({id: 5, name: value.trim()});
+      this.tags.push({id: 0, name: value.trim()});
     }
 
     // Reset the input value
@@ -137,17 +110,16 @@ export class GalleryComponent implements OnInit {
       console.log('sending request...');
     }
   }
+  filterByCategories(categories: number[]) {
+
+  }
 
   checkCookie() {
     if (this.auth.loggedIn) {
-      console.log(this.auth.loggedIn);
-      console.log('prisijunges');
       this.isLoggedIn = true;
       this.loginString = 'LOGOUT';
       this.loginIcon = 'directions_run';
     } else {
-      console.log(this.auth.loggedIn);
-      console.log('ne');
       this.isLoggedIn = false;
       this.loginString = 'LOGIN';
       this.loginIcon = 'account_box';

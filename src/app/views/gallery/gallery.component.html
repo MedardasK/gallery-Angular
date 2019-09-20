@@ -21,13 +21,13 @@
       <mat-form-field>
         <mat-label>Choose</mat-label>
         <mat-select [formControl]="categoryControl" multiple>
-          <mat-option *ngFor="let category of categories" [value]="category.id" (click)="filterByCategories(category)">
+          <mat-option *ngFor="let category of categories" [value]="category.id" (click)="filterByCategories(category.id)">
             {{category.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <div></div>
-    <mat-form-field class="example-chip-list">
+    <div>&nbsp;</div>
+    <mat-form-field class="flex-fill">
       <mat-chip-list #chipList aria-label="Tag selection">
         <mat-chip *ngFor="let tag of tags" selectable="true" removable="true" (removed)="remove(tag)">
           {{tag.name}}
@@ -38,8 +38,8 @@
           (matChipInputTokenEnd)="add($event)">
       </mat-chip-list>
     </mat-form-field>
-    <div></div>
-    <label class="pure-material-textfield-outlined relative">
+    <div>&nbsp;</div>
+    <label class="pure-material-textfield-outlined relative flex-fill">
       <input [(ngModel)]="search" (ngModelChange)="initSearch($event)" class="input-padding" placeholder=" ">
       <span class="placeholder">Search</span>
       <span class="sufix">

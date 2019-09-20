@@ -15,12 +15,13 @@ export class DeleteConfirmComponent {
               private snackBar: MatSnackBar,
               private galleryService: GalleryService) { }
 
-  public decline() {
+  decline() {
     this.dialogRef.close();
   }
 
-  public accept() {
-    this.galleryService.deleteImage(this.photo.id).subscribe(events => {
+  accept() {
+    console.log(this.data);
+    this.galleryService.deleteImage(this.data).subscribe(events => {
       this.snackBar.open('Successfully deleted!', '', {
         duration: 3000
       });
@@ -28,7 +29,7 @@ export class DeleteConfirmComponent {
     });
   }
 
-  public dismiss() {
+  dismiss() {
     this.dialogRef.close();
   }
 
