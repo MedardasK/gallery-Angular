@@ -1,3 +1,4 @@
+import { ICategory } from './../../models/category.model';
 import { ITag } from './../../models/tag.model';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,6 +15,7 @@ export class TagsCategoriesComponent implements OnInit {
   categories: FormGroup;
   tagString: string;
   tag: ITag;
+  categoryObj: ICategory;
   tagData = new FormData();
   categoryData = new FormData();
 
@@ -34,17 +36,17 @@ export class TagsCategoriesComponent implements OnInit {
     });
   }
 
-  createTag(): void {
-    this.galleryService.saveTag(this.tags.value).subscribe(() => {
-      this.snackBar.open('New tag was successfully created!', '', {
+  createCategory(): void {
+    this.galleryService.saveCategory(this.categories.get('category').value).subscribe(() => {
+      this.snackBar.open('New category was successfully created!', '', {
         duration: 3000
       });
     });
   }
 
-  createCategory(): void {
-    this.galleryService.saveCategory(this.categories.value).subscribe(() => {
-      this.snackBar.open('New category was successfully created!', '', {
+  createTag(): void {
+    this.galleryService.saveTag(this.tags.get('tag').value).subscribe(() => {
+      this.snackBar.open('New tag was successfully created!', '', {
         duration: 3000
       });
     });

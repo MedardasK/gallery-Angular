@@ -1,5 +1,7 @@
+import { ITag } from './tag.model';
+import { ICategory } from './category.model';
 export interface IPhotoUpload {
     description: string;
-    tag: [{ id: number, name: string }];
-    category: [{ id: number, name: string }];
+    category: ICategory[];
+    tag: ITag[];
 }
