@@ -70,7 +70,6 @@ export class GalleryComponent implements OnInit {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
         }
       );
-      console.log(this.photos);
     } else {
       this.sortObj.buttonString = 'keyboard_arrow_up';
       this.sortObj.sortBoolean = true;

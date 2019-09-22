@@ -21,13 +21,12 @@ export class PhotoUploadComponent implements OnInit {
   tagControl = new FormControl();
   upload: FormGroup;
   fileControl = new FormControl();
-  categoriesLoad: ICategory[] = [];
-  categoriesArray: ICategory[] = [];
-  tagsLoad: ITag[] = [];
+  categoriesLoad: ICategory[];
+  categoriesArray: ICategory[];
+  tagsLoad: ITag[];
   fileData = new FormData();
   image: IPhotoUpload = {} as IPhotoUpload;
   imageFile: File;
-
   previewUrl: any;
 
   // State for dropzone CSS toggling
@@ -96,10 +95,11 @@ export class PhotoUploadComponent implements OnInit {
   submitValues(): void {
     this.image = this.upload.value;
     this.fileData.append('description', this.image.description);
-    this.fileData.append('category', JSON.stringify(new Array(this.image.category)));
-    this.fileData.append('tag', JSON.stringify(new Array(this.image.tag)));
+    this.fileData.append('categories', JSON.stringify(this.upload.get('category').value));
+    this.fileData.append('tags', JSON.stringify(this.upload.get('tag').value));
     this.galleryService.uploadImage(this.fileData).subscribe(() => {
       this.upload.reset();
+      this.previewUrl = null;
       this.snackBar.open('Successfully uploaded!', '', {
         duration: 3000,
         panelClass: 'snackbar-container'
@@ -109,7 +109,6 @@ export class PhotoUploadComponent implements OnInit {
 
   openDialogCreate(): void {
     if (!this.auth.loggedIn) {
-      console.log(this.auth.loggedIn);
       this.router.navigate(['login']);
       return;
     }

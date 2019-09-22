@@ -14,7 +14,7 @@
         <mat-form-field>
           <mat-label>Select categories</mat-label>
           <mat-select [formControl]="categoryControl" multiple required matInput formControlName="category" name="category">
-            <mat-option *ngFor="let cat of categoriesLoad" [value]="cat" matInput>
+            <mat-option *ngFor="let cat of categoriesLoad" [value]="cat.id" matInput>
               {{cat.name}}</mat-option>
           </mat-select>
           <mat-error *ngIf="upload.controls['category'].hasError('required')">At least one category is required</mat-error>
@@ -22,7 +22,7 @@
         <mat-form-field>
           <mat-label>Select tags</mat-label>
           <mat-select [formControl]="tagControl" multiple required matInput formControlName="tag" name="tag">
-            <mat-option *ngFor="let tagObj of tagsLoad" [value]="tagObj">
+            <mat-option *ngFor="let tagObj of tagsLoad" [value]="tagObj.id">
               {{tagObj.name}}</mat-option>
           </mat-select>
           <mat-error *ngIf="upload.controls['tag'].hasError('required')">At least one tag is required</mat-error>

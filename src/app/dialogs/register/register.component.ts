@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit {
         duration: 3000
       });
     }).catch(() =>  {
-      this.snackBar.open('This username is already taken', '', {
+      this.snackBar.open('This email is already taken', '', {
         duration: 3000
       });
     }
