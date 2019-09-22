@@ -1,3 +1,4 @@
+import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 import { TagsCategoriesComponent } from './tags-categories/tags-categories.component';
 import { RegisterComponent } from './register/register.component';
 import { PhotoOneComponent } from './photo-one/photo-one.component';
@@ -7,5 +8,6 @@ export {
     PhotoOneComponent,
     PhotoEditComponent,
     RegisterComponent,
-    TagsCategoriesComponent
+    TagsCategoriesComponent,
+    DeleteConfirmComponent
 };

@@ -13,7 +13,6 @@ import { FileUploadDirective } from './directives/file-upload.directive';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FooterComponent } from './components/footer/footer.component';
-import { DeleteConfirmComponent } from './dialogs/delete-confirm/delete-confirm.component';
 import { GalleryComponent,
          LoginComponent,
          PhotoUploadComponent } from './views/';
@@ -21,7 +20,8 @@ import { GalleryComponent,
 import { PhotoOneComponent,
          PhotoEditComponent,
          RegisterComponent,
-         TagsCategoriesComponent } from './dialogs';
+         TagsCategoriesComponent,
+         DeleteConfirmComponent } from './dialogs';
 
 import { MatCardModule,
          MatFormFieldModule,
