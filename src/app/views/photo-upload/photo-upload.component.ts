@@ -1,4 +1,3 @@
-import { IPhotoUpload } from './../../models/photo-upload.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { GalleryService } from '../../services/gallery.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -20,6 +19,10 @@ export class PhotoUploadComponent implements OnInit {
   categoryControl = new FormControl();
   tagControl = new FormControl();
   upload: FormGroup;
+  // upload = new FormGroup({
+  //   tagForm: new FormControl(),
+  //   categoryForm: new FormControl(),
+  // });
   fileControl = new FormControl();
   categoriesLoad: ICategory[];
   categoriesArray: ICategory[];
@@ -85,13 +88,13 @@ export class PhotoUploadComponent implements OnInit {
   private createForm(): void {
     this.upload = this.fb.group({
       description: ['', [Validators.required, Validators.minLength(3)]],
-      category: (['', Validators.required]),
-      tag: (['', Validators.required]),
+      category: ['', Validators.required],
+      tag: ['', Validators.required],
       fileForm: ['', Validators.required]
   });
   }
 
-  submitValues(): void {
+  private submitValues(): void {
     this.fileData.append('description', this.upload.get('description').value);
     this.fileData.append('categories', JSON.stringify(this.upload.get('category').value));
     this.fileData.append('tags', JSON.stringify(this.upload.get('tag').value));
@@ -102,7 +105,7 @@ export class PhotoUploadComponent implements OnInit {
         panelClass: 'snackbar-container'
       });
     },
-    (err) => {
+    () => {
       this.deleteFormData();
       this.snackBar.open('Error occurred, please try again later!', '', {
         duration: 3000,

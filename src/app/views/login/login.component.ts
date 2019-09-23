@@ -44,8 +44,7 @@ export class LoginComponent implements OnInit {
         duration: 3000
       });
     })
-    .catch(error => {
-      console.log(error);
+    .catch(() => {
       this.snackBar.open('Email or password incorrect!', '', {
         duration: 3000
       });

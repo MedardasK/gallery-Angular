@@ -51,7 +51,6 @@ export class GalleryComponent implements OnInit {
         this.photos = data;
         this.isLoaded = true;
         this.resCount = data.length;
-        console.log(this.photos);
       });
   }
 
@@ -115,11 +114,20 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-  filterByCategories(categories: number[]) {
+  filterByCategories(categories: number) {
+    if (this.categoriesIds.length === 0) {
+      this.categoriesIds.push(categories);
+    } else if (!this.categoriesIds.includes(categories)) {
+      this.categoriesIds.push(categories);
+    } else  {
+      this.categoriesIds.splice(this.categoriesIds.indexOf(categories), 1);
+    }
     this.searchCombination('categories', categories);
   }
 
   searchCombination(param: string, value: any) {
+    let searchFinal: string;
+
     if (param === 'search') {
       this.searchString = value;
     }
@@ -129,8 +137,8 @@ export class GalleryComponent implements OnInit {
     if (param === 'categories') {
       this.categoriesIds = value;
     }
-
-    this.gallery.getImagesBySearch(this.searchString, this.tagsArray, this.categoriesIds)
+    searchFinal = 'searchString:' + this.searchString ;
+    this.gallery.getImagesBySearch(searchFinal)
     .then(data => {
       this.photos = data;
       this.isLoaded = true;

@@ -22,18 +22,20 @@
         <div>&nbsp;</div>
         <mat-form-field>
           <mat-label>Select categories</mat-label>
-          <mat-select [formControl]="categoryControl" multiple>
-            <mat-option *ngFor="let category of categories" [value]="category.id">
+          <mat-select [formControl]="categoryControl" formControlName="categoryForm" required multiple>
+            <mat-option *ngFor="let category of categoriesLoad" [value]="category.id">
               {{category.name}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="editForm.controls['categoryForm'].hasError('required')">At least one category is required</mat-error>
         </mat-form-field>
         <div>&nbsp;</div>
         <mat-form-field>
           <mat-label>Select tags</mat-label>
-          <mat-select [formControl]="tagControl" multiple>
-            <mat-option *ngFor="let tag of tags" [value]="tag.id">
-              {{tag.name}}</mat-option>
+          <mat-select [formControl]="tagControl" formControlName="tagForm" required multiple>
+            <mat-option *ngFor="let tg of tagsLoad" [value]="tg.id">
+              {{tg.name}}</mat-option>
           </mat-select>
+          <mat-error *ngIf="editForm.controls['tagForm'].hasError('required')">At least one tag is required</mat-error>
         </mat-form-field>
         <div>&nbsp;</div>
         <div class="submit-container">
@@ -43,7 +45,7 @@
     </div>
     <div>
       <div class="preview-container d-flex bd-highlight">
-        <mat-icon *ngIf="adminBoolean"  (click)="confirmDeleteDialog()">cancel</mat-icon>
+        <mat-icon *ngIf="adminBoolean" (click)="confirmDeleteDialog()">cancel</mat-icon>
         <div class="p-2 flex-shrink-1 bd-highlight">
           <img src="data:image/png;base64,{{photo.data}}" alt={{photo.name}}>
         </div>

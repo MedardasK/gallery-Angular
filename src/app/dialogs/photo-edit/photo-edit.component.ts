@@ -23,8 +23,9 @@ export class PhotoEditComponent implements OnInit {
   tagControl = new FormControl();
   adminBoolean = false;
   dataDelete: number;
-  categories: ICategory[] = [];
-  tags: ITag[] = [];
+  categoriesLoad: ICategory[];
+  tagsLoad: ITag[];
+  updateData = new FormData();
 
   constructor(private fb: FormBuilder,
               public dialogRef: MatDialogRef<PhotoEditComponent>,
@@ -46,21 +47,23 @@ export class PhotoEditComponent implements OnInit {
   private loadCategories(): void {
     this.galleryService.getCategories()
     .then(data => {
-      this.categories = data;
+      this.categoriesLoad = data;
     });
   }
 
   private loadTags(): void {
     this.galleryService.getTags()
     .then(data => {
-      this.tags = data;
+      this.tagsLoad = data;
     });
   }
 
   createForm(): void {
     this.editForm = this.fb.group({
       description: ['', Validators.minLength(3)],
-      name: ['', Validators.minLength(1)]
+      name: ['', Validators.minLength(1)],
+      categoryForm: ['', Validators.required],
+      tagForm: ['', Validators.required],
     });
   }
 
@@ -69,19 +72,23 @@ export class PhotoEditComponent implements OnInit {
     this.photoDetails = this.editForm.value;
     updateData.append('description', this.photoDetails.description);
     updateData.append('name', this.photoDetails.name);
-    console.log(this.photoDetails.description);
-    console.log(this.photoDetails.name);
-    updateData.append('tag', JSON.stringify(
-      this.photoDetails.tags !== null ? this.photoDetails.tags : this.photo.tags));
-    updateData.append('category', JSON.stringify(
-      this.photoDetails.categories !== null ? this.photoDetails.categories : this.photo.categories));
-    updateData.append('category', JSON.stringify(this.photoDetails.categories));
+
+    updateData.append('tags', JSON.stringify(this.editForm.get('categoryForm').value));
+    updateData.append('categories', JSON.stringify(this.editForm.get('tagForm').value));
+
 
     this.galleryService.updateImage(this.photo.id, updateData).subscribe(() => {
       this.snackBar.open('Successfully updated!', '', {
         duration: 3000
       });
-    });
+    },
+    () => {
+      this.snackBar.open('Error occurred, please try again later!', '', {
+        duration: 3000,
+        panelClass: 'snackbar-container'
+      });
+    }
+    );
   }
 
   confirmDeleteDialog(): void {

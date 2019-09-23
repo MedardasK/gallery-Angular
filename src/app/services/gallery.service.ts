@@ -43,14 +43,12 @@ export class GalleryService {
   }
 
   saveTag(name: FormData): Observable<any> {
-    console.log(name);
     return this.http.post('http://localhost:8080/tags/create', name).pipe(
       catchError(this.handleError)
     );
   }
 
   saveCategory(name: FormData): Observable<any> {
-    console.log(name);
     return this.http.post('http://localhost:8080/categories/create', name).pipe(
       catchError(this.handleError)
     );
@@ -62,8 +60,8 @@ export class GalleryService {
     );
   }
 
-  getImagesBySearch(searchString: string, tagsArray: string[], categoriesIds: number[]): Promise<IPhoto[]> {
-    return this.http.get<IPhoto[]>('http://localhost:8080/search/' + searchString + tagsArray + categoriesIds).toPromise();
+  getImagesBySearch(searchParams: string): Promise<IPhoto[]> {
+    return this.http.get<IPhoto[]>('http://localhost:8080/search/' + searchParams).toPromise();
   }
 
   private handleError(error: HttpErrorResponse) {
