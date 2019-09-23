@@ -25,7 +25,6 @@ export class PhotoUploadComponent implements OnInit {
   categoriesArray: ICategory[];
   tagsLoad: ITag[];
   fileData = new FormData();
-  image: IPhotoUpload = {} as IPhotoUpload;
   imageFile: File;
   previewUrl: any;
 
@@ -86,25 +85,39 @@ export class PhotoUploadComponent implements OnInit {
   private createForm(): void {
     this.upload = this.fb.group({
       description: ['', [Validators.required, Validators.minLength(3)]],
-      category: new FormControl (['', Validators.required]),
-      tag: new FormControl (['', Validators.required]),
+      category: (['', Validators.required]),
+      tag: (['', Validators.required]),
       fileForm: ['', Validators.required]
   });
   }
 
   submitValues(): void {
-    this.image = this.upload.value;
-    this.fileData.append('description', this.image.description);
+    this.fileData.append('description', this.upload.get('description').value);
     this.fileData.append('categories', JSON.stringify(this.upload.get('category').value));
     this.fileData.append('tags', JSON.stringify(this.upload.get('tag').value));
     this.galleryService.uploadImage(this.fileData).subscribe(() => {
-      this.upload.reset();
-      this.previewUrl = null;
+      this.deleteFormData();
       this.snackBar.open('Successfully uploaded!', '', {
         duration: 3000,
         panelClass: 'snackbar-container'
       });
-    });
+    },
+    (err) => {
+      this.deleteFormData();
+      this.snackBar.open('Error occurred, please try again later!', '', {
+        duration: 3000,
+        panelClass: 'snackbar-container'
+      });
+    }
+    );
+  }
+
+  private deleteFormData(): void {
+    this.upload.reset();
+    this.previewUrl = null;
+    this.fileData.delete('description');
+    this.fileData.delete('categories');
+    this.fileData.delete('tags');
   }
 
   openDialogCreate(): void {

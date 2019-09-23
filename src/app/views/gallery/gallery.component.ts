@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class GalleryComponent implements OnInit {
   categoryControl = new FormControl();
-  photos: IPhoto[] = [];
+  photos: IPhoto[];
   isLoaded = false;
   isLoggedIn = false;
   loginString = 'LOGIN';
@@ -25,7 +25,7 @@ export class GalleryComponent implements OnInit {
   resCount = 0;
   sortObj = { sortBoolean: true,
               buttonString: 'keyboard_arrow_up' };
-  categories: ICategory[] = [];
+  categories: ICategory[];
   tags: string[];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   search: string;
@@ -51,6 +51,7 @@ export class GalleryComponent implements OnInit {
         this.photos = data;
         this.isLoaded = true;
         this.resCount = data.length;
+        console.log(this.photos);
       });
   }
 

@@ -2,12 +2,12 @@ import { ITag } from './../../models/tag.model';
 import { ICategory } from './../../models/category.model';
 import { GalleryService } from './../../services/gallery.service';
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { IPhoto } from '../../models/photo.model';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './../../services/auth.service';
 import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component';
+import { IPhotoFull } from 'src/app/models/photo-full.model';
 
 @Component({
   selector: 'app-photo-edit',
@@ -15,8 +15,8 @@ import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.compone
   styleUrls: ['./photo-edit.component.scss']
 })
 export class PhotoEditComponent implements OnInit {
-  @Input() photo: IPhoto;
-  photoDetails: IPhoto;
+  @Input() photo: IPhotoFull;
+  photoDetails: IPhotoFull;
   editSuccessful = false;
   editForm: FormGroup;
   categoryControl = new FormControl();
@@ -72,10 +72,10 @@ export class PhotoEditComponent implements OnInit {
     console.log(this.photoDetails.description);
     console.log(this.photoDetails.name);
     updateData.append('tag', JSON.stringify(
-      this.photoDetails.tag !== null ? this.photoDetails.tag : this.photo.tag));
+      this.photoDetails.tags !== null ? this.photoDetails.tags : this.photo.tags));
     updateData.append('category', JSON.stringify(
-      this.photoDetails.category !== null ? this.photoDetails.category : this.photo.category));
-    updateData.append('category', JSON.stringify(this.photoDetails.category));
+      this.photoDetails.categories !== null ? this.photoDetails.categories : this.photo.categories));
+    updateData.append('category', JSON.stringify(this.photoDetails.categories));
 
     this.galleryService.updateImage(this.photo.id, updateData).subscribe(() => {
       this.snackBar.open('Successfully updated!', '', {
