@@ -9,7 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemsCountPipe } from './pipes/items-count.pipe';
 import { PhotoComponent } from './components';
-import { FileUploadDirective } from './directives/file-upload.directive';
+import { FileUploadDirective,
+         MustMatchDirective } from './directives';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FooterComponent } from './components/footer/footer.component';
@@ -51,7 +52,8 @@ import { MatCardModule,
         RegisterComponent,
         TagsCategoriesComponent,
         FooterComponent,
-        DeleteConfirmComponent
+        DeleteConfirmComponent,
+        MustMatchDirective
     ],
     imports: [
         BrowserModule,

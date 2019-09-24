@@ -14,9 +14,11 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterComponent implements OnDestroy {
 
- model: any = {};
+  // @ViewChild('f', {static: false}) courseForm: NgForm;
 
-  userCredentials: IUser;
+  model: any = {};
+
+  // userCredentials: IUser;
 
   constructor(public dialogRef: MatDialogRef<RegisterComponent>,
               private auth: AuthService,
@@ -33,10 +35,11 @@ export class RegisterComponent implements OnDestroy {
   //   });
   // }
 
-  onSubmit(form: NgForm): void {
-    console.log(form.value.username);
-    console.log(form.value.password);
-    console.log(form.value.confirmPassword);
+  onSubmit(): void {
+    // console.log(form.value.username);
+    // console.log(form.value.password);
+    // console.log(form.value.confirmPassword);
+    console.log(JSON.stringify(this.model));
     }
 
   // submitValues(): void {
@@ -59,7 +62,7 @@ export class RegisterComponent implements OnDestroy {
   // }
 
   cancel(): void {
-    this.registerForm.reset();
+    // this.registerForm.reset();
     return this.dialogRef.close();
   }
 
