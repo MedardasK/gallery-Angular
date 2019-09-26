@@ -8,22 +8,21 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthService {
   authState: boolean;
 
-  constructor( private cookieService: CookieService,
-               private httpClient: HttpClient ) { }
+  constructor(private cookieService: CookieService,
+              private httpClient: HttpClient) { }
 
   async login(username: string, password: string): Promise<void> {
-    return this.httpClient.post<{token: string}>('http://localhost:8080/login', {username, password})
-    .toPromise()
-    .then( res => {
-      this.cookieService.set('access_token', res.token);
-      this.cookieService.set('roles', JSON.parse(atob(res.token.split('.')[1])).auth);
-    });
+    return this.httpClient.post<{ token: string }>('http://localhost:8080/login', { username, password })
+      .toPromise()
+      .then(res => {
+        this.cookieService.set('access_token', res.token);
+      });
   }
 
   async register(username: string, password: string): Promise<void> {
-    return this.httpClient.post<{access_token: string}>('http://localhost:8080/register', {username, password})
-    .toPromise()
-    .then(res => {});
+    return this.httpClient.post<{ access_token: string }>('http://localhost:8080/register', { username, password })
+      .toPromise()
+      .then(res => { });
   }
 
   logout(): void {
@@ -31,7 +30,11 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    if (this.cookieService.get('roles') ===  'ROLE_ADMIN') {
+    let role = atob(this.cookieService.get('access_token').split('.')[1]);
+    role = role.substring(35, 45);
+    console.log(role);
+
+    if (role === 'ROLE_ADMIN') {
       return true;
     } else {
       return false;
@@ -39,8 +42,8 @@ export class AuthService {
   }
 
   public get loggedIn(): boolean {
-    return (this.cookieService.get('access_token') !==  null
-    && this.cookieService.get('access_token') !== '');
+    return (this.cookieService.get('access_token') !== null
+      && this.cookieService.get('access_token') !== '');
   }
 
 }

@@ -1,5 +1,3 @@
-import { GalleryService,
-         AuthService } from './services/';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,12 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemsCountPipe } from './pipes/items-count.pipe';
-import { PhotoComponent } from './components';
+import { PhotoComponent,
+         FooterComponent } from './components';
 import { FileUploadDirective,
          MustMatchDirective } from './directives';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtModule } from '@auth0/angular-jwt';
-import { FooterComponent } from './components/footer/footer.component';
 import { GalleryComponent,
          LoginComponent,
          PhotoUploadComponent } from './views/';
@@ -24,18 +22,16 @@ import { PhotoOneComponent,
          TagsCategoriesComponent,
          DeleteConfirmComponent } from './dialogs';
 
-import { MatCardModule,
-         MatFormFieldModule,
-         MatSelectModule,
-         MatProgressSpinnerModule,
-         MatChipsModule,
-         MatButtonModule,
-         MatIconModule,
-         MatDialogModule,
-         MatCheckboxModule,
-         MatInputModule,
-         MatToolbarModule,
-         MatSnackBarModule } from '@angular/material';
+import { EmailInputComponent,
+         PasswordInputComponent,
+         ConfirmPasswordInputComponent,
+         PolicyInputComponent } from './components/custom-input/register-login';
+import { DescriptionInputComponent,
+         NameInputComponent } from './components/custom-input/upload-edit';
+import { GalleryService,
+  AuthService } from './services/';
+
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -53,27 +49,22 @@ import { MatCardModule,
         TagsCategoriesComponent,
         FooterComponent,
         DeleteConfirmComponent,
-        MustMatchDirective
+        MustMatchDirective,
+        EmailInputComponent,
+        PasswordInputComponent,
+        ConfirmPasswordInputComponent,
+        DescriptionInputComponent,
+        NameInputComponent,
+        PolicyInputComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        MatIconModule,
-        MatDialogModule,
-        MatCheckboxModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatSelectModule,
         FormsModule,
         ReactiveFormsModule,
-        MatProgressSpinnerModule,
-        MatChipsModule,
-        MatButtonModule,
-        MatInputModule,
-        MatToolbarModule,
-        MatSnackBarModule,
+        MaterialModule,
         JwtModule.forRoot({
             config: {
               tokenGetter: function  tokenGetter() {
@@ -95,7 +86,7 @@ import { MatCardModule,
                 }
                 return getCookie('access_token');
                   },
-              whitelistedDomains: ['localhost:8080'],
+              whitelistedDomains: ['http://localhost:8080'],
               blacklistedRoutes: ['http://localhost:8080/login']
             }
           })

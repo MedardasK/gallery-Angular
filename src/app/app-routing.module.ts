@@ -6,7 +6,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', component: GalleryComponent},
+  { path: '',
+    // loadChildren: './views/gallery/gallery.module#GalleryModule'
+    // loadChildren: () => import('./views/gallery/gallery.module').then(m => m.GalleryModule)
+    component: GalleryComponent
+  },
   { path: 'upload', component: PhotoUploadComponent, canActivate: [AuthGuard]},
   { path: 'login', component: LoginComponent}
 ];
