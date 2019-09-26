@@ -30,6 +30,10 @@ export class GalleryService {
     return this.http.get<ITag[]>('http://localhost:8080/tags').toPromise();
   }
 
+  getImagesBySearch(searchParams: string): Promise<IPhoto[]> {
+    return this.http.get<IPhoto[]>('http://localhost:8080/images/search/' + searchParams).toPromise();
+  }
+
   uploadImage(file: FormData): Observable<any> {
     return this.http.post('http://localhost:8080/images/upload', file).pipe(
       catchError(this.handleError)
@@ -58,10 +62,6 @@ export class GalleryService {
     return this.http.delete('http://localhost:8080/images/delete/' + id).pipe(
       catchError(this.handleError)
     );
-  }
-
-  getImagesBySearch(searchParams: string): Promise<IPhoto[]> {
-    return this.http.get<IPhoto[]>('http://localhost:8080/search/' + searchParams).toPromise();
   }
 
   private handleError(error: HttpErrorResponse) {

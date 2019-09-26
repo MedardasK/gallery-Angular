@@ -21,6 +21,8 @@ export class RegisterComponent {
   onSubmit(): void {
     console.log(this.email);
     console.log(this.password);
+    console.log(this.confirmPassword);
+    console.log(this.policy);
 
     // this.auth.register(this.email, this.password)
     //   .then(() => {

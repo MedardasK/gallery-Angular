@@ -1,0 +1,7 @@
+<mat-form-field>
+  <input matInput type="text" name="name" #inputField="ngModel" placeholder="Name" [(ngModel)]="value"
+  minlength="1" maxlength="15" required>
+  <span matPrefix><i class="material-icons">file_copy</i></span>
+  <mat-error *ngIf="inputField.control.hasError('required')">Name is required</mat-error>
+  <mat-error *ngIf="inputField.control.hasError('minlength')">Name is too short</mat-error>
+</mat-form-field>

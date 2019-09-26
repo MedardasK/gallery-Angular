@@ -23,10 +23,12 @@ export class GalleryComponent implements OnInit {
   loginString = 'LOGIN';
   loginIcon = 'account_box';
   resCount = 0;
-  sortObj = { sortBoolean: true,
-              buttonString: 'keyboard_arrow_up' };
+  sortObj = {
+    sortBoolean: true,
+    buttonString: 'keyboard_arrow_up'
+  };
   categories: ICategory[];
-  tags: string[];
+  tags = [];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   search: string;
   searchString = '';
@@ -56,9 +58,9 @@ export class GalleryComponent implements OnInit {
 
   private loadCategories(): void {
     this.gallery.getCategories()
-    .then(data => {
-      this.categories = data;
-    });
+      .then(data => {
+        this.categories = data;
+      });
   }
 
   sortByDate(): void {
@@ -81,7 +83,7 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-// chip-tags
+  // chip-tags
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -90,12 +92,11 @@ export class GalleryComponent implements OnInit {
     if ((value || '').trim()) {
       this.tags.push(value.trim());
     }
-
     // Reset the input value
     if (input) {
       input.value = '';
     }
-    this.searchCombination('tags', this.tags);
+    this.searchCombination();
   }
 
   remove(tag: string): void {
@@ -104,46 +105,56 @@ export class GalleryComponent implements OnInit {
     if (index >= 0) {
       this.tags.splice(index, 1);
     }
-    this.searchCombination('tags', this.tags);
+    this.searchCombination();
   }
-  // chip-end
-
-  initSearch(e: string): void {
-    if (e.length > 2) {
-      this.searchCombination('search', e);
-    }
-  }
+  // chip-tags end
 
   filterByCategories(categories: number) {
     if (this.categoriesIds.length === 0) {
       this.categoriesIds.push(categories);
     } else if (!this.categoriesIds.includes(categories)) {
       this.categoriesIds.push(categories);
-    } else  {
+    } else {
       this.categoriesIds.splice(this.categoriesIds.indexOf(categories), 1);
     }
-    this.searchCombination('categories', categories);
+    this.searchCombination();
   }
 
-  searchCombination(param: string, value: any) {
-    let searchFinal: string;
+  initSearch(e: string): void {
+    if (e.length > 2) {
+      this.searchString = e;
+      this.searchCombination();
+    } else {
+      this.searchString = '';
+    }
+  }
 
-    if (param === 'search') {
-      this.searchString = value;
+  searchCombination() {
+    let searchFinal: string;
+    let categoriesIdsString = '';
+    let tagsNamesString = '';
+
+    if (this.categoriesIds !== []) {
+      for (const cat of this.categoriesIds) {
+        categoriesIdsString += cat + ',';
+      }
     }
-    if (param === 'categories') {
-      this.tagsArray = value;
+
+    if (this.tags !== []) {
+      for (const tag of this.tags) {
+        tagsNamesString += tag + ',';
+      }
     }
-    if (param === 'categories') {
-      this.categoriesIds = value;
-    }
-    searchFinal = 'searchString:' + this.searchString ;
+
+    searchFinal = '?searchParams=categoriesIds:' + categoriesIdsString +
+      'tagsNames:' + tagsNamesString + 'searchString:' + this.searchString;
+    console.log(searchFinal);
     this.gallery.getImagesBySearch(searchFinal)
-    .then(data => {
-      this.photos = data;
-      this.isLoaded = true;
-      this.resCount = data.length;
-    });
+      .then(data => {
+        this.photos = data;
+        this.isLoaded = true;
+        this.resCount = data.length;
+      });
   }
 
   checkCookie(): void {
@@ -168,9 +179,9 @@ export class GalleryComponent implements OnInit {
         duration: 3000
       });
     } else {
-    this.loginString = 'LOGOUT';
-    this.loginIcon = 'directions_run';
-    this.router.navigate(['login']);
+      this.loginString = 'LOGOUT';
+      this.loginIcon = 'directions_run';
+      this.router.navigate(['login']);
     }
   }
 

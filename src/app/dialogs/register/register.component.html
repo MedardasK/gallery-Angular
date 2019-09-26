@@ -1,17 +1,18 @@
 <mat-card>
-  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
-    <!-- [appMustMatch]="['password', 'confirmPassword']" novalidate> -->
+  <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <!-- [appMustMatch]="['password', 'confirmPassword']"> -->
     <div class="text-container">
       <h1>Please fill out registration form.</h1>
       <p>It will take just a few seconds...</p>
     </div>
     <div class="form-container">
       <div>
-        <app-email-input [(ngModel)]="email" name="email" #validations="ngModel"></app-email-input>
+        <app-email-input [(ngModel)]="email" name="email"
+        ></app-email-input>
       </div>
       <div>&nbsp;</div>
       <div>
-        <app-password-input [(ngModel)]="password" name="password" #validations="ngModel"></app-password-input>
+        <app-password-input [(ngModel)]="password" name="password" ></app-password-input>
       </div>
       <div>&nbsp;</div>
       <div>
@@ -20,12 +21,12 @@
       </div>
       <div>&nbsp;</div>
       <div>
-          <app-policy-input [(ngModel)]="policy" name="policy" #validations="ngModel"></app-policy-input>
+        <app-policy-input [(ngModel)]="policy" name="policy" #validations="ngModel"></app-policy-input>
       </div>
       <div>&nbsp;</div>
       <div>
         <button mat-raised-button type="reset" (click)="cancel()">Cancel</button>
-        <button mat-raised-button type="submit" class="button-register">Register</button>
+        <button mat-raised-button class="button-register">Register</button>
       </div>
     </div>
   </form>

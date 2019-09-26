@@ -3,9 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-email-input',
-  template: '<mat-form-field><input required matInput minlength="5" maxlength="30"' +
-            'placeholder="Email" type="email" [(ngModel)]="value">' +
-            '<span matPrefix><i class="material-icons">mail_outline</i></span></mat-form-field>',
+  templateUrl: './email-input.component.html',
   providers: [
     { provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => EmailInputComponent),
@@ -24,11 +22,7 @@ export class EmailInputComponent implements ControlValueAccessor {
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
   }
-  setDisabledState(isDisabled: boolean): void {
-    // const div = this.textarea.nativeElement;
-    // const action = isDisabled ? 'addClass' : 'removeClass';
-    // this.renderer[action](div, 'disabled');
-  }
+
   constructor() { }
 
   onChange: any = () => { };

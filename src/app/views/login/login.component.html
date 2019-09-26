@@ -7,26 +7,15 @@
   </div>
   <div class="form-container">
     <mat-card>
-      <form [formGroup]="credentials">
+      <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
         <div>
-          <mat-form-field>
-            <input required matInput maxlength="30" formControlName="username" name="username" placeholder="Email" class="d-flex flex-wrap">
-            <span matPrefix><i class="material-icons">mail_outline</i></span>
-            <mat-error *ngIf="credentials.controls['username'].hasError('required')">Email is required</mat-error>
-            <mat-error *ngIf="credentials.controls['username'].hasError('username')">Email is invalid</mat-error>
-          </mat-form-field>
+          <app-email-input [(ngModel)]="email" name="email" #validations="ngModel"></app-email-input>
         </div>
         <div>&nbsp;</div>
         <div>
-          <mat-form-field>
-            <input required matInput maxlength="13" type="password" formControlName="password" name="password"
-              placeholder="Password">
-            <span matPrefix><i class="material-icons">visibility</i></span>
-            <mat-error *ngIf="credentials.controls['password'].hasError('required')">Password is required</mat-error>
-            <mat-error *ngIf="credentials.controls['password'].hasError('minLength')">Password is invalid</mat-error>
-          </mat-form-field>
+          <app-password-input [(ngModel)]="password" name="password" #validations="ngModel"></app-password-input>
         </div>
-        <button mat-raised-button type="button" [disabled]="!credentials.valid" (click)="submitValues()">
+        <button mat-raised-button type="submit">
           Sign In</button>
       </form>
       <p>... or <a (click)="openDialogRegister()">Sign up</a> if you don't have an account</p>

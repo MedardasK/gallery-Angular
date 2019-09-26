@@ -3,8 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-description-input',
-  template: '<mat-form-field><input required matInput minlength="5" maxlength="30" placeholder="Email" [(ngModel)]="value">' +
-   '<span matPrefix><i class="material-icons">mail_outline</i></span> </mat-form-field>',
+  templateUrl: './description-input.component.html',
   providers: [
     { provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DescriptionInputComponent),
@@ -22,11 +21,6 @@ export class DescriptionInputComponent implements ControlValueAccessor {
   }
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
-  }
-  setDisabledState(isDisabled: boolean): void {
-    // const div = this.textarea.nativeElement;
-    // const action = isDisabled ? 'addClass' : 'removeClass';
-    // this.renderer[action](div, 'disabled');
   }
   constructor() { }
 
