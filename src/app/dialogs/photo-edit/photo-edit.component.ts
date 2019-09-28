@@ -72,10 +72,8 @@ export class PhotoEditComponent implements OnInit {
     this.photoDetails = this.editForm.value;
     updateData.append('description', this.photoDetails.description);
     updateData.append('name', this.photoDetails.name);
-
-    updateData.append('tags', JSON.stringify(this.editForm.get('categoryForm').value));
-    updateData.append('categories', JSON.stringify(this.editForm.get('tagForm').value));
-
+    updateData.append('categories', JSON.stringify(this.editForm.get('categoryForm').value));
+    updateData.append('tags', JSON.stringify(this.editForm.get('tagForm').value));
 
     this.galleryService.updateImage(this.photo.id, updateData).subscribe(() => {
       this.snackBar.open('Successfully updated!', '', {

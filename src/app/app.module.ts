@@ -68,7 +68,7 @@ import { MaterialModule } from './material.module';
         JwtModule.forRoot({
             config: {
               tokenGetter: function  tokenGetter() {
-                function getCookie(cname) {
+                function getCookie(cname: string) {
                   const name = cname + '=';
                   const decodedCookie = decodeURIComponent(document.cookie);
                   const ca = decodedCookie.split(';');

@@ -123,10 +123,10 @@ export class GalleryComponent implements OnInit {
   initSearch(e: string): void {
     if (e.length > 2) {
       this.searchString = e;
-      this.searchCombination();
     } else {
       this.searchString = '';
     }
+    this.searchCombination();
   }
 
   searchCombination() {
@@ -148,7 +148,6 @@ export class GalleryComponent implements OnInit {
 
     searchFinal = '?searchParams=categoriesIds:' + categoriesIdsString +
       'tagsNames:' + tagsNamesString + 'searchString:' + this.searchString;
-    console.log(searchFinal);
     this.gallery.getImagesBySearch(searchFinal)
       .then(data => {
         this.photos = data;
