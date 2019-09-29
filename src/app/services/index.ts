@@ -1,7 +1,9 @@
+import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
 import { GalleryService } from './gallery.service';
 
 export {
     AuthService,
-    GalleryService
+    GalleryService,
+    UsersService
 };

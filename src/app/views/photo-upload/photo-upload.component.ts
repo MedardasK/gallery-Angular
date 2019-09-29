@@ -19,6 +19,8 @@ export class PhotoUploadComponent implements OnInit {
   categoryControl = new FormControl();
   tagControl = new FormControl();
   upload: FormGroup;
+  categories = [];
+  description = '';
   // upload = new FormGroup({
   //   tagForm: new FormControl(),
   //   categoryForm: new FormControl(),

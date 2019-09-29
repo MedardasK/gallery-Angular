@@ -6,7 +6,6 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class AuthService {
-  authState: boolean;
 
   constructor(private cookieService: CookieService,
               private httpClient: HttpClient) { }
@@ -19,31 +18,36 @@ export class AuthService {
       });
   }
 
-  async register(username: string, password: string): Promise<void> {
-    return this.httpClient.post<{ access_token: string }>('http://localhost:8080/register', { username, password })
-      .toPromise()
-      .then(res => { });
+  async refresh_token(cookie: string, username: string): Promise<void> {
+    return this.httpClient.post<{ token: string }>('http://localhost:8080/refresh-token', { cookie, username })
+    .toPromise()
+    .then(res => {
+      this.cookieService.set('access_token', res.token);
+    });
   }
 
   logout(): void {
     this.cookieService.deleteAll();
   }
 
-  isAdmin(): boolean {
-    let role = atob(this.cookieService.get('access_token').split('.')[1]);
-    role = role.substring(35, 45);
-    console.log(role);
-
-    if (role === 'ROLE_ADMIN') {
-      return true;
+  public get loggedIn(): boolean {
+    const cookie = this.cookieService.get('access_token');
+    if (cookie !== null && cookie !== '') {
+      const currentTimeSeconds = new Date().getTime() / 1000;
+      const cookieExpirationTimeSeconds = JSON.parse(atob(cookie.split('.')[1])).exp;
+      if (currentTimeSeconds + 300 < cookieExpirationTimeSeconds) {
+        return true;
+      } else if (currentTimeSeconds < cookieExpirationTimeSeconds) {
+        const username = JSON.parse(atob(cookie.split('.')[1])).sub;
+        this.refresh_token(cookie, username);
+        return true;
+      } else {
+        this.cookieService.deleteAll();
+        return false;
+      }
     } else {
       return false;
     }
-  }
-
-  public get loggedIn(): boolean {
-    return (this.cookieService.get('access_token') !== null
-      && this.cookieService.get('access_token') !== '');
   }
 
 }

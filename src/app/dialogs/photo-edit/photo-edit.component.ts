@@ -1,3 +1,4 @@
+import { UsersService } from './../../services/users.service';
 import { ITag } from './../../models/tag.model';
 import { ICategory } from './../../models/category.model';
 import { GalleryService } from './../../services/gallery.service';
@@ -32,6 +33,7 @@ export class PhotoEditComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data: any,
               private snackBar: MatSnackBar,
               private auth: AuthService,
+              private userService: UsersService,
               private galleryService: GalleryService,
               private dialog: MatDialog ) {
               this.photo = data.photo;
@@ -39,7 +41,7 @@ export class PhotoEditComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.adminBoolean = this.auth.isAdmin();
+    this.adminBoolean = this.userService.isAdmin();
     this.loadCategories();
     this.loadTags();
   }

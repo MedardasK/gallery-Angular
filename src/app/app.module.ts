@@ -27,12 +27,13 @@ import { EmailInputComponent,
          ConfirmPasswordInputComponent,
          PolicyInputComponent } from './components/custom-input/register-login';
 import { DescriptionInputComponent,
-         NameInputComponent } from './components/custom-input/upload-edit';
+         NameInputComponent,
+         CategoriesInputComponent } from './components/custom-input/upload-edit';
 import { GalleryService,
-  AuthService } from './services/';
+         AuthService,
+         UsersService } from './services/';
 
 import { MaterialModule } from './material.module';
-
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import { MaterialModule } from './material.module';
         ConfirmPasswordInputComponent,
         DescriptionInputComponent,
         NameInputComponent,
-        PolicyInputComponent
+        PolicyInputComponent,
+        CategoriesInputComponent
     ],
     imports: [
         BrowserModule,
@@ -86,12 +88,12 @@ import { MaterialModule } from './material.module';
                 }
                 return getCookie('access_token');
                   },
-              whitelistedDomains: ['http://localhost:8080'],
-              blacklistedRoutes: ['http://localhost:8080/login']
+              whitelistedDomains: ['localhost:8080'],
+              blacklistedRoutes: ['localhost:8080/login']
             }
           })
     ],
-    providers: [GalleryService, AuthService, CookieService],
+    providers: [GalleryService, AuthService, UsersService, CookieService],
     bootstrap: [AppComponent],
     entryComponents: [PhotoOneComponent, PhotoComponent, PhotoEditComponent, RegisterComponent,
                       TagsCategoriesComponent, DeleteConfirmComponent]
