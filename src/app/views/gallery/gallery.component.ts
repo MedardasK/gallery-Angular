@@ -159,12 +159,10 @@ export class GalleryComponent implements OnInit {
   checkCookie(): void {
     if (this.auth.loggedIn) {
       this.isLoggedIn = true;
-      this.loginString = 'LOGOUT';
-      this.loginIcon = 'directions_run';
+      this.loginOutBox(false);
     } else {
       this.isLoggedIn = false;
-      this.loginString = 'LOGIN';
-      this.loginIcon = 'account_box';
+      this.loginOutBox(true);
     }
   }
 
@@ -172,15 +170,23 @@ export class GalleryComponent implements OnInit {
     if (this.isLoggedIn) {
       this.auth.logout();
       this.isLoggedIn = false;
-      this.loginString = 'LOGIN';
-      this.loginIcon = 'account_box';
+      this.loginOutBox(true);
       this.snackBar.open('Successfully logged out!', '', {
         duration: 3000
       });
     } else {
+      this.loginOutBox(false);
+      this.router.navigate(['login']);
+    }
+  }
+
+  loginOutBox(value: boolean): void {
+    if (value) {
+      this.loginString = 'LOGIN';
+      this.loginIcon = 'account_box';
+    } else {
       this.loginString = 'LOGOUT';
       this.loginIcon = 'directions_run';
-      this.router.navigate(['login']);
     }
   }
 

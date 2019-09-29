@@ -18,21 +18,16 @@ import { IPhotoFull } from 'src/app/models/photo-full.model';
 export class PhotoEditComponent implements OnInit {
   @Input() photo: IPhotoFull;
   photoDetails: IPhotoFull;
-  editSuccessful = false;
-  editForm: FormGroup;
-  categoryControl = new FormControl();
-  tagControl = new FormControl();
+  categories = [];
+  tags = [];
+  description = '';
+  fileName = '';
   adminBoolean = false;
-  dataDelete: number;
-  categoriesLoad: ICategory[];
-  tagsLoad: ITag[];
   updateData = new FormData();
 
-  constructor(private fb: FormBuilder,
-              public dialogRef: MatDialogRef<PhotoEditComponent>,
+  constructor(public dialogRef: MatDialogRef<PhotoEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private snackBar: MatSnackBar,
-              private auth: AuthService,
               private userService: UsersService,
               private galleryService: GalleryService,
               private dialog: MatDialog ) {
@@ -40,42 +35,29 @@ export class PhotoEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.createForm();
     this.adminBoolean = this.userService.isAdmin();
-    this.loadCategories();
-    this.loadTags();
+    this.loadPhotoValues();
   }
 
-  private loadCategories(): void {
-    this.galleryService.getCategories()
-    .then(data => {
-      this.categoriesLoad = data;
-    });
-  }
-
-  private loadTags(): void {
-    this.galleryService.getTags()
-    .then(data => {
-      this.tagsLoad = data;
-    });
-  }
-
-  createForm(): void {
-    this.editForm = this.fb.group({
-      description: ['', Validators.minLength(3)],
-      name: ['', Validators.minLength(1)],
-      categoryForm: ['', Validators.required],
-      tagForm: ['', Validators.required],
-    });
+  loadPhotoValues(): void {
+    this.categories = [];
+    this.tags = [];
+    this.description = this.photo.description;
+    console.log(this.description);
+    console.log(this.photo.description);
+    this.fileName = '';
   }
 
   private submitValues(): void {
+    if (this.description === '' || this.fileName === ''
+        || this.categories === [] || this.tags === []) {
+          return ;
+    }
     const updateData = new FormData();
-    this.photoDetails = this.editForm.value;
-    updateData.append('description', this.photoDetails.description);
-    updateData.append('name', this.photoDetails.name);
-    updateData.append('categories', JSON.stringify(this.editForm.get('categoryForm').value));
-    updateData.append('tags', JSON.stringify(this.editForm.get('tagForm').value));
+    updateData.append('description', this.description);
+    updateData.append('name', this.fileName);
+    updateData.append('categories', JSON.stringify(this.categories));
+    updateData.append('tags', JSON.stringify(this.tags));
 
     this.galleryService.updateImage(this.photo.id, updateData).subscribe(() => {
       this.snackBar.open('Successfully updated!', '', {
@@ -105,7 +87,15 @@ export class PhotoEditComponent implements OnInit {
             duration: 3000
           });
           this.dialogRef.close();
-        });
+        }
+        ,
+        () => {
+          this.snackBar.open('Error occurred, please try again later!', '', {
+            duration: 3000,
+            panelClass: 'snackbar-container'
+          });
+        }
+        );
       }
     });
   }

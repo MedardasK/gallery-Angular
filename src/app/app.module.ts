@@ -6,12 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemsCountPipe } from './pipes/items-count.pipe';
+import { JwtModule } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
 import { PhotoComponent,
          FooterComponent } from './components';
 import { FileUploadDirective,
          MustMatchDirective } from './directives';
-import { CookieService } from 'ngx-cookie-service';
-import { JwtModule } from '@auth0/angular-jwt';
 import { GalleryComponent,
          LoginComponent,
          PhotoUploadComponent } from './views/';
@@ -28,7 +28,8 @@ import { EmailInputComponent,
          PolicyInputComponent } from './components/custom-input/register-login';
 import { DescriptionInputComponent,
          NameInputComponent,
-         CategoriesInputComponent } from './components/custom-input/upload-edit';
+         CategoriesInputComponent,
+         TagsInputComponent } from './components/custom-input/upload-edit';
 import { GalleryService,
          AuthService,
          UsersService } from './services/';
@@ -57,7 +58,8 @@ import { MaterialModule } from './material.module';
         DescriptionInputComponent,
         NameInputComponent,
         PolicyInputComponent,
-        CategoriesInputComponent
+        CategoriesInputComponent,
+        TagsInputComponent
     ],
     imports: [
         BrowserModule,

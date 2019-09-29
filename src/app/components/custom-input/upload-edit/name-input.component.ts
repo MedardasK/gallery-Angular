@@ -26,7 +26,7 @@ export class NameInputComponent implements ControlValueAccessor {
 
   onChange: any = () => { };
   onTouch: any = () => { };
-  set value(val) {
+  set value(val: string) {
     this.val = val;
     this.onChange(val);
     this.onTouch(val);

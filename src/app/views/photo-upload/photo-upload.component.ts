@@ -1,12 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { GalleryService } from '../../services/gallery.service';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { ITag } from '../../models/tag.model';
-import { ICategory } from '../../models/category.model';
 import { AuthService } from './../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { TagsCategoriesComponent } from 'src/app/dialogs';
 
 @Component({
@@ -14,55 +11,22 @@ import { TagsCategoriesComponent } from 'src/app/dialogs';
   templateUrl: './photo-upload.component.html',
   styleUrls: ['./photo-upload.component.scss']
 })
-export class PhotoUploadComponent implements OnInit {
+export class PhotoUploadComponent {
   @Input() photo: any;
-  categoryControl = new FormControl();
-  tagControl = new FormControl();
-  upload: FormGroup;
   categories = [];
+  tags = [];
   description = '';
-  // upload = new FormGroup({
-  //   tagForm: new FormControl(),
-  //   categoryForm: new FormControl(),
-  // });
-  fileControl = new FormControl();
-  categoriesLoad: ICategory[];
-  categoriesArray: ICategory[];
-  tagsLoad: ITag[];
   fileData = new FormData();
-  imageFile: File;
   previewUrl: any;
-
+  file = '';
   // State for dropzone CSS toggling
   isHovering: boolean;
 
-  ngOnInit() {
-    this.loadCategories();
-    this.loadTags();
-    this.createForm();
-  }
-
   constructor(private galleryService: GalleryService,
-              private fb: FormBuilder,
               private snackBar: MatSnackBar,
               private router: Router,
               private auth: AuthService,
               private dialog: MatDialog) { }
-
-  private loadCategories(): void {
-    this.galleryService.getCategories()
-      .then(data => {
-        this.categoriesLoad = data;
-      });
-  }
-
-  private loadTags(): void {
-    this.galleryService.getTags()
-      .then(data => {
-        this.tagsLoad = data;
-      });
-  }
-
 
   toggleHover(event: boolean): void {
     this.isHovering = event;
@@ -70,7 +34,6 @@ export class PhotoUploadComponent implements OnInit {
 
   startUpload(event: FileList): void {
     const fileData = event.item(0);
-    this.imageFile = event.item(0);
     if (fileData.type.split('/')[0] !== 'image') {
       console.error('unsupported file type... ');
       return;
@@ -87,42 +50,29 @@ export class PhotoUploadComponent implements OnInit {
     };
   }
 
-  private createForm(): void {
-    this.upload = this.fb.group({
-      description: ['', [Validators.required, Validators.minLength(3)]],
-      category: ['', Validators.required],
-      tag: ['', Validators.required],
-      fileForm: ['', Validators.required]
-  });
-  }
-
   private submitValues(): void {
-    this.fileData.append('description', this.upload.get('description').value);
-    this.fileData.append('categories', JSON.stringify(this.upload.get('category').value));
-    this.fileData.append('tags', JSON.stringify(this.upload.get('tag').value));
+    if (this.description === '' || this.categories === []
+        || this.tags === [] || !this.fileData.has('file')) {
+          return ;
+    }
+    this.fileData.append('description', this.description);
+    this.fileData.append('categories', JSON.stringify(this.categories));
+    this.fileData.append('tags', JSON.stringify(this.tags));
+
     this.galleryService.uploadImage(this.fileData).subscribe(() => {
-      this.deleteFormData();
+      this.router.navigate(['/']);
       this.snackBar.open('Successfully uploaded!', '', {
         duration: 3000,
         panelClass: 'snackbar-container'
       });
     },
     () => {
-      this.deleteFormData();
       this.snackBar.open('Error occurred, please try again later!', '', {
         duration: 3000,
         panelClass: 'snackbar-container'
       });
     }
     );
-  }
-
-  private deleteFormData(): void {
-    this.upload.reset();
-    this.previewUrl = null;
-    this.fileData.delete('description');
-    this.fileData.delete('categories');
-    this.fileData.delete('tags');
   }
 
   openDialogCreate(): void {
@@ -133,8 +83,6 @@ export class PhotoUploadComponent implements OnInit {
     const dialogRef = this.dialog.open(TagsCategoriesComponent);
 
     dialogRef.afterClosed().subscribe(() => {
-      this.loadCategories();
-      this.loadTags();
     });
   }
 

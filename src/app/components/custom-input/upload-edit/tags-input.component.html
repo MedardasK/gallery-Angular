@@ -1,0 +1,8 @@
+<mat-form-field class="tags-container">
+  <mat-label>Select tags</mat-label>
+  <mat-select name="tag"#inputField="ngModel" [(ngModel)]="value" matInput multiple required>
+    <mat-option *ngFor="let tagObj of tagsLoad" [value]="tagObj.id" matInput  >
+      {{tagObj.name}}</mat-option>
+  </mat-select>
+  <mat-error *ngIf="inputField.control.hasError('required')">At least one tag is required</mat-error>
+</mat-form-field>

@@ -70,7 +70,8 @@ export class GalleryService {
     } else {
       console.error(
         `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+        `body was: `);
+      console.error(error.error);
     }
     return throwError(
       'Something bad happened; please try again later.');

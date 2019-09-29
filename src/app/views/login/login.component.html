@@ -9,11 +9,11 @@
     <mat-card>
       <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
         <div>
-          <app-email-input [(ngModel)]="email" name="email" #validations="ngModel"></app-email-input>
+          <app-email-input [(ngModel)]="email" name="email"></app-email-input>
         </div>
         <div>&nbsp;</div>
         <div>
-          <app-password-input [(ngModel)]="password" name="password" #validations="ngModel"></app-password-input>
+          <app-password-input [(ngModel)]="password" name="password"></app-password-input>
         </div>
         <button mat-raised-button type="submit">
           Sign In</button>

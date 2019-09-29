@@ -1,5 +1,5 @@
+import { UsersService } from './../../services/users.service';
 import { Component } from '@angular/core';
-import { AuthService } from './../../services/auth.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -15,27 +15,26 @@ export class RegisterComponent {
   policy = '';
 
   constructor(public dialogRef: MatDialogRef<RegisterComponent>,
-              private auth: AuthService,
+              private usersService: UsersService,
               private snackBar: MatSnackBar) { }
 
   onSubmit(): void {
-    console.log(this.email);
-    console.log(this.password);
-    console.log(this.confirmPassword);
-    console.log(this.policy);
-
-    // this.auth.register(this.email, this.password)
-    //   .then(() => {
-    //     this.snackBar.open('Successfully registered! You can login now', '', {
-    //       duration: 3000
-    //     });
-    //   }).catch(() => {
-    //     this.snackBar.open('This email is already taken', '', {
-    //       duration: 3000
-    //     });
-    //   }
-    //   );
-    // return this.dialogRef.close();
+    if (this.email === '' || this.password === '' ||
+        this.confirmPassword === '' || this.policy === 'false' || this.policy === '') {
+          return ;
+}
+    this.usersService.register(this.email, this.password)
+      .then(() => {
+        this.snackBar.open('Successfully registered! You can login now', '', {
+          duration: 3000
+        });
+      }).catch(() => {
+        this.snackBar.open('This email is already taken', '', {
+          duration: 3000
+        });
+      }
+      );
+    return this.dialogRef.close();
   }
 
   cancel(): void {

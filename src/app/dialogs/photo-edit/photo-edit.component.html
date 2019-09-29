@@ -2,44 +2,21 @@
   <h3>Edit selected picture</h3>
   <div class="d-flex bd-highlight form-container">
     <div class="p-2 flex-grow-1 bd-highlight">
-      <form [formGroup]="editForm">
+      <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
         <div>
-          <mat-form-field>
-            <input matInput maxlength="30" formControlName="description" name="description" placeholder="Description"
-              value="{{photo.description}}">
-            <span matPrefix><i class="material-icons">create</i></span>
-          </mat-form-field>
+          <app-description-input [(ngModel)]="description" name="description"></app-description-input>
         </div>
         <div>&nbsp;</div>
         <div>
-          <mat-form-field>
-            <input matInput maxlength="30" formControlName="name" name="name" placeholder="File name"
-              value="{{photo.name}}">
-            <span matPrefix><i class="material-icons">file_copy</i></span>
-            <mat-error *ngIf="editForm.controls['name'].hasError('name')">FileName is too short</mat-error>
-          </mat-form-field>
+          <app-name-input [(ngModel)]="fileName" name="fileName"></app-name-input>
         </div>
         <div>&nbsp;</div>
-        <mat-form-field>
-          <mat-label>Select categories</mat-label>
-          <mat-select [formControl]="categoryControl" formControlName="categoryForm" required multiple>
-            <mat-option *ngFor="let category of categoriesLoad" [value]="category.id">
-              {{category.name}}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="editForm.controls['categoryForm'].hasError('required')">At least one category is required</mat-error>
-        </mat-form-field>
+        <app-categories-input [(ngModel)]="categories" name="categories"></app-categories-input>
         <div>&nbsp;</div>
-        <mat-form-field>
-          <mat-label>Select tags</mat-label>
-          <mat-select [formControl]="tagControl" formControlName="tagForm" required multiple>
-            <mat-option *ngFor="let tg of tagsLoad" [value]="tg.id">
-              {{tg.name}}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="editForm.controls['tagForm'].hasError('required')">At least one tag is required</mat-error>
-        </mat-form-field>
+        <app-tags-input [(ngModel)]="tags" name="tags"></app-tags-input>
         <div>&nbsp;</div>
         <div class="submit-container">
-          <button mat-raised-button type="button" [disabled]="!editForm.valid" (click)="submitValues()">Submit</button>
+          <button mat-raised-button type="button" (click)="submitValues()">Submit</button>
         </div>
       </form>
     </div>

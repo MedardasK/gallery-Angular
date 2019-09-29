@@ -1,0 +1,8 @@
+<mat-form-field class="categories-container">
+  <mat-label>Select categories</mat-label>
+  <mat-select name="category"#inputField="ngModel" [(ngModel)]="value" matInput multiple required>
+    <mat-option *ngFor="let cat of categoriesLoad" [value]="cat.id" matInput  >
+      {{cat.name}}</mat-option>
+  </mat-select>
+  <mat-error *ngIf="inputField.control.hasError('required')">At least one category is required</mat-error>
+</mat-form-field>
