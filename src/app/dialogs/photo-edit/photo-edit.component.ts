@@ -1,12 +1,8 @@
 import { UsersService } from './../../services/users.service';
-import { ITag } from './../../models/tag.model';
-import { ICategory } from './../../models/category.model';
 import { GalleryService } from './../../services/gallery.service';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from './../../services/auth.service';
 import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component';
 import { IPhotoFull } from 'src/app/models/photo-full.model';
 
@@ -87,15 +83,13 @@ export class PhotoEditComponent implements OnInit {
             duration: 3000
           });
           this.dialogRef.close();
-        }
-        ,
+        },
         () => {
           this.snackBar.open('Error occurred, please try again later!', '', {
             duration: 3000,
             panelClass: 'snackbar-container'
           });
-        }
-        );
+        });
       }
     });
   }

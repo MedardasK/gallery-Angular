@@ -38,7 +38,6 @@ export class PhotoComponent {
       .then(res => {
         this.dialog.open(PhotoEditComponent, {
           width: '80vw',
-          height: '62vh',
           data: {photo: res}
         });
     });

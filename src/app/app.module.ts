@@ -4,70 +4,21 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ItemsCountPipe } from './pipes/items-count.pipe';
 import { JwtModule } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
-import { PhotoComponent,
-         FooterComponent } from './components';
-import { FileUploadDirective,
-         MustMatchDirective } from './directives';
-import { GalleryComponent,
-         LoginComponent,
-         PhotoUploadComponent } from './views/';
-
-import { PhotoOneComponent,
-         PhotoEditComponent,
-         RegisterComponent,
-         TagsCategoriesComponent,
-         DeleteConfirmComponent } from './dialogs';
-
-import { EmailInputComponent,
-         PasswordInputComponent,
-         ConfirmPasswordInputComponent,
-         PolicyInputComponent } from './components/custom-input/register-login';
-import { DescriptionInputComponent,
-         NameInputComponent,
-         CategoriesInputComponent,
-         TagsInputComponent } from './components/custom-input/upload-edit';
-import { GalleryService,
-         AuthService,
-         UsersService } from './services/';
-
+import { FooterComponent } from './components';
 import { MaterialModule } from './material.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        GalleryComponent,
-        PhotoComponent,
-        PhotoOneComponent,
-        ItemsCountPipe,
-        PhotoUploadComponent,
-        PhotoEditComponent,
-        LoginComponent,
-        FileUploadDirective,
-        RegisterComponent,
-        TagsCategoriesComponent,
-        FooterComponent,
-        DeleteConfirmComponent,
-        MustMatchDirective,
-        EmailInputComponent,
-        PasswordInputComponent,
-        ConfirmPasswordInputComponent,
-        DescriptionInputComponent,
-        NameInputComponent,
-        PolicyInputComponent,
-        CategoriesInputComponent,
-        TagsInputComponent
+        FooterComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
         MaterialModule,
         JwtModule.forRoot({
             config: {
@@ -95,9 +46,8 @@ import { MaterialModule } from './material.module';
             }
           })
     ],
-    providers: [GalleryService, AuthService, UsersService, CookieService],
+    providers: [CookieService],
     bootstrap: [AppComponent],
-    entryComponents: [PhotoOneComponent, PhotoComponent, PhotoEditComponent, RegisterComponent,
-                      TagsCategoriesComponent, DeleteConfirmComponent]
+    entryComponents: []
 })
 export class AppModule { }
