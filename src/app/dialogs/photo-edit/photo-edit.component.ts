@@ -39,8 +39,6 @@ export class PhotoEditComponent implements OnInit {
     this.categories = [];
     this.tags = [];
     this.description = this.photo.description;
-    console.log(this.description);
-    console.log(this.photo.description);
     this.fileName = '';
   }
 

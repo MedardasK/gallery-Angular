@@ -5,7 +5,7 @@ p, i, mat-checkbox {
     color: $grey;
 }
 .image-container {
-    max-height: 100vh;
+    max-height: 90vh;
     overflow: hidden;
     position: relative;
     border-radius: 5px;
@@ -41,7 +41,7 @@ p, i, mat-checkbox {
     }
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 680px) {
     .image-container{
         display: none;
     }

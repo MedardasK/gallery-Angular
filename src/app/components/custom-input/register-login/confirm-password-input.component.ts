@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'app-confirm-password-input',
   templateUrl: './confirm-password-input.component.html',
+  styleUrls: ['./confirm-password-input.component.scss'],
   providers: [
     { provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => ConfirmPasswordInputComponent),

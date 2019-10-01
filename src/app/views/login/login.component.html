@@ -9,13 +9,14 @@
     <mat-card>
       <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
         <div>
-          <app-email-input [(ngModel)]="email" name="email"></app-email-input>
+          <app-email-input [(ngModel)]="email" name="email" [required]="true" [minlength]="5" ngModel>
+          </app-email-input>
         </div>
         <div>&nbsp;</div>
         <div>
-          <app-password-input [(ngModel)]="password" name="password"></app-password-input>
+          <app-password-input [(ngModel)]="password" name="password" [required]="true" [minlength]="6" ngModel></app-password-input>
         </div>
-        <button mat-raised-button type="submit">
+        <button mat-raised-button type="submit" [disabled]= "f.invalid">
           Sign In</button>
       </form>
       <p>... or <a (click)="openDialogRegister()">Sign up</a> if you don't have an account</p>

@@ -8,13 +8,14 @@
     <div class="d-flex bd-highlight form-container">
       <div class="d-flex flex-column bd-highlight mb-3 p-2 flex-fill bd-highlight">
         <div>
-          <app-description-input [(ngModel)]="description" name="description"></app-description-input>
+          <app-description-input [(ngModel)]="description" name="description" [required]="true" [minlength]="3">
+          </app-description-input>
         </div>
         <div>
-          <app-categories-input [(ngModel)]="categories" name="categories"></app-categories-input>
+          <app-categories-input [(ngModel)]="categories" name="categories" [required]="true"></app-categories-input>
         </div>
         <div>
-          <app-tags-input [(ngModel)]="tags" name="tags"></app-tags-input>
+          <app-tags-input [(ngModel)]="tags" name="tags" [required]="true"></app-tags-input>
         </div>
         <button mat-raised-button class="tags-categories-button" type="button" (click)="openDialogCreate()">Create tags
           or categories</button>
@@ -25,7 +26,7 @@
         <div class="file">
           <label class="file-label">
             <input required class="file-input" type="file" [(ngModel)]="file"
-              (change)="startUpload($event.target.files)" name="file">
+              (change)="startUpload($event.target.files)" name="file" [required]="true">
             <span class="file-cta">
               <span class="file-icon">
                 <i class="fa fa-upload"></i>
@@ -38,7 +39,8 @@
     </div>
     <div>&nbsp;</div>
     <div class="submit-container">
-      <button mat-raised-button class="submit-button" type="button" (click)="submitValues()">Submit</button>
+      <button mat-raised-button class="submit-button" type="button" (click)="submitValues()"
+        [disabled]="f.invalid">Submit</button>
     </div>
     <div class="d-flex">
       <div class="image-preview-container flex-wrap d-flex" *ngIf="previewUrl">

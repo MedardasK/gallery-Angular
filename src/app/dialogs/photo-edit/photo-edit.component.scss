@@ -9,12 +9,23 @@
         max-width: 400px;
         max-height: 400px;
     }
-    mat-icon {
-        top: 23px;
-        right: 10px;
-        position: absolute;
-        cursor: pointer;
+}
+.image-preview-container {
+    height: 400px;
+    width: 400px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    img{
+        max-width: 400px;
+        max-height: 400px;
     }
+}
+mat-icon {
+    top: 23px;
+    right: 10px;
+    position: absolute;
+    cursor: pointer;
 }
 .submit-container {
     text-align: right;

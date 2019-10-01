@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'app-policy-input',
   templateUrl: './policy-input.component.html',
+  styleUrls: ['./policy-input.component.scss'],
   providers: [
     { provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => PolicyInputComponent),

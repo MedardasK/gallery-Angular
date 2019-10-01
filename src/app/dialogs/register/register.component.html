@@ -7,26 +7,29 @@
     </div>
     <div class="form-container">
       <div>
-        <app-email-input [(ngModel)]="email" name="email"
-        ></app-email-input>
+        <app-email-input [(ngModel)]="email" name="email" [required]="true" [minlength]="5" ngModel>
+        </app-email-input>
       </div>
       <div>&nbsp;</div>
       <div>
-        <app-password-input [(ngModel)]="password" name="password" ></app-password-input>
+        <app-password-input [(ngModel)]="password" name="password" [required]="true" [minlength]="6" ngModel>
+        </app-password-input>
       </div>
       <div>&nbsp;</div>
       <div>
-        <app-confirm-password-input [(ngModel)]="confirmPassword" name="confirmPassword" #validations="ngModel">
+        <app-confirm-password-input [(ngModel)]="confirmPassword" name="confirmPassword" [required]="true"
+          [minlength]="6" ngModel>
         </app-confirm-password-input>
       </div>
       <div>&nbsp;</div>
       <div>
-        <app-policy-input [(ngModel)]="policy" name="policy" #validations="ngModel"></app-policy-input>
+        <app-policy-input [(ngModel)]="policy" name="policy" [required]="true" ngModel>
+        </app-policy-input>
       </div>
       <div>&nbsp;</div>
       <div>
         <button mat-raised-button type="reset" (click)="cancel()">Cancel</button>
-        <button mat-raised-button class="button-register">Register</button>
+        <button mat-raised-button class="button-register" [disabled]="f.invalid">Register</button>
       </div>
     </div>
   </form>

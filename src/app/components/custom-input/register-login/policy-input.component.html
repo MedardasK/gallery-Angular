@@ -1,5 +1,5 @@
-
-  <mat-checkbox required name="policy" name="policy" [(ngModel)]="value" #policy="ngModel">I agree with privacy policy
+<div class="checkbox-container">
+  <mat-checkbox name="policy" name="policy" [(ngModel)]="value" #policy="ngModel" required>I agree with privacy policy
   </mat-checkbox>
-  <mat-error *ngIf="policy.control.hasError('required')">Please accept our policy</mat-error>
-
+  <mat-error *ngIf="!policy.control.valid">Please accept our policy</mat-error>
+</div>

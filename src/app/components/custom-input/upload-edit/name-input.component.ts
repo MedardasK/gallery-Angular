@@ -4,6 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'app-name-input',
   templateUrl: './name-input.component.html',
+  styleUrls: ['./name-input.component.scss'],
   providers: [
     { provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => NameInputComponent),

@@ -20,9 +20,6 @@ export class LoginComponent {
               private dialog: MatDialog) { }
 
   submitValues(): void {
-    if (this.email === '' || this.password === '') {
-          return ;
-    }
     this.auth.login(this.email, this.password)
     .then(
       () => {

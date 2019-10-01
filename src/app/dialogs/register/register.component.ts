@@ -19,10 +19,6 @@ export class RegisterComponent {
               private snackBar: MatSnackBar) { }
 
   onSubmit(): void {
-    if (this.email === '' || this.password === '' ||
-        this.confirmPassword === '' || this.policy === 'false' || this.policy === '') {
-          return ;
-}
     this.usersService.register(this.email, this.password)
       .then(() => {
         this.snackBar.open('Successfully registered! You can login now', '', {
