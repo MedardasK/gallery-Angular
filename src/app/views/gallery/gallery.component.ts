@@ -53,6 +53,7 @@ export class GalleryComponent implements OnInit {
         this.photos = data;
         this.isLoaded = true;
         this.resCount = data.length;
+        console.log(data);
       });
   }
 
@@ -134,26 +135,30 @@ export class GalleryComponent implements OnInit {
     let categoriesIdsString = '';
     let tagsNamesString = '';
 
-    if (this.categoriesIds !== []) {
+    if (this.categoriesIds.length > 0) {
       for (const cat of this.categoriesIds) {
         categoriesIdsString += cat + ',';
       }
     }
 
-    if (this.tags !== []) {
+    if (this.tags.length > 0) {
       for (const tag of this.tags) {
         tagsNamesString += tag + ',';
       }
     }
-
-    searchFinal = '?searchParams=categoriesIds:' + categoriesIdsString +
-      'tagsNames:' + tagsNamesString + 'searchString:' + this.searchString;
+    if (this.categoriesIds.length > 0 || this.tags.length > 0
+      || this.searchString !== '') {
+    searchFinal = '?categoriesIds=' + categoriesIdsString + '&tagsNames=' + tagsNamesString
+    + '&searchString=' + this.searchString;
     this.gallery.getImagesBySearch(searchFinal)
       .then(data => {
         this.photos = data;
         this.isLoaded = true;
         this.resCount = data.length;
       });
+    } else {
+      this.loadPhotos();
+    }
   }
 
   checkCookie(): void {

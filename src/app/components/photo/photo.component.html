@@ -1,6 +1,8 @@
 <div class="img-container">
-  <div class="d-flex justify-content-center">
-    <img src="data:image/png;base64,{{photo.data}}" alt="picture">
+  <div class="d-flex">
+    <div class="d-flex flex-wrap wrap-container">
+      <img src="data:image/png;base64,{{photo.data}}" alt="picture">
+    </div>
     <div class="img-overlay">
       <div (click)="openDialogReview()" class="icon-container">
         <mat-icon class="icon-search">search</mat-icon>

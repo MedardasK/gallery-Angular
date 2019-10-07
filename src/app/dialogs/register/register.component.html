@@ -1,35 +1,36 @@
 <mat-card>
   <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-    <!-- [appMustMatch]="['password', 'confirmPassword']"> -->
     <div class="text-container">
       <h1>Please fill out registration form.</h1>
       <p>It will take just a few seconds...</p>
     </div>
     <div class="form-container">
       <div>
-        <app-email-input [(ngModel)]="email" name="email" [required]="true" [minlength]="5" ngModel>
+        <app-email-input [(ngModel)]="email" name="email" [required]="true" minlength="5" ngModel>
         </app-email-input>
       </div>
       <div>&nbsp;</div>
       <div>
-        <app-password-input [(ngModel)]="password" name="password" [required]="true" [minlength]="6" ngModel>
+        <app-password-input [(ngModel)]="password" name="password" [required]="true" minlength="6" ngModel>
         </app-password-input>
       </div>
       <div>&nbsp;</div>
-      <div>
+      <div class="error-container">
         <app-confirm-password-input [(ngModel)]="confirmPassword" name="confirmPassword" [required]="true"
-          [minlength]="6" ngModel>
+          minlength="6" ngModel>
         </app-confirm-password-input>
+        <mat-error *ngIf="password !== confirmPassword && confirmPassword.length > 5">Passwords don't match</mat-error>
       </div>
       <div>&nbsp;</div>
       <div>
-        <app-policy-input [(ngModel)]="policy" name="policy" [required]="true" ngModel>
+        <app-policy-input [(ngModel)]="policy" name="policy" [(ngModel)]="policy" ngModel>
         </app-policy-input>
       </div>
       <div>&nbsp;</div>
       <div>
         <button mat-raised-button type="reset" (click)="cancel()">Cancel</button>
-        <button mat-raised-button class="button-register" [disabled]="f.invalid">Register</button>
+        <button mat-raised-button class="button-register" [disabled]="f.invalid || password !== confirmPassword
+        || !policy">Register</button>
       </div>
     </div>
   </form>

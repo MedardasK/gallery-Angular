@@ -65,11 +65,9 @@
     margin-bottom: 0px;
   }
   .photo-container {
-    width: 270px;
-    height: 270px;
-    overflow: hidden;
+    max-width: 270px;
+    max-height: 270px;
     margin: 13px;
-    display: inline-block;
     border-radius: 7px;
   }
   .sort-date-container {

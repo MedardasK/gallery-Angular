@@ -6,11 +6,17 @@
     color: $grey;
   }
 }
+
+.form-container{
+  .tags-categories-button{
+    color: $grey;
+  }
+}
 .tags-categories-button{
   color: $grey;
 }
 .dropzone {
-  width: 60%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,6 +38,7 @@
     color: $grey;
   }
 }
+
 progress::-webkit-progress-value {
   transition: width 0.1s ease;
 }
@@ -57,8 +64,5 @@ progress::-webkit-progress-value {
 @media only screen and (max-width: 420px) {
   .form-container{
     flex-direction: column;
-    .dropzone{
-      width: 100%;
-    }
   }
 }

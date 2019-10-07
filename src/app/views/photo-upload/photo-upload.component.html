@@ -8,7 +8,7 @@
     <div class="d-flex bd-highlight form-container">
       <div class="d-flex flex-column bd-highlight mb-3 p-2 flex-fill bd-highlight">
         <div>
-          <app-description-input [(ngModel)]="description" name="description" [required]="true" [minlength]="3">
+          <app-description-input [(ngModel)]="description" name="description" [required]="true" minlength="3">
           </app-description-input>
         </div>
         <div>
@@ -17,16 +17,16 @@
         <div>
           <app-tags-input [(ngModel)]="tags" name="tags" [required]="true"></app-tags-input>
         </div>
-        <button mat-raised-button class="tags-categories-button" type="button" (click)="openDialogCreate()">Create tags
-          or categories</button>
+          <button mat-raised-button class="tags-categories-button" type="button" (click)="openDialogCreate()">
+            Create tags or categories</button>
       </div>
       <div class="dropzone p-2 flex-fill bd-highlight" dropZone (hovered)="toggleHover($event)"
         (dropped)="startUpload($event)" [class.hovering]="isHovering">
         <h3>Drop your image here</h3>
         <div class="file">
           <label class="file-label">
-            <input required class="file-input" type="file" [(ngModel)]="file"
-              (change)="startUpload($event.target.files)" name="file" [required]="true">
+            <input class="file-input" type="file" [(ngModel)]="file" (change)="startUpload($event.target.files)"
+              name="file">
             <span class="file-cta">
               <span class="file-icon">
                 <i class="fa fa-upload"></i>
@@ -40,10 +40,11 @@
     <div>&nbsp;</div>
     <div class="submit-container">
       <button mat-raised-button class="submit-button" type="button" (click)="submitValues()"
-        [disabled]="f.invalid">Submit</button>
+        [disabled]="f.invalid || !previewUrl">Submit</button>
     </div>
-    <div class="d-flex">
-      <div class="image-preview-container flex-wrap d-flex" *ngIf="previewUrl">
+    <div>&nbsp;</div>
+    <div class="d-flex justify-content-center">
+      <div class="d-flex flex-wrap image-preview-container" *ngIf="previewUrl">
         <img [src]="previewUrl">
       </div>
     </div>

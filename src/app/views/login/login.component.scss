@@ -1,51 +1,77 @@
 @import '../../../assets/styles/consts.scss';
 @import '../../../assets/styles/snackbar.scss';
 
-p, i, mat-checkbox {
-    color: $grey;
+p,
+i,
+mat-checkbox {
+  color: $grey;
 }
-.image-container {
-    max-height: 90vh;
-    overflow: hidden;
-    position: relative;
-    border-radius: 5px;
+
+.image-text-container {
+  max-height: 88vh;
+  //   overflow: hidden;
+  position: relative;
+  border-radius: 5px;
+  max-width: 60vw;
+
+  .image-container {
     img {
-        max-width: 60vw;
+      height: 100%;
+      width: 100%;
+      display: block;
+      margin: auto;
     }
-    .text-container {
-        position: absolute;
-        width: 200px;
-        left: 20px;
-        p {
-            font-size: 60px;
-        }
+  }
+
+  .text-container {
+    position: absolute;
+    width: 200px;
+    left: 20px;
+
+    p {
+      font-size: 60px;
     }
+  }
 }
+
 .form-container {
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    mat-card{
-        text-align: center;
-        width: 80%;
-    }
-    a {
-        color: $secondary;
-        text-decoration: none;
-        font-style: italic;
-        cursor: pointer;
-    }
-    span {
-        margin-right: 6px;
-    }
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  mat-card {
+    text-align: center;
+    width: 80%;
+  }
+
+  a {
+    color: $secondary;
+    text-decoration: none;
+    font-style: italic;
+    cursor: pointer;
+  }
+
+  span {
+    margin-right: 6px;
+  }
 }
 
 @media only screen and (max-width: 680px) {
-    .image-container{
-        display: none;
+  .login-container {
+    margin-top: 20vh;
+
+    .image-container {
+      display: none;
     }
-    .form-container{
-        width: 100%;
+
+    .form-container {
+      width: 100%;
+
+      mat-card {
+        width: 60%;
+      }
     }
+
+  }
 }

@@ -62,7 +62,7 @@
   </div>
   <div class="res-count-container">Showing: {{resCount | itemsCount}} pictures</div>
   <div>
-    <div class="photo-container" *ngFor="let item of photos">
+    <div class="photo-container col-sm" *ngFor="let item of photos">
       <app-photo [photo]="item"></app-photo>
     </div>
   </div>

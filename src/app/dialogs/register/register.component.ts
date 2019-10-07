@@ -12,7 +12,7 @@ export class RegisterComponent {
   email = '';
   password = '';
   confirmPassword = '';
-  policy = '';
+  policy = false;
 
   constructor(public dialogRef: MatDialogRef<RegisterComponent>,
               private usersService: UsersService,

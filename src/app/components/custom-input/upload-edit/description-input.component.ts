@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'app-description-input',
   templateUrl: './description-input.component.html',
-  styleUrls: ['./description-input.component.scss'],
+  styleUrls: ['./icon-style.component.scss'],
   providers: [
     { provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => DescriptionInputComponent),

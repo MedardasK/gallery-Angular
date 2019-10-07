@@ -1,58 +1,67 @@
 @import '../../../assets/styles/snackbar.scss';
 
 .img-container {
-    position: relative;
-    height: 270px;
-    width: 270px;
+  position: relative;
+  height: 270px;
+  max-width: 270px;
+  .wrap-container {
     overflow: hidden;
-
+    max-width: 270px;
     img {
-        max-width: 270px;
-        height: auto;
+      height: 270px;
+      width: 270px;
     }
-}
+  }
 
-.img-overlay {
-    height: 270px;
-    width: 270px;
+  .img-overlay {
+    height: 100%;
+    width: 100%;
     top: 0px;
     left: 0px;
     position: absolute;
     display: none;
+
     p {
-        color: white;
-        margin: 20px;
-        text-align: center;
+      color: white;
+      margin: 20px;
+      text-align: center;
     }
-    .icon-container{
-        height: 50%;
-        .mat-icon {
-            font-size: 60px;
-            cursor: pointer;
-            margin-left: 110px;
-            margin-top: 35px;
-        }
+
+    .icon-container {
+      height: 50%;
+
+      .mat-icon {
+        font-size: 60px;
+        cursor: pointer;
+        margin-left: 42%;
+        margin-top: 35px;
+      }
     }
-}
-.img-container:hover {
+  }
+
+  .img-container:hover {
     .img-overlay {
-        display: block;
-        background: rgb(128, 0, 60, 0.6);
-        transition: .5s ease;
-        animation: moveUp linear 0.3s;
+      display: block;
+      background: rgb(128, 0, 60, 0.6);
+      transition: .5s ease;
+      animation: moveUp linear 0.3s;
     }
+  }
 }
-@keyframes moveUp{
-    0% {
-        top: 200px;
-        opacity: 0;
-    }
-    50% {
-        top: 100px;
-        opacity: 0.3;
-    }
-    100% {
-        top: 0px;
-        opacity: 1;
-    }
+
+@keyframes moveUp {
+  0% {
+    top: 200px;
+    opacity: 0;
+  }
+
+  50% {
+    top: 100px;
+    opacity: 0.3;
+  }
+
+  100% {
+    top: 0px;
+    opacity: 1;
+  }
 }

@@ -8,6 +8,15 @@
 }
 .form-container {
     text-align: center;
+    .error-container{
+        position: relative;
+        mat-error{
+            position: absolute;
+            top: 49px;
+            left: 45px;
+            font-size: 11.5px;
+        }
+    }
 }
 .button-register{
     margin-left: 20px;

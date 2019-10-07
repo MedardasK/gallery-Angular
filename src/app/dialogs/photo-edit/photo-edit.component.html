@@ -4,12 +4,12 @@
     <div class="p-2 flex-grow-1 bd-highlight">
       <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
         <div>
-          <app-description-input [(ngModel)]="description" name="description" [required]="true" [minlength]="3">
+          <app-description-input [(ngModel)]="description" name="description" [required]="true" minlength="3">
           </app-description-input>
         </div>
         <div>&nbsp;</div>
         <div>
-          <app-name-input [(ngModel)]="fileName" name="fileName" [required]="true" [minlength]="1"></app-name-input>
+          <app-name-input [(ngModel)]="fileName" name="fileName" [required]="true" minlength="1"></app-name-input>
         </div>
         <div>&nbsp;</div>
         <app-categories-input [(ngModel)]="categories" name="categories" [required]="true"></app-categories-input>

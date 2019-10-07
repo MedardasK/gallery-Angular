@@ -6,7 +6,7 @@ import { ITag } from 'src/app/models/tag.model';
 @Component({
   selector: 'app-tags-input',
   templateUrl: './tags-input.component.html',
-  styleUrls: ['./tags-input.component.scss'],
+  styleUrls: ['./categories-tags-input.component.scss'],
   providers: [
     { provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => TagsInputComponent),

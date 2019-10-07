@@ -1,27 +1,33 @@
-<div class="d-flex bd-highlight">
-  <div class="image-container">
+<div class="d-flex bd-highlight login-container">
+  <div class="p-2 flex-grow-1 bd-highlight image-text-container">
     <div class="text-container">
       <p>Your imagination journey starts here...</p>
     </div>
-    <img src="../../../assets/pictures/login.jpg" alt="login greet picture">
+    <div class="image-container">
+      <img src="../../../assets/pictures/login.jpg" alt="login greet picture">
+    </div>
   </div>
-  <div class="form-container">
-    <mat-card>
-      <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
-        <div>
-          <app-email-input [(ngModel)]="email" name="email" [required]="true" [minlength]="5" ngModel>
-          </app-email-input>
-        </div>
+  <div class="p-2 bd-highlight form-container">
+    <div class="d-flex justify-content-center">
+      <mat-card>
+        <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
+          <div>
+            <app-email-input [(ngModel)]="email" name="email" [required]="true" minlength="5" ngModel>
+            </app-email-input>
+          </div>
+          <div>&nbsp;</div>
+          <div>
+            <app-password-input [(ngModel)]="password" name="password" [required]="true" minlength="6" ngModel>
+            </app-password-input>
+          </div>
+          <button mat-raised-button type="submit" [disabled]="f.invalid">
+            Sign In</button>
+        </form>
         <div>&nbsp;</div>
-        <div>
-          <app-password-input [(ngModel)]="password" name="password" [required]="true" [minlength]="6" ngModel></app-password-input>
-        </div>
-        <button mat-raised-button type="submit" [disabled]= "f.invalid">
-          Sign In</button>
-      </form>
-      <p>... or <a (click)="openDialogRegister()">Sign up</a> if you don't have an account</p>
-      <p>or</p>
-      <p><a [routerLink]="'/'">check our currently listed pictures</a></p>
-    </mat-card>
+        <p>... or <a (click)="openDialogRegister()">Sign up</a> if you don't have an account</p>
+        <p>or</p>
+        <p><a [routerLink]="'/'">check our currently listed pictures</a></p>
+      </mat-card>
+    </div>
   </div>
 </div>

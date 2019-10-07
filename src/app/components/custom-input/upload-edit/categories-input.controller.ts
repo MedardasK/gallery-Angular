@@ -6,7 +6,7 @@ import { GalleryService } from 'src/app/services';
 @Component({
   selector: 'app-categories-input',
   templateUrl: './categories-input.component.html',
-  styleUrls: ['./categories-input.component.scss'],
+  styleUrls: ['./categories-tags-input.component.scss'],
   providers: [
     { provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CategoriesInputComponent),
