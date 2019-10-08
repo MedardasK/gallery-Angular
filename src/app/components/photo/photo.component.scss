@@ -4,9 +4,11 @@
   position: relative;
   height: 270px;
   max-width: 270px;
+  overflow: hidden;
+
   .wrap-container {
-    overflow: hidden;
     max-width: 270px;
+
     img {
       height: 270px;
       width: 270px;

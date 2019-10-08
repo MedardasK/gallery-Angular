@@ -9,40 +9,60 @@
   background: $background;
   border-bottom: 1px solid $secondary;
   min-height: 50px;
+
   mat-toolbar-row {
     height: 50px;
   }
+
   mat-icon {
     margin-right: 3px;
   }
+
   .toolbar-button-container {
     a {
       color: #ffffff;
       text-decoration: none;
     }
+
     button {
       background-color: $secondary;
     }
   }
 }
+
 .top-container {
   margin-top: 80px;
-  .chip {
+
+  .categories-chip {
     position: absolute;
     top: -15px;
   }
-  .sorting-container {
+
+  .search-container {
     margin-bottom: 30px;
-    padding: 20px;
-    width: 100%;
+    padding: 20px 30px;
+
+    .tags-cats-container {
+      width: 55%;
+
+      .categories-search-container {
+        margin-right: 20px;
+      }
+    }
+
+    .search-input {
+      width: 300px;
+    }
   }
 }
+
 .loading-container {
   margin-top: 30px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
 .sufix {
   position: absolute;
   right: 5px;
@@ -50,10 +70,20 @@
   background-color: $background;
   color: $secondary;
 }
+
 .placeholder {
   color: $grey;
 }
+
 .gallery-container {
+  position: relative;
+
+  .pictures-chip {
+    position: absolute;
+    top: -15px;
+    left: 31px;
+  }
+
   .res-count-container {
     position: absolute;
     color: $grey;
@@ -61,22 +91,28 @@
     right: 25px;
     font-size: 14px;
   }
+
   .photo-container.ng-star-inserted {
     margin-bottom: 0px;
   }
+
   .photo-container {
     max-width: 270px;
     max-height: 270px;
     margin: 13px;
     border-radius: 7px;
+    display: inline-block;
   }
+
   .sort-date-container {
     p {
       color: $grey;
     }
+
     button {
       color: $grey;
     }
+
     .sort-date-button {
       min-width: 30px;
       background: none;
@@ -84,8 +120,45 @@
   }
 }
 
-@media only screen and (max-width: 750px) {
-  .sorting-container{
+@media only screen and (max-width: 800px) {
+  .search-container {
+    flex-direction: column;
+
+    .tags-cats-container {
+      width: 100% !important;
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100% !important;
+    }
+
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .search-container {
+    .tags-cats-container {
       flex-direction: column;
+
+      .categories-search-container {
+        margin-right: 0px !important;
+
+        mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .res-count-container {
+    top: 40px !important;
+  }
+
+  .photo-container {
+    display: block !important;
   }
 }
