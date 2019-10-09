@@ -21,25 +21,22 @@ export class PhotoComponent {
               private dialog: MatDialog) {}
 
   async openDialogReview(): Promise<void> {
-    return this.galleryService.getPhotoById(this.photo.id)
-      .then(res => {
-        this.dialog.open(PhotoOneComponent, {
-          data: {photo: res}
-        });
+    this.galleryService.getPhotoById(this.photo.id).subscribe(res => {
+      this.dialog.open(PhotoOneComponent, {
+          data: {photo: res, photoDetails: this.photo}
+        }
+        );
       });
   }
 
-  async openDialogEdit(): Promise<void> {
+  openDialogEdit(): void {
     if (!this.auth.loggedIn) {
       this.router.navigate(['login']);
       return;
     }
-    return this.galleryService.getPhotoById(this.photo.id)
-      .then(res => {
-        this.dialog.open(PhotoEditComponent, {
+    this.dialog.open(PhotoEditComponent, {
           width: '80vw',
-          data: {photo: res}
+          data: this.photo
         });
-    });
   }
 }

@@ -3,10 +3,9 @@
     <mat-icon>close</mat-icon>
   </button>
   <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
     <mat-card-subtitle>
       <div>
-        <p> Description: {{photo.description}} </p>
+        <p> Description: {{photoDetails.description}} </p>
       </div>
       <div>Categories:
         <button class="categories-buttons" mat-stroked-button disabled
@@ -16,10 +15,10 @@
   </mat-card-header>
   <mat-card-content>
     <div class="image-container">
-      <img src="data:image/png;base64,{{photo.imageFull.data}}" [alt]="photo.description">
+      <img src="{{fullPhoto}}" alt="picture">
     </div>
   </mat-card-content>
-  <mat-card-subtitle>
+  <mat-card-subtitle class="d-flex justify-content-between bottom-container">
     <div>
       <mat-chip-list aria-label="tags selection">
         Tags:
@@ -27,7 +26,7 @@
       </mat-chip-list>
     </div>
     <div>
-      <p>Uploaded on: {{photo.date}}</p>
+      <p>Uploaded on: {{photoDetails.date}}</p>
     </div>
   </mat-card-subtitle>
 </mat-card>

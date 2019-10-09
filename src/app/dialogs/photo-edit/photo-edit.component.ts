@@ -5,6 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component';
 import { IPhotoFull } from 'src/app/models/photo-full.model';
+import { IPhoto } from 'src/app/models/photo.model';
 
 @Component({
   selector: 'app-photo-edit',
@@ -18,6 +19,7 @@ export class PhotoEditComponent implements OnInit {
   tags = [];
   description = '';
   fileName = '';
+  photoThumbnail: any;
   adminBoolean = false;
   updateData = new FormData();
 
@@ -27,7 +29,9 @@ export class PhotoEditComponent implements OnInit {
               private userService: UsersService,
               private galleryService: GalleryService,
               private dialog: MatDialog ) {
-              this.photo = data.photo;
+              this.photo = data;
+              this.photoThumbnail = data.data;
+              this.description = this.photo.description;
   }
 
   ngOnInit() {

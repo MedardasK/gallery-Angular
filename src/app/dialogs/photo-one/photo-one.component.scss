@@ -1,27 +1,33 @@
 @import '../../../assets/styles/consts.scss';
 
 ::ng-deep .mat-dialog-container {
-    padding: 0px;
-    background: $background;
+  padding: 0px;
+  background: $background;
 }
+
 .close-button {
-    top: 10px;
-    right: 10px;
-    position: absolute;
-    background: none;
-	border: none;
-    cursor: pointer;
-    outline: none;
+  top: 10px;
+  right: 10px;
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
 }
+
 .image-container {
-    border-radius: 5px;
-    max-width: 80vw;
-        max-height: 80vh;
-    img {
-        max-width: 80vw;
-        max-height: 80vh;
-    }
+  border-radius: 5px;
+
+  img {
+    max-width: 70vw;
+    max-height: 70vh;
+  }
 }
+
 .categories-buttons {
-    height: 35px;
+  height: 35px;
+  margin-left: 5px;
+}
+.bottom-container{
+    padding: 0px 10px;
 }

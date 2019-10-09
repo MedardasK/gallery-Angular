@@ -18,7 +18,13 @@ export class GalleryService {
     return this.http.get<IPhoto[]>('http://localhost:8080/images').toPromise();
   }
 
-  getPhotoById(id: number): Promise<IPhoto> {
+    getPhotoById(id: number): Observable<Blob> {
+    return this.http.get('http://localhost:8080/images/image/' + id, { responseType: 'blob' }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getPhotoDetailsById(id: number): Promise<IPhoto> {
     return this.http.get<IPhoto>('http://localhost:8080/images/image/' + id).toPromise();
   }
 

@@ -4,10 +4,8 @@ import { ITag } from './tag.model';
 export interface IPhotoFull {
     id: number;
     name: string;
+    description: string;
+    date: string;
     categories: ICategory[];
     tags: ITag[];
-    description: string;
-    data: string;
-    imageFull: {id: number; data: string[]};
-    date: string;
 }

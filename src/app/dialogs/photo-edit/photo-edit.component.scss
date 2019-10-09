@@ -1,41 +1,51 @@
 @import '../../../assets/styles/snackbar.scss';
 
 .preview-container {
+  max-width: 400px;
+  max-height: 400px;
+  position: relative;
+
+  img {
+    border-radius: 5px;
     max-width: 400px;
     max-height: 400px;
-    position: relative;
-    img {
-        border-radius: 5px;
-        max-width: 400px;
-        max-height: 400px;
-    }
-}
-.image-preview-container {
-    height: 400px;
-    width: 400px;
-    border-radius: 5px;
-    overflow: hidden;
-    position: relative;
-    img{
-        max-width: 400px;
-        max-height: 400px;
-    }
-}
-mat-icon {
-    top: 23px;
-    right: 10px;
-    position: absolute;
-    cursor: pointer;
-}
-.submit-container {
-    text-align: right;
-}
-mat-form-field {
-    width: 100%;
+  }
 }
 
-@media only screen and (max-width: 840px) {
-    .form-container{
-        flex-direction: column;
-    }
+.image-preview-container {
+  height: 400px;
+  width: 400px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    max-width: 400px;
+    max-height: 400px;
+  }
+}
+
+mat-icon {
+  top: 23px;
+  right: 10px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.submit-container {
+  text-align: right;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.fields-container {
+  padding-right: 20px;
+}
+
+@media only screen and (max-width: 900px) {
+  .form-container {
+    flex-direction: column;
+  }
 }

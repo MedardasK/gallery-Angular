@@ -1,8 +1,8 @@
-<mat-card class="gallery-container">
+<mat-card>
   <h3>Edit selected picture</h3>
   <div class="d-flex bd-highlight form-container">
     <div class="p-2 flex-grow-1 bd-highlight">
-      <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
+      <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm" class="fields-container">
         <div>
           <app-description-input [(ngModel)]="description" name="description" [required]="true" minlength="3">
           </app-description-input>
@@ -25,7 +25,7 @@
       <div class="d-flex">
         <div class="image-preview-container flex-wrap d-flex">
           <mat-icon *ngIf="adminBoolean" (click)="confirmDeleteDialog()">cancel</mat-icon>
-          <img src="data:image/png;base64,{{photo.data}}" alt={{photo.name}}>
+          <img src="data:image/png;base64,{{photoThumbnail}}" alt="image">
         </div>
       </div>
     </div>
