@@ -19,6 +19,7 @@ export class GalleryComponent implements OnInit {
   categoryControl = new FormControl();
   photos: IPhoto[];
   isLoaded = false;
+  isPhotoFound = true;
   isLoggedIn = false;
   loginString = 'LOGIN';
   loginIcon = 'account_box';
@@ -53,7 +54,6 @@ export class GalleryComponent implements OnInit {
         this.photos = data;
         this.isLoaded = true;
         this.resCount = data.length;
-        console.log(data);
       });
   }
 
@@ -154,10 +154,14 @@ export class GalleryComponent implements OnInit {
       .then(data => {
         this.photos = data;
         this.isLoaded = true;
+        if (this.photos.length < 1) {
+          this.isPhotoFound = false;
+        }
         this.resCount = data.length;
       });
     } else {
       this.loadPhotos();
+      this.isPhotoFound = true;
     }
   }
 

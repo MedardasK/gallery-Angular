@@ -63,20 +63,26 @@
         Sort by date<mat-icon>{{sortObj.buttonString}}</mat-icon>
       </button>
     </div>
-    <div></div>
   </div>
   <div class="res-count-container">Showing: {{resCount | itemsCount}} pictures</div>
-  <div class="">
+  <div class="pic-center-container">
     <div class="photo-container" *ngFor="let item of photos">
       <app-photo [photo]="item"></app-photo>
     </div>
   </div>
   <ng-container *ngIf="isLoaded else loading"></ng-container>
+  <ng-container *ngIf="isPhotoFound else noPhotos"></ng-container>
 </mat-card>
 
 <ng-template #loading>
   <div class="loading-container">
     <mat-progress-spinner color="warn" mode="indeterminate">
     </mat-progress-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noPhotos>
+  <div class="no-pictures-container">
+    <p>No pictures were found!</p>
   </div>
 </ng-template>

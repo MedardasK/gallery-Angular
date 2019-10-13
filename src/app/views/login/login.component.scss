@@ -9,7 +9,7 @@ mat-checkbox {
 
 .image-text-container {
   max-height: 88vh;
-  //   overflow: hidden;
+  overflow: hidden;
   position: relative;
   border-radius: 5px;
   max-width: 60vw;
@@ -39,6 +39,12 @@ mat-checkbox {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  .sign-in {
+    font-size: 25px;
+    font-style: oblique;
+    font-weight: bold;
+  }
 
   mat-card {
     text-align: center;

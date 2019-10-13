@@ -14,8 +14,9 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div class="image-container">
-      <img src="{{fullPhoto}}" alt="picture">
+    <div class="d-flex justify-content-center image-container">
+      <img *ngIf="isLoaded" src="{{fullPhoto}}" alt="picture">
+      <ng-container *ngIf="isLoaded else loading"></ng-container>
     </div>
   </mat-card-content>
   <mat-card-subtitle class="d-flex justify-content-between bottom-container">
@@ -30,3 +31,10 @@
     </div>
   </mat-card-subtitle>
 </mat-card>
+
+<ng-template #loading>
+  <div class="loading-container">
+    <mat-progress-spinner color="warn" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+</ng-template>

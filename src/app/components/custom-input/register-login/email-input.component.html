@@ -1,6 +1,6 @@
 <mat-form-field>
   <input matInput type="email" name="email" #emailField="ngModel" placeholder="Email" [(ngModel)]="value"
-  minlength="5" maxlength="30" required>
+  minlength="5" maxlength="30" email required>
   <span matPrefix><i class="material-icons">mail_outline</i></span>
   <mat-error *ngIf="emailField.control.hasError('required')">Email is required</mat-error>
   <mat-error *ngIf="emailField.control.hasError('email')">Email must be valid</mat-error>

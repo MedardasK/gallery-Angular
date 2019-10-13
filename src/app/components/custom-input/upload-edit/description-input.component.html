@@ -1,6 +1,6 @@
 <mat-form-field>
   <input matInput type="text" name="description" #inputField="ngModel" placeholder="Description" [(ngModel)]="value"
-    minlength="3" maxlength="30" required>
+    minlength="3" maxlength="30" required value="description">
   <span matPrefix><i class="material-icons">create</i></span>
   <mat-error *ngIf="inputField.control.hasError('required')">Description is required</mat-error>
   <mat-error *ngIf="inputField.control.hasError('minlength')">Description is too short</mat-error>

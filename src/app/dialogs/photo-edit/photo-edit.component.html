@@ -4,7 +4,7 @@
     <div class="p-2 flex-grow-1 bd-highlight">
       <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm" class="fields-container">
         <div>
-          <app-description-input [(ngModel)]="description" name="description" [required]="true" minlength="3">
+          <app-description-input [(ngModel)]="description" name="description" [required]="true" minlength="3" value="description">
           </app-description-input>
         </div>
         <div>&nbsp;</div>

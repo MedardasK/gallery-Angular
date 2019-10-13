@@ -56,11 +56,19 @@
   }
 }
 
-.loading-container {
+.loading-container,
+.no-pictures-container {
   margin-top: 30px;
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+.no-pictures-container {
+  p {
+    font-weight: bold;
+    font-size: 30px;
+  }
 }
 
 .sufix {
@@ -96,12 +104,16 @@
     margin-bottom: 0px;
   }
 
-  .photo-container {
-    max-width: 270px;
-    max-height: 270px;
-    margin: 13px;
-    border-radius: 7px;
-    display: inline-block;
+  .pic-center-container {
+    text-align: center;
+
+    .photo-container {
+      max-width: 270px;
+      max-height: 270px;
+      margin: 13px;
+      border-radius: 7px;
+      display: inline-block;
+    }
   }
 
   .sort-date-container {

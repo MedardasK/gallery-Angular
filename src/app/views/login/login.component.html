@@ -10,7 +10,7 @@
   <div class="p-2 bd-highlight form-container">
     <div class="d-flex justify-content-center">
       <mat-card>
-          <p>SIGN IN</p>
+          <p class="sign-in">SIGN IN</p>
         <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
           <div>
             <app-email-input [(ngModel)]="email" name="email" [required]="true" minlength="5" ngModel>
