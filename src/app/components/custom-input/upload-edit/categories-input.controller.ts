@@ -1,7 +1,7 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { ICategory } from 'src/app/models/category.model';
-import { GalleryService } from 'src/app/services';
+import { GalleryService, RefreshService } from 'src/app/services';
 
 @Component({
   selector: 'app-categories-input',
@@ -26,7 +26,15 @@ export class CategoriesInputComponent implements ControlValueAccessor, OnInit {
   registerOnTouched(fn: any): void {
     this.onTouch = fn;
   }
-  constructor(private galleryService: GalleryService) { }
+
+  constructor(private galleryService: GalleryService,
+              private refreshService: RefreshService) {
+                // this.refreshService.customObservable.subscribe(() => {
+                //   console.log('konstruktorius');
+                //   this.loadCategories();
+                // }
+                // );
+              }
 
   ngOnInit() {
     this.loadCategories();
@@ -46,4 +54,5 @@ export class CategoriesInputComponent implements ControlValueAccessor, OnInit {
         this.categoriesLoad = data;
       });
   }
+
 }

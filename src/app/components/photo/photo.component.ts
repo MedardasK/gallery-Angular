@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PhotoEditComponent } from 'src/app/dialogs/photo-edit/photo-edit.component';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
+import { IPhoto } from 'src/app/models/photo.model';
 
 @Component({
   selector: 'app-photo',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./photo.component.scss']
 })
 export class PhotoComponent {
-  @Input() photo: IPhotoFull;
+  @Input() photo: IPhoto;
 
   constructor(private galleryService: GalleryService,
               private auth: AuthService,

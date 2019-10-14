@@ -17,10 +17,10 @@
     <div class="d-flex justify-content-between tags-cats-container">
       <div class="categories-search-container">
         <mat-chip-list class="categories-chip">
-          <mat-chip color="primary" selected>CATEGORIES</mat-chip>
+          <mat-chip color="primary" selected>SEARCH</mat-chip>
         </mat-chip-list>
         <mat-form-field>
-          <mat-label>Choose</mat-label>
+          <mat-label>Choose category</mat-label>
           <mat-select [formControl]="categoryControl" multiple>
             <mat-option *ngFor="let category of categories" [value]="category.id"
               (click)="filterByCategories(category.id)">
@@ -44,7 +44,7 @@
     </div>
     <div class="search-input-container">
       <label class="pure-material-textfield-outlined relative search-input">
-        <input [(ngModel)]="search" (ngModelChange)="initSearch($event)" class="" placeholder=" " maxlength="50">
+        <input [(ngModel)]="search" (ngModelChange)="initSearch($event)" placeholder=" " maxlength="50">
         <span class="placeholder">Search</span>
         <span class="sufix">
           <mat-icon>search</mat-icon>

@@ -52,13 +52,13 @@ export class GalleryService {
     );
   }
 
-  saveTag(name: FormData): Observable<any> {
+  saveTag(name: string): Observable<any> {
     return this.http.post('http://localhost:8080/tags/create', name).pipe(
       catchError(this.handleError)
     );
   }
 
-  saveCategory(name: FormData): Observable<any> {
+  saveCategory(name: string): Observable<any> {
     return this.http.post('http://localhost:8080/categories/create', name).pipe(
       catchError(this.handleError)
     );

@@ -7,7 +7,8 @@ import { FileUploadDirective } from '../../directives';
 
 import { GalleryService,
          AuthService,
-         UsersService } from '../../services/';
+         UsersService,
+         RefreshService } from '../../services/';
 
 import { MaterialModule } from '../../material.module';
 import { PhotoUploadRoutingModule } from './photo-upload-routing.module';
@@ -27,7 +28,7 @@ import { EditInputModule } from 'src/app/edit-input.module';
         ReactiveFormsModule,
         MaterialModule
     ],
-    providers: [GalleryService, AuthService, UsersService],
+    providers: [GalleryService, AuthService, UsersService, RefreshService],
     entryComponents: [TagsCategoriesComponent]
 })
 export class PhotoUploadModule { }

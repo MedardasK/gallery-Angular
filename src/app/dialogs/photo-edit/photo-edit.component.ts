@@ -1,23 +1,22 @@
 import { UsersService } from './../../services/users.service';
 import { GalleryService } from './../../services/gallery.service';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteConfirmComponent } from '../delete-confirm/delete-confirm.component';
 import { IPhotoFull } from 'src/app/models/photo-full.model';
-import { IPhoto } from 'src/app/models/photo.model';
 
 @Component({
   selector: 'app-photo-edit',
   templateUrl: './photo-edit.component.html',
   styleUrls: ['./photo-edit.component.scss']
 })
-export class PhotoEditComponent implements OnInit {
+export class PhotoEditComponent {
   @Input() photo: IPhotoFull;
   photoDetails: IPhotoFull;
   categories = [];
   tags = [];
-  description = '';
+  description = 'asd';
   fileName = '';
   photoThumbnail: any;
   adminBoolean = false;
@@ -29,21 +28,13 @@ export class PhotoEditComponent implements OnInit {
               private userService: UsersService,
               private galleryService: GalleryService,
               private dialog: MatDialog ) {
+              this.adminBoolean = this.userService.isAdmin();
               this.photo = data;
               this.photoThumbnail = data.data;
               this.description = this.photo.description;
-  }
-
-  ngOnInit() {
-    this.adminBoolean = this.userService.isAdmin();
-    this.loadPhotoValues();
-  }
-
-  loadPhotoValues(): void {
-    this.categories = [];
-    this.tags = [];
-    this.description = this.photo.description;
-    this.fileName = '';
+              this.fileName = this.photo.name;
+              this.categories = this.photo.categories;
+              this.tags = this.photo.tags;
   }
 
   private submitValues(): void {

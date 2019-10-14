@@ -9,14 +9,5 @@ export function MustMatch(controlName: string, matchingControlName: string): any
         } else {
             return false;
         }
-        // if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-        //     return;
-        // }
-
-        // if (control.value !== matchingControl.value) {
-        //     matchingControl.setErrors({ mustMatch: true });
-        // } else {
-        //     matchingControl.setErrors(null);
-        // }
     };
 }

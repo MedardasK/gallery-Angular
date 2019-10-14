@@ -1,1 +1,45 @@
 @import '../../../assets/styles/consts.scss';
+
+
+
+form {
+  display: flex;
+
+  .button-containers {
+    line-height: 55px;
+
+    .tags-button {
+      margin-left: 28px;
+    }
+
+    .categories-button {
+      margin-left: 10px;
+    }
+
+    span {
+      margin-right: 5px;
+    }
+  }
+}
+
+@media only screen and (max-width: 540px) {
+
+  form {
+    flex-direction: column;
+
+    .button-containers {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .tags-button {
+      margin-left: 0px;
+    }
+
+    .categories-button {
+      margin-left: 0px;
+    }
+  }
+
+
+}

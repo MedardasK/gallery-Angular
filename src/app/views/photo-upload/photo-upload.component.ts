@@ -1,3 +1,4 @@
+import { RefreshService } from './../../services/refresh.service';
 import { Component, Input } from '@angular/core';
 import { GalleryService } from '../../services/gallery.service';
 import { AuthService } from './../../services/auth.service';
@@ -23,6 +24,7 @@ export class PhotoUploadComponent {
   isHovering: boolean;
 
   constructor(private galleryService: GalleryService,
+              private refreshService: RefreshService,
               private snackBar: MatSnackBar,
               private router: Router,
               private auth: AuthService,
@@ -83,6 +85,7 @@ export class PhotoUploadComponent {
     const dialogRef = this.dialog.open(TagsCategoriesComponent);
 
     dialogRef.afterClosed().subscribe(() => {
+      this.refreshService.callComponentMethod();
     });
   }
 
