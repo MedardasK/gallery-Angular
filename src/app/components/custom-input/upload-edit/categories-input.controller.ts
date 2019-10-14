@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl } from '@angular/forms';
 import { ICategory } from 'src/app/models/category.model';
 import { GalleryService, RefreshService } from 'src/app/services';
@@ -14,7 +14,7 @@ import { GalleryService, RefreshService } from 'src/app/services';
   ]
 })
 
-export class CategoriesInputComponent implements ControlValueAccessor, OnInit {
+export class CategoriesInputComponent implements ControlValueAccessor {
   val = '';
   categoriesLoad: ICategory[];
   writeValue(value: any): void {
@@ -29,16 +29,12 @@ export class CategoriesInputComponent implements ControlValueAccessor, OnInit {
 
   constructor(private galleryService: GalleryService,
               private refreshService: RefreshService) {
-                // this.refreshService.customObservable.subscribe(() => {
-                //   console.log('konstruktorius');
-                //   this.loadCategories();
-                // }
-                // );
+                this.refreshService.customObservable.subscribe(() => {
+                  this.loadCategories();
+                }
+                );
+                this.loadCategories();
               }
-
-  ngOnInit() {
-    this.loadCategories();
-  }
 
   onChange: any = () => { };
   onTouch: any = () => { };

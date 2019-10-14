@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnInit, OnDestroy } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { GalleryService, RefreshService } from 'src/app/services';
 import { ITag } from 'src/app/models/tag.model';
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
   ]
 })
 
-export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class TagsInputComponent implements ControlValueAccessor {
   val = '';
   tagsLoad: ITag[];
   subscription: Subscription;
@@ -37,11 +37,8 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
                   this.loadTags();
                 }
                 );
+                this.loadTags();
               }
-
-  ngOnInit() {
-    this.loadTags();
-  }
 
   onChange: any = () => { };
   onTouch: any = () => { };
@@ -52,7 +49,6 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   }
 
   private loadTags(): void {
-    this.refreshService.callComponentMethod();
     this.galleryService.getTags()
       .then(data => {
         this.tagsLoad = data;
@@ -60,7 +56,6 @@ export class TagsInputComponent implements ControlValueAccessor, OnInit, OnDestr
   }
 
   ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
     this.subscription.unsubscribe();
 }
 

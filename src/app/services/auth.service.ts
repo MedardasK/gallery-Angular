@@ -18,14 +18,6 @@ export class AuthService {
       });
   }
 
-  async refresh_token(cookie: string, username: string): Promise<void> {
-    return this.httpClient.post<{ token: string }>('http://localhost:8080/refresh-token', { cookie, username })
-    .toPromise()
-    .then(res => {
-      this.cookieService.set('access_token', res.token);
-    });
-  }
-
   logout(): void {
     this.cookieService.deleteAll();
   }
@@ -38,8 +30,6 @@ export class AuthService {
       if (currentTimeSeconds + 300 < cookieExpirationTimeSeconds) {
         return true;
       } else if (currentTimeSeconds < cookieExpirationTimeSeconds) {
-        const username = JSON.parse(atob(cookie.split('.')[1])).sub;
-        this.refresh_token(cookie, username);
         return true;
       } else {
         this.cookieService.deleteAll();
