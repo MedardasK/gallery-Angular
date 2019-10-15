@@ -16,7 +16,7 @@ export class PhotoEditComponent {
   photoDetails: IPhotoFull;
   categories = [];
   tags = [];
-  description = 'asd';
+  description = '';
   fileName = '';
   photoThumbnail: any;
   adminBoolean = false;

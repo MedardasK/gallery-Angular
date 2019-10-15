@@ -1,4 +1,3 @@
-import { IPhotoFull } from './../../models/photo-full.model';
 import { PhotoOneComponent } from '../../dialogs/photo-one/photo-one.component';
 import { GalleryService } from './../../services/gallery.service';
 import { Component, Input } from '@angular/core';
@@ -7,6 +6,7 @@ import { PhotoEditComponent } from 'src/app/dialogs/photo-edit/photo-edit.compon
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { IPhoto } from 'src/app/models/photo.model';
+import { RefreshService } from 'src/app/services';
 
 @Component({
   selector: 'app-photo',
@@ -17,17 +17,18 @@ export class PhotoComponent {
   @Input() photo: IPhoto;
 
   constructor(private galleryService: GalleryService,
+              private refreshService: RefreshService,
               private auth: AuthService,
               private router: Router,
-              private dialog: MatDialog) {}
+              private dialog: MatDialog) { }
 
   async openDialogReview(): Promise<void> {
     this.galleryService.getPhotoById(this.photo.id).subscribe(res => {
       this.dialog.open(PhotoOneComponent, {
-          data: {photo: res, photoDetails: this.photo}
-        }
-        );
-      });
+        data: { photo: res, photoDetails: this.photo }
+      }
+      );
+    });
   }
 
   openDialogEdit(): void {
@@ -35,9 +36,13 @@ export class PhotoComponent {
       this.router.navigate(['login']);
       return;
     }
-    this.dialog.open(PhotoEditComponent, {
-          width: '80vw',
-          data: this.photo
-        });
+    const dialogRef = this.dialog.open(PhotoEditComponent, {
+      width: '80vw',
+      data: this.photo
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.refreshService.callComponentMethodLoadPhotos();
+    });
   }
 }

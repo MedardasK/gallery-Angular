@@ -10,7 +10,7 @@
   <div class="p-2 bd-highlight form-container">
     <div class="d-flex justify-content-center">
       <mat-card>
-          <p class="sign-in">SIGN IN</p>
+        <p class="sign-in">SIGN IN</p>
         <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
           <div>
             <app-email-input [(ngModel)]="email" name="email" [required]="true" minlength="5" ngModel>
@@ -21,8 +21,7 @@
             <app-password-input [(ngModel)]="password" name="password" [required]="true" minlength="6" ngModel>
             </app-password-input>
           </div>
-          <button mat-raised-button type="submit" [disabled]="f.invalid">
-            Sign In</button>
+          <button mat-raised-button type="submit" [disabled]="f.invalid">Sign In</button>
         </form>
         <div>&nbsp;</div>
         <p>... or <a (click)="openDialogRegister()">Sign up</a> if you don't have an account</p>

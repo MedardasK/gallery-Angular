@@ -14,6 +14,9 @@ export class RefreshService {
 
   callComponentMethod(): void {
     this.customSubject.next();
-    }
+  }
 
+  callComponentMethodLoadPhotos(): void {
+    this.customSubject.next();
+  }
 }

@@ -8,6 +8,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RefreshService } from 'src/app/services';
 
 @Component({
   selector: 'app-gallery',
@@ -31,13 +32,14 @@ export class GalleryComponent implements OnInit {
   categories: ICategory[];
   tags = [];
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  search: string;
+  search: '';
   searchString = '';
   tagsArray = [];
   categoriesIds = [];
 
 
   constructor(private gallery: GalleryService,
+              private refreshService: RefreshService,
               private router: Router,
               private auth: AuthService,
               private snackBar: MatSnackBar) { }
@@ -46,6 +48,10 @@ export class GalleryComponent implements OnInit {
     this.loadPhotos();
     this.loadCategories();
     this.checkCookie();
+    this.refreshService.customObservable.subscribe(() => {
+      this.loadPhotos();
+    }
+    );
   }
 
   private loadPhotos(): void {

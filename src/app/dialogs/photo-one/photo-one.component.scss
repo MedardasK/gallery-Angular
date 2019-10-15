@@ -22,18 +22,25 @@
     max-width: 70vw;
     max-height: 70vh;
   }
+
   .loading-container {
-  margin-top: 30px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .categories-buttons {
   height: 35px;
   margin-left: 5px;
 }
-.bottom-container{
-    padding: 0px 10px;
+
+.bottom-container {
+  padding: 0px 20px;
+}
+
+.date-container {
+  height: 30px;
+  padding: 6.5px 0px 0px 10px;
 }
