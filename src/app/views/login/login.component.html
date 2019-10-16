@@ -13,7 +13,7 @@
         <p class="sign-in">SIGN IN</p>
         <form name="form" (ngSubmit)="f.form.valid && submitValues()" #f="ngForm">
           <div>
-            <app-email-input [(ngModel)]="email" name="email" [required]="true" minlength="5" ngModel>
+            <app-email-input [(ngModel)]="email" name="email" [required]="true" [email]="true" minlength="5" ngModel>
             </app-email-input>
           </div>
           <div>&nbsp;</div>
